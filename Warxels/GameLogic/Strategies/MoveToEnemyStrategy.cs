@@ -41,7 +41,7 @@
             if (nearestEnemyUnit != null)
             {
                 var moveVector = DistanceHelper.GetMoveTowardsPoint(unit, nearestEnemyUnit.X, nearestEnemyUnit.Y);
-                var cost = unit.GetMovementCost(moveVector);
+                var cost = unit.GetMovementCost(moveVector, _world.Terrain[unit.X, unit.Y]);
 
                 if (unit.Power < cost)
                     return StrategyResult.NotEnoughPower;
@@ -61,7 +61,7 @@
 
                     foreach(var possibleWay in DistanceHelper.GetAdjancedDirectionVectors(moveVector))
                     {
-                        cost = unit.GetMovementCost(possibleWay);
+                        cost = unit.GetMovementCost(possibleWay, _world.Terrain[unit.X, unit.Y]);
 
                         if (unit.Power < cost)
                             return StrategyResult.NotEnoughPower;

@@ -34,6 +34,15 @@
 
         public abstract int MoveCost { get; }
 
+        public virtual float GetTerrainPenalty(byte terrainId)
+        {
+            switch (terrainId)
+            {
+                case 1: return 1.5f;
+                default: return 1;
+            }
+        }
+
         public double GetHealthPercentage()
         {
             return Math.Max(0, 100 * Health / MaxHealth);
@@ -87,8 +96,9 @@
             return y * 3733 ^ x;
         }
 
-        public int GetMovementCost(Vector moveVector)
+        public int GetMovementCost(Vector moveVector, byte terrainId)
         {
+            var tempMoveCost = MoveCost * GetTerrainPenalty(terrainId);
             var length = moveVector.GetLengthSquared();
             if (length == 0)
             {
@@ -97,15 +107,15 @@
 
             if (length == 1)
             {
-                return MoveCost;
+                return (int)tempMoveCost;
             }
 
             if (length == 2)
             {
-                return (int)Math.Ceiling(1.4 * MoveCost);
+                return (int)Math.Ceiling(1.4 * tempMoveCost);
             }
 
-            return (int)Math.Ceiling(length * (double)MoveCost);
+            return (int)Math.Ceiling(length * (double)tempMoveCost);
         }
     }
 }
