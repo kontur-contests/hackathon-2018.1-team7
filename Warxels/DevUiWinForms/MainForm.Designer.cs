@@ -32,6 +32,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonUnitArcher = new System.Windows.Forms.RadioButton();
+            this.radioButtonUnitHorse = new System.Windows.Forms.RadioButton();
             this.radioButtonUnitSwords = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -47,7 +49,10 @@
             this.textBoxWorldY = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxWorldX = new System.Windows.Forms.TextBox();
-            this.radioButtonUnitHorse = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBoxSquareAmount = new System.Windows.Forms.TextBox();
+            this.radioButtonSquare = new System.Windows.Forms.RadioButton();
+            this.radioButtonOneUnit = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -55,6 +60,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -70,7 +76,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.73431F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.26568F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1057, 613);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1114, 724);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -78,9 +84,10 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(929, 495);
+            this.pictureBox1.Size = new System.Drawing.Size(979, 585);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
@@ -91,29 +98,53 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox3);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.groupBox4);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox5);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(938, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(988, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(116, 495);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(123, 585);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButtonUnitHorse);
+            this.groupBox1.Controls.Add(this.radioButtonUnitArcher);
             this.groupBox1.Controls.Add(this.radioButtonUnitSwords);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(104, 100);
+            this.groupBox1.Size = new System.Drawing.Size(104, 96);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "UnitType";
+            // 
+            // radioButtonUnitArcher
+            // 
+            this.radioButtonUnitArcher.AutoSize = true;
+            this.radioButtonUnitArcher.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonUnitArcher.Name = "radioButtonUnitArcher";
+            this.radioButtonUnitArcher.Size = new System.Drawing.Size(55, 17);
+            this.radioButtonUnitArcher.TabIndex = 2;
+            this.radioButtonUnitArcher.TabStop = true;
+            this.radioButtonUnitArcher.Text = "archer";
+            this.radioButtonUnitArcher.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonUnitHorse
+            // 
+            this.radioButtonUnitHorse.AutoSize = true;
+            this.radioButtonUnitHorse.Location = new System.Drawing.Point(6, 42);
+            this.radioButtonUnitHorse.Name = "radioButtonUnitHorse";
+            this.radioButtonUnitHorse.Size = new System.Drawing.Size(71, 17);
+            this.radioButtonUnitHorse.TabIndex = 1;
+            this.radioButtonUnitHorse.TabStop = true;
+            this.radioButtonUnitHorse.Text = "horseman";
+            this.radioButtonUnitHorse.UseVisualStyleBackColor = true;
             // 
             // radioButtonUnitSwords
             // 
             this.radioButtonUnitSwords.AutoSize = true;
             this.radioButtonUnitSwords.Checked = true;
-            this.radioButtonUnitSwords.Location = new System.Drawing.Point(6, 29);
+            this.radioButtonUnitSwords.Location = new System.Drawing.Point(6, 19);
             this.radioButtonUnitSwords.Name = "radioButtonUnitSwords";
             this.radioButtonUnitSwords.Size = new System.Drawing.Size(78, 17);
             this.radioButtonUnitSwords.TabIndex = 0;
@@ -125,9 +156,9 @@
             // 
             this.groupBox2.Controls.Add(this.radioButton3);
             this.groupBox2.Controls.Add(this._radioTeamA);
-            this.groupBox2.Location = new System.Drawing.Point(3, 109);
+            this.groupBox2.Location = new System.Drawing.Point(3, 105);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(104, 75);
+            this.groupBox2.Size = new System.Drawing.Size(104, 63);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Team";
@@ -159,9 +190,9 @@
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX4);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX2);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedNormal);
-            this.groupBox3.Location = new System.Drawing.Point(3, 190);
+            this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 124);
+            this.groupBox3.Size = new System.Drawing.Size(104, 91);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "GameSpeed";
@@ -203,7 +234,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 320);
+            this.button1.Location = new System.Drawing.Point(3, 271);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -218,7 +249,7 @@
             this.groupBox4.Controls.Add(this.textBoxWorldY);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.textBoxWorldX);
-            this.groupBox4.Location = new System.Drawing.Point(3, 349);
+            this.groupBox4.Location = new System.Drawing.Point(3, 300);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(104, 130);
             this.groupBox4.TabIndex = 4;
@@ -267,22 +298,54 @@
             this.textBoxWorldX.Size = new System.Drawing.Size(66, 20);
             this.textBoxWorldX.TabIndex = 0;
             // 
-            // radioButtonUnitHorse
+            // groupBox5
             // 
-            this.radioButtonUnitHorse.AutoSize = true;
-            this.radioButtonUnitHorse.Location = new System.Drawing.Point(7, 53);
-            this.radioButtonUnitHorse.Name = "radioButtonUnitHorse";
-            this.radioButtonUnitHorse.Size = new System.Drawing.Size(71, 17);
-            this.radioButtonUnitHorse.TabIndex = 1;
-            this.radioButtonUnitHorse.TabStop = true;
-            this.radioButtonUnitHorse.Text = "horseman";
-            this.radioButtonUnitHorse.UseVisualStyleBackColor = true;
+            this.groupBox5.Controls.Add(this.textBoxSquareAmount);
+            this.groupBox5.Controls.Add(this.radioButtonSquare);
+            this.groupBox5.Controls.Add(this.radioButtonOneUnit);
+            this.groupBox5.Location = new System.Drawing.Point(3, 436);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(111, 100);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "groupBox5";
+            // 
+            // textBoxSquareAmount
+            // 
+            this.textBoxSquareAmount.Location = new System.Drawing.Point(2, 67);
+            this.textBoxSquareAmount.Name = "textBoxSquareAmount";
+            this.textBoxSquareAmount.Size = new System.Drawing.Size(82, 20);
+            this.textBoxSquareAmount.TabIndex = 2;
+            this.textBoxSquareAmount.Text = "50";
+            // 
+            // radioButtonSquare
+            // 
+            this.radioButtonSquare.AutoSize = true;
+            this.radioButtonSquare.Location = new System.Drawing.Point(6, 44);
+            this.radioButtonSquare.Name = "radioButtonSquare";
+            this.radioButtonSquare.Size = new System.Drawing.Size(57, 17);
+            this.radioButtonSquare.TabIndex = 1;
+            this.radioButtonSquare.TabStop = true;
+            this.radioButtonSquare.Text = "square";
+            this.radioButtonSquare.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonOneUnit
+            // 
+            this.radioButtonOneUnit.AutoSize = true;
+            this.radioButtonOneUnit.Checked = true;
+            this.radioButtonOneUnit.Location = new System.Drawing.Point(6, 20);
+            this.radioButtonOneUnit.Name = "radioButtonOneUnit";
+            this.radioButtonOneUnit.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonOneUnit.TabIndex = 0;
+            this.radioButtonOneUnit.TabStop = true;
+            this.radioButtonOneUnit.Text = "one unit";
+            this.radioButtonOneUnit.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 613);
+            this.ClientSize = new System.Drawing.Size(1114, 724);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -298,6 +361,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -324,6 +389,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxWorldX;
         private System.Windows.Forms.RadioButton radioButtonUnitHorse;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton radioButtonSquare;
+        private System.Windows.Forms.RadioButton radioButtonOneUnit;
+        private System.Windows.Forms.TextBox textBoxSquareAmount;
+        private System.Windows.Forms.RadioButton radioButtonUnitArcher;
     }
 }
 

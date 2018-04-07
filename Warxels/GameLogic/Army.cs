@@ -42,6 +42,19 @@
             }
         }
 
+        public IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int dx, int dy)
+        {
+            for (var i = unit.X - dx; i <= unit.X + dx; i++)
+            {
+                for (var j = unit.Y - dy; j <= unit.Y + dy; j++)
+                {
+                    var testUnit = GetUnit(j, i);
+                    if (testUnit != null)
+                        yield return testUnit;
+                }
+            }
+        }
+
         public void Move(UnitBase unit, int y, int x)
         {
             var key = unit.GetPositionKey();
@@ -58,6 +71,9 @@
         public void Add(UnitBase unit)
         {
             var key = unit.GetPositionKey();
+
+            if (_units.ContainsKey(key))
+                return;
 
             _units.Add(key, unit);
         }

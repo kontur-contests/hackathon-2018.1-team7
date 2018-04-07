@@ -31,8 +31,6 @@
 
         public abstract int MoveCost { get; }
 
-
-
         public bool ApplyStrategies()
         {
             Power++;
