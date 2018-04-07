@@ -11,6 +11,8 @@
             Team = team;
             Health = health;
             _strategies = strategies;
+            Y = y;
+            X = x;
         }
 
         public int Health { get; private set; }
