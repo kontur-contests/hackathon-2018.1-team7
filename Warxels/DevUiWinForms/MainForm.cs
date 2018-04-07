@@ -59,8 +59,7 @@ namespace DevUiWinForms
             {
                 if (!Paused)
                     World.DoTick();
-
-                Task.Delay(Delay).Wait();
+                
                 var world = World;
 
                 {
