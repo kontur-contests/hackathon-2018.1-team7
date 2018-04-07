@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "GameLogic\GameLogic.csproj", "{3D311401-B861-4654-9E9F-383B92B5832B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLogic", "GameLogic\GameLogic.csproj", "{3D311401-B861-4654-9E9F-383B92B5832B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevUiWinForms", "DevUiWinForms\DevUiWinForms.csproj", "{96381527-5DAB-4EC4-9D0C-F01F929D07DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3D311401-B861-4654-9E9F-383B92B5832B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D311401-B861-4654-9E9F-383B92B5832B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D311401-B861-4654-9E9F-383B92B5832B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
