@@ -22,10 +22,15 @@
 
                 var distanceSquared = DistanceHelper.GetDistanceSquared(unit, testUnit);
 
-                // если два врага находятся на одинаковом расстоянии, бежать к тому, у кого ХП меньше.
-                if (distanceSquared >= minDistance || (nearestEnemyUnit != null && nearestEnemyUnit.Health >= testUnit.Health))
+                if (distanceSquared > minDistance)
                 {
-                    break;
+                    continue;
+                }
+
+                // если два врага находятся на одинаковом расстоянии, бежать к тому, у кого ХП меньше.
+                if (distanceSquared == minDistance && nearestEnemyUnit != null && nearestEnemyUnit.Health > testUnit.Health)
+                {
+                    continue;
                 }
 
                 minDistance = distanceSquared;
@@ -50,6 +55,7 @@
 
                 if (_world.Army.GetUnit(y, x) != null)
                 {
+                    // Так, прямо по курсу какой-то хер, попробуем обойти.
                     return StrategyResult.NotApplicable;
                 }
 
