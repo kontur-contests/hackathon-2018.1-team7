@@ -7,12 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameLogic;
 
 namespace DevUiWinForms
 {
+    
     public partial class MainForm : Form
     {
-        private static readonly Pen Pen = new Pen(Color.Black,1);
+        private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
+        private static readonly Pen TeamAPen = new Pen(Brushes.Red);
+        private static readonly Pen TeamBPen = new Pen(Brushes.Green);
+        private static IWorld World;
 
         public class Actor
         {
@@ -20,13 +25,22 @@ namespace DevUiWinForms
             public int Y { get; set; }
         }
 
-        private static readonly Image image = new Bitmap(512, 512);
+        private const int ImageSizeX = 512;
+        private const int ImageSizeY = 512;
+
+        private static readonly Image image = new Bitmap(ImageSizeX, ImageSizeY);
 
         private readonly Actor[] _actors = new Actor[500];
 
         public MainForm()
         {
             InitializeComponent();
+            SetWorld(Game.GenerateWorld(128, 128));
+        }
+
+        public void SetWorld(IWorld world)
+        {
+            World = world;
         }
 
         private void Render()
@@ -39,35 +53,50 @@ namespace DevUiWinForms
                     {
                         z.Clear(Color.White);
                         
-                        DrawGrid(z, 20, 20, 512, 512);
+                        DrawGrid(z, World);
+                        DrawUnits(z, World);
                     }
                     
-                    pictureBox1.BackgroundImage = image;
+                    pictureBox1.Image = image;
                     
-                    pictureBox1.Invalidate();
+                    //pictureBox1.Invalidate();
                 }));
 
-                Task.Delay(10).Wait();
+                Task.Delay(50).Wait();
             }
         }
 
-        private void DrawGrid(Graphics gfx, int stepX, int stepY, int sizeX, int sizeY)
+        private void DrawUnits(Graphics gfx, IWorld world)
         {
-            for (int i = 0; i < sizeX; i += stepX)
+            int dX = ImageSizeX / world.Width;
+            int dY = ImageSizeY / world.Length;
+
+            foreach (var unit in world.Army.GetUnits())
             {
-                gfx.DrawLine(Pen, new Point(i, 0), new Point(i, sizeY));
+                gfx.DrawEllipse(TeamAPen, unit.X * dX, unit.Y * dY, dX, dY);
+            }
+        }
+
+        private void DrawGrid(Graphics gfx, IWorld world)
+        {
+            int stepX = ImageSizeX / world.Width;
+            int stepY = ImageSizeY / world.Length;
+
+            for (int x = 0; x < ImageSizeX; x += stepX)
+            {
+                gfx.DrawLine(Pen, new Point(x, 0), new Point(x, ImageSizeY));
             }
 
-            for (int i = 0; i < sizeY; i += stepY)
+            for (int y = 0; y < ImageSizeY; y += stepY)
             {
-                gfx.DrawLine(Pen, new Point(0, i), new Point(sizeX, i));
+                gfx.DrawLine(Pen, new Point(0, y), new Point(ImageSizeX, y));
             }
         }
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             var rnd = new Random(DateTime.Now.GetHashCode());
             for (int i = 0; i < _actors.Length; i++)
             {
