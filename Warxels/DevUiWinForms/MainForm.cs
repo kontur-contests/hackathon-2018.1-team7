@@ -17,6 +17,7 @@ namespace DevUiWinForms
         private Point squareBegin;
         private Point squareEnd;
         private bool renderSquare = false;
+        private bool squareSelection = false;
 
         private static bool Paused = true;
         private const int DefaultDelay = 100;
@@ -47,6 +48,7 @@ namespace DevUiWinForms
 
             _gfx = Graphics.FromImage(image);
 
+            UpdateDrawMode();
             
         }
 
@@ -205,7 +207,7 @@ namespace DevUiWinForms
 
         private void UnitDrawMouseUp(MouseEventArgs e)
         {
-            if (!renderSquare)
+            if (!squareSelection)
             {
                 if (e.Button == MouseButtons.Left)
                 {
@@ -223,8 +225,7 @@ namespace DevUiWinForms
                 if (radioButtonUnitArcher.Checked)
                     t = UnitType.Archer;
 
-
-                renderSquare = false;
+                
                 var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
                 var coords2 = ControlCoordsToWorldCoords(squareEnd.X, squareEnd.Y);
                 int amount = int.Parse(textBoxSquareAmount.Text);
@@ -235,7 +236,7 @@ namespace DevUiWinForms
 
         private void TerrainDrawMouseUp(MouseEventArgs e)
         {
-            if (!renderSquare)
+            if (!squareSelection)
             {
                 var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
                 var size = int.Parse(textBoxTerrainBrushSize.Text);
@@ -243,7 +244,6 @@ namespace DevUiWinForms
             }
             else
             {
-                renderSquare = false;
                 var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
                 var coords2 = ControlCoordsToWorldCoords(squareEnd.X, squareEnd.Y);
 
@@ -258,6 +258,9 @@ namespace DevUiWinForms
                 case DrawMode.Units: UnitDrawMouseUp(e); break;
                 case DrawMode.Terrain: TerrainDrawMouseUp(e); break;
             }
+
+            if (squareSelection)
+                renderSquare = false;
         }
 
         private void AddUnit(Team team, int worldX, int worldY)
@@ -305,7 +308,7 @@ namespace DevUiWinForms
 
         private void UnitDrawMouseMove(MouseEventArgs e)
         {
-            if (!renderSquare)
+            if (!squareSelection)
             {
                 var coords = ControlCoordsToWorldCoords(e.X, e.Y);
                 if (e.Button == MouseButtons.Left)
@@ -323,21 +326,24 @@ namespace DevUiWinForms
 
         private void TerrainDrawMouseMove(MouseEventArgs e)
         {
-            if (!renderSquare)
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            if (!squareSelection)
             {
-                var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
+                var coords1 = ControlCoordsToWorldCoords(e.X, e.Y);
                 var size = int.Parse(textBoxTerrainBrushSize.Text);
                 World.SetTerrain(coords1.Y, coords1.X, coords1.Y + size, coords1.X + size, (byte)comboBoxTerrain.SelectedIndex);
             }
             else
             {
-                if (e.Button == MouseButtons.Left)
-                    squareEnd = new Point(e.X, e.Y);
+                squareEnd = new Point(e.X, e.Y);
             }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+
             switch (_drawMode)
             {
                 case DrawMode.Units: UnitDrawMouseMove(e);break;
@@ -362,7 +368,7 @@ namespace DevUiWinForms
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (radioButtonSquare.Checked || radioButtonTerrainSquare.Checked)
+            if (squareSelection)
             {
                 squareBegin = squareEnd = new Point(e.X, e.Y);
                 
@@ -377,6 +383,11 @@ namespace DevUiWinForms
         }
 
         private void tabControlUnits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDrawMode();
+        }
+
+        private void UpdateDrawMode()
         {
             switch (tabControlUnits.SelectedIndex)
             {
@@ -399,8 +410,13 @@ namespace DevUiWinForms
 
         private void CheckRenderSquare()
         {
-            renderSquare = radioButtonTerrainSquare.Checked && _drawMode == DrawMode.Terrain
+            squareSelection = radioButtonTerrainSquare.Checked && _drawMode == DrawMode.Terrain
                 || radioButtonSquare.Checked && _drawMode == DrawMode.Units;
+        }
+
+        private void radioButtonSquare_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckRenderSquare();
         }
     }
 }
