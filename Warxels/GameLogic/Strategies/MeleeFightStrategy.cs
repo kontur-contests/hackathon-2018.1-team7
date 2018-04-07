@@ -2,6 +2,8 @@
 {
     internal sealed class MeleeFightStrategy : IStrategy
     {
+        private readonly int _cost = 15;
+
         private readonly World _world;
 
         private readonly int[] _dx = { -1, 0, 1 };
@@ -14,6 +16,9 @@
 
         public bool Apply(UnitBase unit)
         {
+            if (unit.Counter < _cost)
+                return false;
+
             IUnit minUnit = null;
 
             for (var i = 0; i < 3; i++)

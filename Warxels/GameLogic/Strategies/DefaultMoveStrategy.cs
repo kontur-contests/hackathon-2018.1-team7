@@ -2,6 +2,8 @@
 {
     internal sealed class DefaultMoveStrategy : IStrategy
     {
+        private readonly int _cost = 10;
+
         private readonly int _dy;
 
         private readonly int _dx;
@@ -17,6 +19,9 @@
 
         public bool Apply(UnitBase unit)
         {
+            if (unit.Counter < _cost)
+                return false;
+
             var x = unit.X + _dx;
             var y = unit.Y + _dy;
 

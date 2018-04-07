@@ -30,14 +30,21 @@
 
         public bool ApplyStrategies()
         {
+            Counter++;
+
             foreach (var strategy in _strategies)
             {
                 if (strategy.Apply(this))
+                {
+                    Counter = 0;
                     return true;
+                }
             }
 
             return false;
         }
+
+        public int Counter { get; set; }
 
         public void Move(int y, int x)
         {
