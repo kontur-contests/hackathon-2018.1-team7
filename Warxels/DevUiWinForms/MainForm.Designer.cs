@@ -41,12 +41,19 @@
             this.radioButtonGameSpeedX2 = new System.Windows.Forms.RadioButton();
             this.radioButtonGameSpeedNormal = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBoxWorldX = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxWorldY = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonGenerateWorld = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -82,6 +89,7 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox2);
             this.flowLayoutPanel1.Controls.Add(this.groupBox3);
             this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox4);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(938, 3);
@@ -201,6 +209,62 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.buttonGenerateWorld);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.textBoxWorldY);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.textBoxWorldX);
+            this.groupBox4.Location = new System.Drawing.Point(3, 349);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(104, 130);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
+            // 
+            // textBoxWorldX
+            // 
+            this.textBoxWorldX.Location = new System.Drawing.Point(38, 23);
+            this.textBoxWorldX.Name = "textBoxWorldX";
+            this.textBoxWorldX.Size = new System.Drawing.Size(66, 20);
+            this.textBoxWorldX.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "X";
+            // 
+            // textBoxWorldY
+            // 
+            this.textBoxWorldY.Location = new System.Drawing.Point(38, 49);
+            this.textBoxWorldY.Name = "textBoxWorldY";
+            this.textBoxWorldY.Size = new System.Drawing.Size(66, 20);
+            this.textBoxWorldY.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Y";
+            // 
+            // buttonGenerateWorld
+            // 
+            this.buttonGenerateWorld.Location = new System.Drawing.Point(29, 86);
+            this.buttonGenerateWorld.Name = "buttonGenerateWorld";
+            this.buttonGenerateWorld.Size = new System.Drawing.Size(75, 23);
+            this.buttonGenerateWorld.TabIndex = 4;
+            this.buttonGenerateWorld.Text = "New wold";
+            this.buttonGenerateWorld.UseVisualStyleBackColor = true;
+            this.buttonGenerateWorld.Click += new System.EventHandler(this.buttonGenerateWorld_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,6 +283,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +304,12 @@
         private System.Windows.Forms.RadioButton radioButtonGameSpeedX2;
         private System.Windows.Forms.RadioButton radioButtonGameSpeedNormal;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button buttonGenerateWorld;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxWorldY;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxWorldX;
     }
 }
 
