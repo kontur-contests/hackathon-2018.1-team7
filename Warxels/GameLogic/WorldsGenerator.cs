@@ -40,11 +40,11 @@
 
             if (team == Team.Blue)
             {
-                unit = new SwordsMan(team, 100, _strategiesUp, y, x);
+                unit = new SwordsMan(team, _strategiesUp, y, x);
             }
             else
             {
-                unit = new SwordsMan(team, 100, _strategiesDown, y, x);
+                unit = new SwordsMan(team, _strategiesDown, y, x);
             }
 
             _world.AddUnit(unit);
