@@ -10,7 +10,7 @@
         {
             Team = team;
             Health = health;
-            this._strategies = strategies;
+            _strategies = strategies;
         }
 
         public int Health { get; private set; }
@@ -36,6 +36,16 @@
         {
             X = x;
             Y = y;
+        }
+
+        public int GetPositionKey()
+        {
+            return GetPositionKey(Y, X);
+        }
+
+        public static int GetPositionKey(int y, int x)
+        {
+            return y * 3733 ^ x;
         }
     }
 }

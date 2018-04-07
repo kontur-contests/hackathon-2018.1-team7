@@ -6,9 +6,9 @@
 
         private readonly int _dx;
 
-        private readonly IWorld _world;
+        private readonly World _world;
 
-        public DefaultMoveStrategy(int dy, int dx, IWorld world)
+        public DefaultMoveStrategy(int dy, int dx, World world)
         {
             _dx = dx;
             _dy = dy;
@@ -30,7 +30,7 @@
                 return false;
             }
 
-            unit.Move(y, x);
+            _world.MoveUnit(unit, y, x);
 
             return true;
         }
