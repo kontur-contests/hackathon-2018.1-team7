@@ -61,5 +61,10 @@
         {
             _army.Add(unit);
         }
+
+        public void ApplyDamage(UnitBase unit, int damageValue)
+        {
+            unit.ApplyDamage(damageValue);
+        }
     }
 }

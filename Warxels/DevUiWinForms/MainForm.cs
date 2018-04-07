@@ -11,11 +11,12 @@ using GameLogic;
 
 namespace DevUiWinForms
 {
-    
+
     public partial class MainForm : Form
     {
         private static bool Paused = true;
-        private static int Delay = 500;
+        private const int DefaultDelay = 100;
+        private static int Delay = DefaultDelay;
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
@@ -49,7 +50,7 @@ namespace DevUiWinForms
             while (true)
             {
                 if (!Paused)
-                    lock(SyncRoot)
+                    lock (SyncRoot)
                         World.DoTick();
 
                 Task.Delay(Delay).Wait();
@@ -83,11 +84,11 @@ namespace DevUiWinForms
         {
             int dX = ImageSizeX / world.Width;
             int dY = ImageSizeY / world.Length;
-            lock(SyncRoot)
-            foreach (var unit in world.Army.GetUnits())
-            {
-                gfx.DrawEllipse(unit.Team==Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
-            } 
+            lock (SyncRoot)
+                foreach (var unit in world.Army.GetUnits())
+                {
+                    gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
+                }
         }
 
         private void DrawGrid(Graphics gfx, IWorld world)
@@ -118,7 +119,7 @@ namespace DevUiWinForms
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);                        
+                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
         }
 
         private void AddUnit(Team team, int worldX, int worldY)
@@ -131,19 +132,19 @@ namespace DevUiWinForms
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonGameSpeedNormal.Checked)
-                Delay = 500;
+                Delay = DefaultDelay;
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonGameSpeedX2.Checked)
-                Delay = 250;
+                Delay = DefaultDelay / 2;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonGameSpeedX4.Checked)
-                Delay = 125;
+                Delay = DefaultDelay / 4;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -167,11 +168,11 @@ namespace DevUiWinForms
             int x = Int32.Parse(textBoxWorldX.Text);
             int y = Int32.Parse(textBoxWorldY.Text);
 
-           
-                WorldGen = WorldsGenerator.GetDefault(y, x);
-                var world = WorldGen.GetWorld();
-                SetWorld(world);
-            
+
+            WorldGen = WorldsGenerator.GetDefault(y, x);
+            var world = WorldGen.GetWorld();
+            SetWorld(world);
+
         }
     }
 }

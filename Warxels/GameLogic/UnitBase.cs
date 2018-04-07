@@ -22,25 +22,39 @@
 
         public Team Team { get; }
 
-        public bool IsDead => Health == 0;
+        public bool IsDead => Health <= 0;
 
         public abstract UnitType UnitType { get; }
 
+        public abstract int DamageValue { get; }
+
         public bool ApplyStrategies()
         {
+            Counter++;
+
             foreach (var strategy in _strategies)
             {
                 if (strategy.Apply(this))
+                {
+                    Counter = 0;
                     return true;
+                }
             }
 
             return false;
         }
 
+        public int Counter { get; set; }
+
         public void Move(int y, int x)
         {
             X = x;
             Y = y;
+        }
+
+        public void ApplyDamage(int damageValue)
+        {
+            Health -= damageValue;
         }
 
         public int GetPositionKey()
