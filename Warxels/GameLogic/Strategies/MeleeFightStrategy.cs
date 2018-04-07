@@ -6,9 +6,6 @@
 
         private readonly World _world;
 
-        private readonly int[] _dx = { -1, 0, 1 };
-        private readonly int[] _dy = { -1, 0, 1 };
-
         public MeleeFightStrategy(World world)
         {
             _world = world;
