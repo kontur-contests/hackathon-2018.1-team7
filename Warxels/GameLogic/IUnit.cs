@@ -9,5 +9,9 @@
         int X { get; }
 
         Team Team { get; }
+
+        bool ApplyStrategies();
+
+        bool IsDead { get; }
     }
 }

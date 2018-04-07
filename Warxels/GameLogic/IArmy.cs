@@ -7,5 +7,7 @@
         IEnumerable<IUnit> GetUnits();
 
         IUnit GetUnit(int y, int x);
+
+        void Remove(IUnit unit);
     }
 }

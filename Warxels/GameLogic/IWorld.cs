@@ -7,5 +7,7 @@
         int Width { get; }
 
         IArmy Army { get; }
+
+        StepResult DoTick();
     }
 }

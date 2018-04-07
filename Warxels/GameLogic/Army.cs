@@ -48,5 +48,12 @@
 
             _units.Add(key, unit);
         }
+
+        public void Remove(IUnit unit)
+        {
+            var key = UnitBase.GetPositionKey(unit.Y, unit.X);
+
+            _units.Remove(key);
+        }
     }
 }
