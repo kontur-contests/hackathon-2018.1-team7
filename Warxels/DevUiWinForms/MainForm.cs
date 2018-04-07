@@ -22,10 +22,10 @@ namespace DevUiWinForms
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
         private static IWorld World;
         private WorldsGenerator WorldGen;
-        private readonly object SyncRoot = new object();
+        private readonly Graphics _gfx;
 
-        private const int ImageSizeX = 512;
-        private const int ImageSizeY = 512;
+        private const int ImageSizeX = 1024;
+        private const int ImageSizeY = 1024;
 
         private static readonly Image image = new Bitmap(ImageSizeX, ImageSizeY);
 
@@ -38,6 +38,8 @@ namespace DevUiWinForms
             textBoxWorldY.Text = "64";
 
             SetWorld(WorldGen.GetWorld());
+
+            _gfx = Graphics.FromImage(image);
         }
 
         public void SetWorld(IWorld world)
@@ -50,7 +52,6 @@ namespace DevUiWinForms
             while (true)
             {
                 if (!Paused)
-                    lock (SyncRoot)
                         World.DoTick();
 
                 Task.Delay(Delay).Wait();
@@ -62,21 +63,20 @@ namespace DevUiWinForms
             while (true)
             {
                 var world = World;
-                
 
-                pictureBox1.Invoke(new Action(() =>
                 {
-                    using (var z = Graphics.FromImage(image))
-                    {
-                        z.Clear(Color.White);
+                    _gfx.Clear(Color.White);
 
-                        DrawGrid(z, world);
-                        DrawUnits(z, world);
-                    }
+                    DrawGrid(_gfx, world);
+                    DrawUnits(_gfx, world);
+                }
+
+                pictureBox1.BeginInvoke(new Action(() =>
+                {
                     pictureBox1.Image = image;
                 }));
 
-                Task.Delay(25).Wait();
+                Task.Delay(24).Wait();
             }
         }
 
@@ -84,7 +84,7 @@ namespace DevUiWinForms
         {
             int dX = ImageSizeX / world.Width;
             int dY = ImageSizeY / world.Length;
-            lock (SyncRoot)
+            
                 foreach (var unit in world.Army.GetUnits())
                 {
                     gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
@@ -124,7 +124,7 @@ namespace DevUiWinForms
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
-            lock(SyncRoot)
+            
             if (World.Army.GetUnit(worldY, worldX) == null)
                 WorldGen.CreateSwordsman(team, worldY, worldX);
         }
