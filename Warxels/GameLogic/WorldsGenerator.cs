@@ -1,4 +1,6 @@
-﻿namespace GameLogic
+﻿using System;
+
+namespace GameLogic
 {
     using GameLogic.Strategies;
 
@@ -55,8 +57,8 @@
             return new WorldsGenerator(world);
         }
 
-
-        public IUnit CreateSwordsman(Team team, int y, int x)
+        
+        private IUnit CreateSwordsman(Team team, int y, int x)
         {
             var strats = team == Team.Blue ? _meleeStrategiesUp : _meleeStrategiesDown;
 
@@ -66,7 +68,7 @@
             return unit;
         }
 
-        public IUnit CreateHorseman(Team team, int y, int x)
+        private IUnit CreateHorseman(Team team, int y, int x)
         {
             var strats = team == Team.Blue ? _strategiesHorseUp : _strategiesHorseDown;
 
@@ -76,7 +78,45 @@
             return unit;
         }
 
-        public IUnit CreateArcher(Team team, int y, int x)
+        public void CreatePreset()
+        {
+            
+        }
+
+        public void AddUnitSquare(Team team, int y, int x, int width, int height, UnitType type, int amount)
+        {
+            var density = (float)Math.Sqrt(width * height / amount);
+
+            if (density == 0)
+                density = 1;
+            int k = 0;
+            for (float i = 0; i < height; i += density)
+                for (float j = 0; j < width; j += density)
+                {
+                    CreateUnit(type, team, (int)(y+i), (int)(x+j));
+                    k++;
+
+                    if (k == amount)
+                        return;
+                }
+        }
+
+        public IUnit CreateUnit(UnitType type, Team team, int y, int x)
+        {
+            switch (type)
+            {
+                case UnitType.HorseMan:
+                    return CreateHorseman(team, y, x);
+                case UnitType.SwordsMan:
+                    return CreateSwordsman(team, y, x);
+                case UnitType.Archer:
+                    return CreateArcher(team, y, x);
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(type));
+        }
+
+        private IUnit CreateArcher(Team team, int y, int x)
         {
             var strats = team == Team.Blue ? _archerStrategiesUp : _archerStrategiesDown;
 

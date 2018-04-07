@@ -72,6 +72,9 @@
         {
             var key = unit.GetPositionKey();
 
+            if (_units.ContainsKey(key))
+                return;
+
             _units.Add(key, unit);
         }
 
