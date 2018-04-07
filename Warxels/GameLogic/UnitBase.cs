@@ -24,13 +24,17 @@
 
         public bool IsDead => Health == 0;
 
-        public void ApplyStrategies()
+        public abstract UnitType UnitType { get; }
+
+        public bool ApplyStrategies()
         {
             foreach (var strategy in _strategies)
             {
                 if (strategy.Apply(this))
-                    return;
+                    return true;
             }
+
+            return false;
         }
 
         public void Move(int y, int x)
