@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Widget;
 using Android.OS;
 
@@ -18,7 +19,7 @@ namespace DevUiAndroidV2
 
         private void MainActivity_Click(object sender, System.EventArgs e)
         {
-
+            StartActivity(new Intent(this, typeof(PrepareView)));
         }
     }
 }

@@ -11,7 +11,13 @@
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/topLayout"
-        p1:layout_weight="1" />
+        p1:layout_weight="1">
+        <Button
+            p1:text="Сделать что-то важное"
+            p1:layout_width="match_parent"
+            p1:layout_height="match_parent"
+            p1:id="@+id/doSomethingButton" />
+    </LinearLayout>
     <LinearLayout
         p1:orientation="horizontal"
         p1:minWidth="25px"
@@ -19,7 +25,14 @@
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/cocosLayout"
-        p1:layout_weight="6" />
+        p1:layout_weight="6">
+        <Grid
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:layout_width="wrap_content"
+            p1:layout_height="match_parent"
+            p1:id="@+id/gridView1" />
+    </LinearLayout>
     <LinearLayout
         p1:orientation="horizontal"
         p1:layout_width="match_parent"
