@@ -164,13 +164,21 @@ namespace DevUiWinForms
             }
             else
             {
+                UnitType t = UnitType.SwordsMan;
+                if (radioButtonUnitSwords.Checked)
+                    t = UnitType.SwordsMan;
+                else if (radioButtonUnitHorse.Checked)
+                    t = UnitType.HorseMan;
+                if (radioButtonUnitArcher.Checked)
+                    t = UnitType.Archer;
+
+
                 renderSquare = false;
                 var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
                 var coords2 = ControlCoordsToWorldCoords(squareEnd.X, squareEnd.Y);
                 int amount = int.Parse(textBoxSquareAmount.Text);
-                WorldGen.AddUnitSquare(_radioTeamA.Checked ? Team.Red : Team.Blue,
-                    coords1.Y, coords1.X, coords2.X - coords1.X, coords2.Y - coords1.Y,
-                    radioButtonUnitSwords.Checked ? UnitType.SwordsMan : UnitType.HorseMan, amount);
+                WorldGen.AddUnitSquare(_radioTeamA.Checked ? Team.Red : Team.Blue,coords1.Y, coords1.X, coords2.X - coords1.X, coords2.Y - coords1.Y,
+                    t, amount);
             }
         }
 
@@ -180,8 +188,11 @@ namespace DevUiWinForms
             {
                 if (radioButtonUnitSwords.Checked)
                     WorldGen.CreateUnit(UnitType.SwordsMan, team, worldY, worldX);
-                else
+                if (radioButtonUnitHorse.Checked)
                     WorldGen.CreateUnit(UnitType.HorseMan, team, worldY, worldX);
+                if (radioButtonUnitArcher.Checked)
+                    WorldGen.CreateUnit(UnitType.Archer, team, worldY, worldX);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
