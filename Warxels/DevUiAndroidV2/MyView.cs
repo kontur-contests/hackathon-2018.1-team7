@@ -17,7 +17,7 @@ namespace DevUiAndroidV2
 {
     class MyView : View
     {
-        const int SIZE = 50;
+        public const int SIZE = 50;
         int step;
         public GenerateArmy Army { get; private set; }
         Paint paint;
