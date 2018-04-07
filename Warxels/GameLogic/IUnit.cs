@@ -7,5 +7,7 @@
         int Y { get; }
 
         int X { get; }
+
+        Team Team { get; }
     }
 }
