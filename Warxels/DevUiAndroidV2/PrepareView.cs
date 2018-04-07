@@ -16,6 +16,8 @@ namespace DevUiAndroidV2
         private SeekBar _rankSeekBar;
         private TextView _totalUnitsEditText;
         private TextView _totalInSquadEditText;
+        private TextView _rowText;
+        private TextView _rankText;
         private LinearLayout _topLayout;
         private LinearLayout _cocosLayout;
         private CCGameView _gameView;
@@ -33,6 +35,8 @@ namespace DevUiAndroidV2
             _rankSeekBar = FindViewById<SeekBar>(Resource.Id.rankSeekBar);
             _totalUnitsEditText = FindViewById<TextView>(Resource.Id.totalUnits);
             _totalInSquadEditText = FindViewById<TextView>(Resource.Id.totalInSquad);
+            _rowText = FindViewById<TextView>(Resource.Id.rowText);
+            _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
             _gameView = FindViewById<CCGameView>(Resource.Id.cCGameView);
@@ -40,23 +44,28 @@ namespace DevUiAndroidV2
             _rankSeekBar.Max = 15;
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
-            _somethingButton.Click += _somethingButton_Click;
-        }
 
-        private void _somethingButton_Click(object sender, System.EventArgs e)
-        {
             CCScene gameScene = new CCScene(_gameView);
-
-            // This will set the world bounds to be (0,0, w, h)
-            // CCSceneResolutionPolicy.ShowAll will ensure that the aspect ratio is preserved
             gameScene.AddLayer(new GameLayer());
             _gameView.RunWithScene(gameScene);
             _gameView.StartGame();
         }
 
+        private void _somethingButton_Click(object sender, System.EventArgs e)
+        {
+        }
+
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
+            if (sender == _rowsSeekBar)
+            {
+                _rowText.Text = "Число рядов: " + _rowsSeekBar.Progress;
+            }
+            else
+            {
+                _rankText.Text = "Число шеренг: " + _rankSeekBar.Progress;
+            }
         }
     }
 

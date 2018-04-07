@@ -69,17 +69,17 @@ namespace DevUiAndroidV2
 			// aapt resource value: 0x7f04000b
 			public const int rankSeekBar = 2130968587;
 			
+			// aapt resource value: 0x7f04000a
+			public const int rankText = 2130968586;
+			
+			// aapt resource value: 0x7f040008
+			public const int rowText = 2130968584;
+			
 			// aapt resource value: 0x7f040009
 			public const int rowsSeekBar = 2130968585;
 			
 			// aapt resource value: 0x7f040000
 			public const int startGameButton = 2130968576;
-			
-			// aapt resource value: 0x7f040008
-			public const int textView1 = 2130968584;
-			
-			// aapt resource value: 0x7f04000a
-			public const int textView2 = 2130968586;
 			
 			// aapt resource value: 0x7f04000d
 			public const int textView3 = 2130968589;
