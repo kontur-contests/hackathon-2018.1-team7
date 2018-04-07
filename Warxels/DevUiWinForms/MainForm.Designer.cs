@@ -54,6 +54,7 @@
             this.radioButtonSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonOneUnit = new System.Windows.Forms.RadioButton();
             this.comboBoxPreset = new System.Windows.Forms.ComboBox();
+            this.radioButtonX8 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -188,12 +189,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.radioButtonX8);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX4);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX2);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedNormal);
             this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 91);
+            this.groupBox3.Size = new System.Drawing.Size(104, 102);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "GameSpeed";
@@ -201,7 +203,7 @@
             // radioButtonGameSpeedX4
             // 
             this.radioButtonGameSpeedX4.AutoSize = true;
-            this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(7, 67);
+            this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(6, 56);
             this.radioButtonGameSpeedX4.Name = "radioButtonGameSpeedX4";
             this.radioButtonGameSpeedX4.Size = new System.Drawing.Size(36, 17);
             this.radioButtonGameSpeedX4.TabIndex = 2;
@@ -212,7 +214,7 @@
             // radioButtonGameSpeedX2
             // 
             this.radioButtonGameSpeedX2.AutoSize = true;
-            this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(7, 44);
+            this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(6, 33);
             this.radioButtonGameSpeedX2.Name = "radioButtonGameSpeedX2";
             this.radioButtonGameSpeedX2.Size = new System.Drawing.Size(36, 17);
             this.radioButtonGameSpeedX2.TabIndex = 1;
@@ -224,7 +226,7 @@
             // 
             this.radioButtonGameSpeedNormal.AutoSize = true;
             this.radioButtonGameSpeedNormal.Checked = true;
-            this.radioButtonGameSpeedNormal.Location = new System.Drawing.Point(7, 20);
+            this.radioButtonGameSpeedNormal.Location = new System.Drawing.Point(6, 10);
             this.radioButtonGameSpeedNormal.Name = "radioButtonGameSpeedNormal";
             this.radioButtonGameSpeedNormal.Size = new System.Drawing.Size(58, 17);
             this.radioButtonGameSpeedNormal.TabIndex = 0;
@@ -235,7 +237,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 271);
+            this.button1.Location = new System.Drawing.Point(3, 282);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -251,7 +253,7 @@
             this.groupBox4.Controls.Add(this.textBoxWorldY);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.textBoxWorldX);
-            this.groupBox4.Location = new System.Drawing.Point(3, 300);
+            this.groupBox4.Location = new System.Drawing.Point(3, 311);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(104, 130);
             this.groupBox4.TabIndex = 4;
@@ -305,7 +307,7 @@
             this.groupBox5.Controls.Add(this.textBoxSquareAmount);
             this.groupBox5.Controls.Add(this.radioButtonSquare);
             this.groupBox5.Controls.Add(this.radioButtonOneUnit);
-            this.groupBox5.Location = new System.Drawing.Point(3, 436);
+            this.groupBox5.Location = new System.Drawing.Point(3, 447);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(111, 100);
             this.groupBox5.TabIndex = 5;
@@ -352,6 +354,17 @@
             this.comboBoxPreset.Name = "comboBoxPreset";
             this.comboBoxPreset.Size = new System.Drawing.Size(97, 21);
             this.comboBoxPreset.TabIndex = 5;
+            // 
+            // radioButtonX8
+            // 
+            this.radioButtonX8.AutoSize = true;
+            this.radioButtonX8.Location = new System.Drawing.Point(6, 79);
+            this.radioButtonX8.Name = "radioButtonX8";
+            this.radioButtonX8.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonX8.TabIndex = 3;
+            this.radioButtonX8.Text = "x8";
+            this.radioButtonX8.UseVisualStyleBackColor = true;
+            this.radioButtonX8.CheckedChanged += new System.EventHandler(this.radioButtonX8_CheckedChanged);
             // 
             // MainForm
             // 
@@ -407,6 +420,7 @@
         private System.Windows.Forms.TextBox textBoxSquareAmount;
         private System.Windows.Forms.RadioButton radioButtonUnitArcher;
         private System.Windows.Forms.ComboBox comboBoxPreset;
+        private System.Windows.Forms.RadioButton radioButtonX8;
     }
 }
 

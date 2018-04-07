@@ -262,5 +262,11 @@ namespace DevUiWinForms
                 renderSquare = true;
             }
         }
+
+        private void radioButtonX8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonX8.Checked)
+                Delay = DefaultDelay / 8;
+        }
     }
 }
