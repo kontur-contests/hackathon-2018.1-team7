@@ -22,6 +22,11 @@
             _world = world;
         }
 
+        public IWorld GetWorld()
+        {
+            return _world;
+        }
+
         public static WorldsGenerator GetDefault(int length, int width)
         {
             var world = Game.GenerateWorld(length, width);

@@ -16,7 +16,7 @@ namespace DevUiWinForms
     {
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
-        private static readonly Pen TeamBPen = new Pen(Brushes.Green);
+        private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
         private static IWorld World;
 
         public class Actor
@@ -35,7 +35,12 @@ namespace DevUiWinForms
         public MainForm()
         {
             InitializeComponent();
-            SetWorld(Game.GenerateWorld(128, 128));
+
+            var worldGen = WorldsGenerator.GetDefault(128, 128);
+            worldGen.CreateSwordsman(Team.Blue, 5, 5);
+            worldGen.CreateSwordsman(Team.Red, 10, 10);
+
+            SetWorld(worldGen.GetWorld());
         }
 
         public void SetWorld(IWorld world)
