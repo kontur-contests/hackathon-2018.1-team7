@@ -1,10 +1,8 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
-using CocosSharp;
 using GameLogic;
-using Xamarin.Forms;
 using Button = Android.Widget.Button;
 
 namespace DevUiAndroidV2
@@ -20,10 +18,9 @@ namespace DevUiAndroidV2
         private TextView _rankText;
         private LinearLayout _topLayout;
         private LinearLayout _cocosLayout;
-        private CCGameView _gameView;
         private WorldsGenerator WorldGen;
         private Button _somethingButton;
-        private CocosSharpView gameView;
+        private View _view;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,20 +36,16 @@ namespace DevUiAndroidV2
             _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
-            _gameView = FindViewById<CCGameView>(Resource.Id.cCGameView);
+            _view = FindViewById<View>(Resource.Id.cocosLayout);
             _rowsSeekBar.Max = 15;
             _rankSeekBar.Max = 15;
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
-
-            CCScene gameScene = new CCScene(_gameView);
-            gameScene.AddLayer(new GameLayer());
-            _gameView.RunWithScene(gameScene);
-            _gameView.StartGame();
         }
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
+
         }
 
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
@@ -66,19 +59,6 @@ namespace DevUiAndroidV2
             {
                 _rankText.Text = "Число шеренг: " + _rankSeekBar.Progress;
             }
-        }
-    }
-
-    class GameLayer : CCLayer
-    {
-        protected override void AddedToScene()
-        {
-            base.AddedToScene();
-            
-            this.ContentSize = new CCSize(100, 100);
-            CCLabel label = new CCLabel("Test", "arial", 22);
-            label.Position = new CCPoint(50, 50);
-            AddChild(label);
         }
     }
 }

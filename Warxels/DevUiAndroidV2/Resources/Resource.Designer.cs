@@ -26,7 +26,6 @@ namespace DevUiAndroidV2
 		
 		public static void UpdateIdValues()
 		{
-			global::CocosSharp.Forms.Android.Resource.String.library_name = global::DevUiAndroidV2.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -47,9 +46,6 @@ namespace DevUiAndroidV2
 			
 			// aapt resource value: 0x7f040006
 			public const int BottomLayout = 2130968582;
-			
-			// aapt resource value: 0x7f040005
-			public const int cCGameView = 2130968581;
 			
 			// aapt resource value: 0x7f040004
 			public const int cocosLayout = 2130968580;
@@ -96,6 +92,9 @@ namespace DevUiAndroidV2
 			// aapt resource value: 0x7f040010
 			public const int totalUnits = 2130968592;
 			
+			// aapt resource value: 0x7f040005
+			public const int view1 = 2130968581;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -128,11 +127,8 @@ namespace DevUiAndroidV2
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030001
-			public const int app_name = 2130903041;
-			
 			// aapt resource value: 0x7f030000
-			public const int library_name = 2130903040;
+			public const int app_name = 2130903040;
 			
 			static String()
 			{
