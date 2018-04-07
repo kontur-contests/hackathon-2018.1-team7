@@ -44,7 +44,9 @@ namespace DevUiAndroidV2
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _somethingButton.Click += _somethingButton_Click;
-            _view.Touch += _view_Touch; ;
+            _view.Touch += _view_Touch;
+            _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
+            _totalUnitsEditText.Text = _view.Army.Size.ToString();
         }
 
         private void _view_Touch(object sender, View.TouchEventArgs e)
@@ -52,7 +54,8 @@ namespace DevUiAndroidV2
             if(e.Event.Action== MotionEventActions.Up)
             {
                 _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress);
-                Toast.MakeText(this, $"{e.Event.GetX()} {e.Event.GetY()}", ToastLength.Short).Show();
+                _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
+                _totalUnitsEditText.Text = _view.Army.Size.ToString();
             }
         }
 
@@ -64,6 +67,7 @@ namespace DevUiAndroidV2
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
+            _totalUnitsEditText.Text = _view.Army.Size.ToString();
             if (sender == _rowsSeekBar)
             {
                 _rowText.Text = "Число рядов: " + _rowsSeekBar.Progress;

@@ -19,7 +19,7 @@ namespace DevUiAndroidV2
     {
         const int SIZE = 50;
         int step;
-        GenerateArmy army;
+        public GenerateArmy Army { get; private set; }
         Paint paint;
         Paint focusPaint;
         private Tuple<Rect, ISquad> focus = null;
@@ -33,7 +33,7 @@ namespace DevUiAndroidV2
             paint.SetStyle(Paint.Style.Fill);
             focusPaint = new Paint(paint);
             focusPaint.Color = Color.Gray;
-            army = new GenerateArmy();
+            Army = new GenerateArmy();
         }
         
         public override void Draw(Canvas canvas)
@@ -56,7 +56,7 @@ namespace DevUiAndroidV2
                 {
 
                     var rectsquad = new RectSquad(rows, ranks, UnitType.SwordsMan, Team.Blue, location.X/step, location.Y/step);
-                    var isAdded = army.AddSquad(rectsquad);
+                    var isAdded = Army.AddSquad(rectsquad);
                     if (isAdded)
                     {
                         var a = new Rect(rectsquad.MinX * step, rectsquad.MinY * step,
@@ -68,7 +68,7 @@ namespace DevUiAndroidV2
             }
             else
             {
-                if(focus.Item2.CheckAndSetPos(army, (int)(location.X / step), (int)(location.Y / step)))
+                if(focus.Item2.CheckAndSetPos(Army, (int)(location.X / step), (int)(location.Y / step)))
                 {
                     var rectsquad = focus.Item2;
                     focus.Item1.Set(new Rect(rectsquad.MinX * step, rectsquad.MinY * step,

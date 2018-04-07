@@ -20,6 +20,8 @@ namespace DevUiAndroidV2
             return _squads;
         }
 
+        public int Size => _squads.Sum(s => s.Size);
+
         public bool AddSquad(ISquad squad)
         {
             if (CheckSquad(squad))

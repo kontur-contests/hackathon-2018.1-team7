@@ -29,6 +29,8 @@ namespace DevUiAndroidV2
         public int MinY => _yMin;
         public int MaxY => _yMin+_y;
 
+        public int Size => _x * _y;
+
         public bool CheckAndSetPos(GenerateArmy army, int x, int y)
         {
             var tempX = _xMin;

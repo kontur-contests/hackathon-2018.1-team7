@@ -19,6 +19,8 @@ namespace DevUiAndroidV2
         int MaxX { get; }
         int MinY { get; }
         int MaxY { get; }
+        int Size { get; }
+
         bool CheckAndSetPos(GenerateArmy army, int x, int y);
         IEnumerable<IUnit> GetUnits();
 
