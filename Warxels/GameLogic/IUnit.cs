@@ -13,5 +13,7 @@
         bool ApplyStrategies();
 
         bool IsDead { get; }
+
+        UnitType UnitType { get; }
     }
 }

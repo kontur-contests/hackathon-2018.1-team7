@@ -8,5 +8,7 @@
             : base(team, strategies, y, x)
         {
         }
+
+        public override UnitType UnitType => UnitType.SwordsMan;
     }
 }

@@ -24,6 +24,8 @@
 
         public bool IsDead => Health == 0;
 
+        public abstract UnitType UnitType { get; }
+
         public bool ApplyStrategies()
         {
             foreach (var strategy in _strategies)
