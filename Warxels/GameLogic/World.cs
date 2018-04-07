@@ -117,5 +117,7 @@
                 for (int j = y; j < y1 && j < Length; j++)
                     Terrain[i, j] = terrainType;
         }
+
+        
     }
 }

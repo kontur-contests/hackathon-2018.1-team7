@@ -63,6 +63,10 @@
             this.radioButtonTerrainSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonTerrainBrush = new System.Windows.Forms.RadioButton();
             this.comboBoxTerrain = new System.Windows.Forms.ComboBox();
+            this.buttonUnitsSave = new System.Windows.Forms.Button();
+            this.buttonUnitsLoad = new System.Windows.Forms.Button();
+            this.buttonTerrainLoad = new System.Windows.Forms.Button();
+            this.buttonTerrainSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -267,6 +271,8 @@
             // 
             // tabPageUnits
             // 
+            this.tabPageUnits.Controls.Add(this.buttonUnitsLoad);
+            this.tabPageUnits.Controls.Add(this.buttonUnitsSave);
             this.tabPageUnits.Controls.Add(this.groupBox2);
             this.tabPageUnits.Controls.Add(this.groupBox5);
             this.tabPageUnits.Controls.Add(this.groupBox1);
@@ -402,6 +408,8 @@
             // 
             // tabPageTerrain
             // 
+            this.tabPageTerrain.Controls.Add(this.buttonTerrainLoad);
+            this.tabPageTerrain.Controls.Add(this.buttonTerrainSave);
             this.tabPageTerrain.Controls.Add(this.groupBox6);
             this.tabPageTerrain.Controls.Add(this.comboBoxTerrain);
             this.tabPageTerrain.Location = new System.Drawing.Point(4, 22);
@@ -466,6 +474,46 @@
             this.comboBoxTerrain.Name = "comboBoxTerrain";
             this.comboBoxTerrain.Size = new System.Drawing.Size(136, 21);
             this.comboBoxTerrain.TabIndex = 0;
+            // 
+            // buttonUnitsSave
+            // 
+            this.buttonUnitsSave.Location = new System.Drawing.Point(890, 6);
+            this.buttonUnitsSave.Name = "buttonUnitsSave";
+            this.buttonUnitsSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonUnitsSave.TabIndex = 6;
+            this.buttonUnitsSave.Text = "Save";
+            this.buttonUnitsSave.UseVisualStyleBackColor = true;
+            this.buttonUnitsSave.Click += new System.EventHandler(this.buttonUnitsSave_Click);
+            // 
+            // buttonUnitsLoad
+            // 
+            this.buttonUnitsLoad.Location = new System.Drawing.Point(890, 35);
+            this.buttonUnitsLoad.Name = "buttonUnitsLoad";
+            this.buttonUnitsLoad.Size = new System.Drawing.Size(75, 23);
+            this.buttonUnitsLoad.TabIndex = 7;
+            this.buttonUnitsLoad.Text = "Load";
+            this.buttonUnitsLoad.UseVisualStyleBackColor = true;
+            this.buttonUnitsLoad.Click += new System.EventHandler(this.buttonUnitsLoad_Click);
+            // 
+            // buttonTerrainLoad
+            // 
+            this.buttonTerrainLoad.Location = new System.Drawing.Point(880, 35);
+            this.buttonTerrainLoad.Name = "buttonTerrainLoad";
+            this.buttonTerrainLoad.Size = new System.Drawing.Size(75, 23);
+            this.buttonTerrainLoad.TabIndex = 9;
+            this.buttonTerrainLoad.Text = "Load";
+            this.buttonTerrainLoad.UseVisualStyleBackColor = true;
+            this.buttonTerrainLoad.Click += new System.EventHandler(this.buttonTerrainLoad_Click);
+            // 
+            // buttonTerrainSave
+            // 
+            this.buttonTerrainSave.Location = new System.Drawing.Point(880, 6);
+            this.buttonTerrainSave.Name = "buttonTerrainSave";
+            this.buttonTerrainSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonTerrainSave.TabIndex = 8;
+            this.buttonTerrainSave.Text = "Save";
+            this.buttonTerrainSave.UseVisualStyleBackColor = true;
+            this.buttonTerrainSave.Click += new System.EventHandler(this.buttonTerrainSave_Click);
             // 
             // MainForm
             // 
@@ -535,6 +583,10 @@
         private System.Windows.Forms.RadioButton radioButtonTerrainSquare;
         private System.Windows.Forms.RadioButton radioButtonTerrainBrush;
         private System.Windows.Forms.TextBox textBoxTerrainBrushSize;
+        private System.Windows.Forms.Button buttonUnitsLoad;
+        private System.Windows.Forms.Button buttonUnitsSave;
+        private System.Windows.Forms.Button buttonTerrainLoad;
+        private System.Windows.Forms.Button buttonTerrainSave;
     }
 }
 

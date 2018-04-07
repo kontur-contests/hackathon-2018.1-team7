@@ -148,5 +148,10 @@ namespace GameLogic
             _world.AddUnit(unit);
             return unit;
         }
+
+        public void ClearUnits()
+        {
+            _world.Army.Clear();
+        }
     }
 }
