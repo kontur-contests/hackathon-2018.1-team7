@@ -17,6 +17,11 @@
 
         public int Width { get; }
 
+        public bool IsPointWithin(int x, int y)
+        {
+            return x < Width && x >= 0 && y < Length && y >= 0;
+        }
+
         public IArmy Army => _army;
 
         public StepResult DoTick()

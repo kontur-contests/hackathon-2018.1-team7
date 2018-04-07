@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLogic", "GameLogic\Game
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevUiWinForms", "DevUiWinForms\DevUiWinForms.csproj", "{96381527-5DAB-4EC4-9D0C-F01F929D07DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevUIAndroid", "DevUIAndroid\DevUIAndroid.csproj", "{E3BA8186-FE45-494A-BD79-8673A361857A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevUiAndroidV2", "DevUiAndroidV2\DevUiAndroidV2.csproj", "{647620B4-7B5B-410A-84DF-67F2604D3F9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,12 @@ Global
 		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96381527-5DAB-4EC4-9D0C-F01F929D07DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3BA8186-FE45-494A-BD79-8673A361857A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647620B4-7B5B-410A-84DF-67F2604D3F9C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,7 +17,6 @@ namespace DevUIAndroid
 {
 
     [Activity(Label = "DevUIAndroid"
-        , MainLauncher = true
         , Icon = "@drawable/icon"
         , Theme = "@style/Theme.Splash"
         , AlwaysRetainTaskState = true
@@ -35,7 +34,6 @@ namespace DevUIAndroid
             application.ApplicationDelegate = new AppDelegate();
 
             this.SetContentView(application.AndroidContentView);
-
             application.StartGame();
 
         }

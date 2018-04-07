@@ -26,7 +26,7 @@
                         x -= 1;
             }
             
-            if (x >= World.Width || x < 0 || y >= World.Length || y < 0)
+            if (!World.IsPointWithin(x, y))
             {
                 return StrategyResult.NotApplicable;
             }

@@ -17,5 +17,7 @@
         UnitType UnitType { get; }
 
         int DamageValue { get; }
+
+        int MoveCost { get; }
     }
 }
