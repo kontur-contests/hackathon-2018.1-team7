@@ -104,5 +104,18 @@
         {
             _projectiles.Add(arrow);
         }
+
+        public void SetTerrain(int y, int x, int y1, int x1, byte terrainType)
+        {
+            if (x < 0)
+                x = 0;
+
+            if (y < 0)
+                y = 0;
+
+            for (int i = x; i < x1 && i < Width; i++)
+                for (int j = y; j < y1 && j < Length; j++)
+                    Terrain[i, j] = terrainType;
+        }
     }
 }
