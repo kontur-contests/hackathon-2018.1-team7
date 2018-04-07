@@ -258,7 +258,7 @@
             this.groupBox4.Size = new System.Drawing.Size(104, 130);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Создать мир";
             // 
             // buttonGenerateWorld
             // 
@@ -312,7 +312,7 @@
             this.groupBox5.Size = new System.Drawing.Size(111, 100);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "groupBox5";
+            this.groupBox5.Text = "Добавить юнитов";
             // 
             // textBoxSquareAmount
             // 
@@ -325,6 +325,7 @@
             // radioButtonSquare
             // 
             this.radioButtonSquare.AutoSize = true;
+            this.radioButtonSquare.Checked = true;
             this.radioButtonSquare.Location = new System.Drawing.Point(6, 44);
             this.radioButtonSquare.Name = "radioButtonSquare";
             this.radioButtonSquare.Size = new System.Drawing.Size(57, 17);
@@ -336,12 +337,10 @@
             // radioButtonOneUnit
             // 
             this.radioButtonOneUnit.AutoSize = true;
-            this.radioButtonOneUnit.Checked = true;
             this.radioButtonOneUnit.Location = new System.Drawing.Point(6, 20);
             this.radioButtonOneUnit.Name = "radioButtonOneUnit";
             this.radioButtonOneUnit.Size = new System.Drawing.Size(63, 17);
             this.radioButtonOneUnit.TabIndex = 0;
-            this.radioButtonOneUnit.TabStop = true;
             this.radioButtonOneUnit.Text = "one unit";
             this.radioButtonOneUnit.UseVisualStyleBackColor = true;
             // 
