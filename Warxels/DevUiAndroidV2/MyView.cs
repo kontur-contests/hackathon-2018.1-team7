@@ -15,32 +15,35 @@ using GameLogic;
 
 namespace DevUiAndroidV2
 {
-    class MyView : View
+    sealed class MyView : View
     {
-        public const int SIZE = 50;
+        public const int SIZE = 100;
         int step;
         public GenerateArmy Army { get; private set; }
-        Paint paint;
-        Paint focusPaint;
+        private Paint paint;
+        private Paint focusPaint;
+        private Paint borderPaint;
         private Tuple<Rect, ISquad> focus = null;
         private List<Tuple<Rect, ISquad>> lists = new List<Tuple<Rect, ISquad>>();
         public MyView(Context context) : base(context)
         {
+            SetPadding(0, 0, 0, 0);
             paint = new Paint
             {
                 Color = Color.Green
             };
             paint.SetStyle(Paint.Style.Fill);
-            focusPaint = new Paint(paint);
-            focusPaint.Color = Color.Gray;
+            borderPaint = new Paint(paint) {Color = Color.Cyan};
+            focusPaint = new Paint(paint) {Color = Color.Gray};
             Army = new GenerateArmy();
         }
         
         public override void Draw(Canvas canvas)
         {
+            canvas.DrawLine(0, Bottom / 2, Right, Bottom / 2, borderPaint);
             foreach(var t in lists)
             {
-                canvas.DrawRect(t.Item1, t == focus ? focusPaint : paint);
+                canvas.DrawRect(t.Item1, Equals(t, focus) ? focusPaint : paint);
             }
         }
 

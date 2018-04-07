@@ -24,9 +24,9 @@
         p1:minHeight="25px"
         p1:layout_width="match_parent"
         p1:id="@+id/cocosLayout"
-        p1:layout_weight="6"
+        p1:layout_weight="10"
         p1:layout_marginBottom="0.0dp"
-        p1:layout_height="400px" />
+        p1:layout_height="800px" />
     <LinearLayout
         p1:orientation="horizontal"
         p1:layout_width="match_parent"

@@ -1,4 +1,6 @@
-﻿using Android.App;
+﻿using System;
+using Android.Accounts;
+using Android.App;
 using Android.Graphics;
 using Android.OS;
 using Android.Views;
@@ -58,6 +60,7 @@ namespace DevUiAndroidV2
                 _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress, GetUnitType());
                 _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
                 _totalUnitsEditText.Text = _view.Army.Size.ToString();
+                UpdateSelectors();
             }
         }
 
@@ -80,23 +83,33 @@ namespace DevUiAndroidV2
             _view.Invalidate();
         }
 
-        private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
+        private void UpdateSelectors()
+        {
+            UpdateSelectors(_rowsSeekBar);
+            UpdateSelectors(_rankSeekBar);
+        }
+        private void UpdateSelectors(object sender)
         {
             var army = _view.Army.MaxSizeArmy - _view.Army.Size;
             if (sender == _rowsSeekBar)
             {
-                _rowsSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army 
-                    ? army/(_rankSeekBar.Progress != 0 ? _rankSeekBar.Progress : 1) : _rowsSeekBar.Max;
+                _rankSeekBar.Max = Math.Min(army / (_rowsSeekBar.Progress == 0 ? 1 : _rowsSeekBar.Progress), MyView.SIZE / 2);
+                _rankSeekBar.Progress = Math.Min(_rankSeekBar.Max, _rankSeekBar.Progress);
                 _rowText.Text = "Число рядов: " + _rowsSeekBar.Progress;
             }
             else
             {
-                _rankSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army
-                    ? army/(_rowsSeekBar.Progress != 0 ? _rowsSeekBar.Progress : 1): _rankSeekBar.Max;
+                _rowsSeekBar.Max = Math.Min(army / (_rankSeekBar.Progress == 0 ? 1 : _rankSeekBar.Progress), MyView.SIZE);
+                _rowsSeekBar.Progress = Math.Min(_rowsSeekBar.Max, _rowsSeekBar.Progress);
                 _rankText.Text = "Число шеренг: " + _rankSeekBar.Progress;
             }
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
             _totalUnitsEditText.Text = _view.Army.Size.ToString();
+        }
+
+        private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
+        {
+            UpdateSelectors(sender);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace DevUiAndroidV2
         public bool CheckSquad(ISquad squad)
         {
             var inWorldSpace = squad.MinX >= 0 && squad.MaxX < MyView.SIZE 
-                               && squad.MinY >= 0 && squad.MaxY < MyView.SIZE/2;
+                               && squad.MinY >= MyView.SIZE/2 && squad.MaxY < MyView.SIZE;
             return inWorldSpace && (_squads.Count == 0 || _squads.All(val => squad==val 
                                     || val.MaxX < squad.MinX || val.MinX > squad.MaxX
                                      || val.MinY > squad.MaxY || val.MaxY < squad.MinY));
