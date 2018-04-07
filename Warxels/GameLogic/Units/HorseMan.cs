@@ -11,5 +11,7 @@
         public override UnitType UnitType => UnitType.HorseMan;
 
         public override int DamageValue => 50;
+
+        public override int MoveCost => 5;
     }
 }

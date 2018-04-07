@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic;
@@ -46,22 +41,16 @@ namespace DevUiWinForms
         {
             World = world;
         }
-
-        private void Tick()
-        {
-            while (true)
-            {
-                if (!Paused)
-                        World.DoTick();
-
-                Task.Delay(Delay).Wait();
-            }
-        }
+        
 
         private void Render()
         {
             while (true)
             {
+                if (!Paused)
+                    World.DoTick();
+
+                Task.Delay(Delay).Wait();
                 var world = World;
 
                 {
@@ -75,8 +64,8 @@ namespace DevUiWinForms
                 {
                     pictureBox1.Image = image;
                 }));
-
-                Task.Delay(24).Wait();
+                
+                Task.Delay(Delay).Wait();
             }
         }
 
@@ -105,12 +94,12 @@ namespace DevUiWinForms
 
             for (int x = 0; x < ImageSizeX; x += stepX)
             {
-                gfx.DrawLine(Pen, new Point(x, 0), new Point(x, ImageSizeY));
+                gfx.DrawLine(Pen, x,0, x, ImageSizeY);
             }
 
             for (int y = 0; y < ImageSizeY; y += stepY)
             {
-                gfx.DrawLine(Pen, new Point(0, y), new Point(ImageSizeX, y));
+                gfx.DrawLine(Pen, 0, y, ImageSizeX, y);
             }
         }
 
@@ -120,7 +109,6 @@ namespace DevUiWinForms
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Task.Factory.StartNew(Render);
-            Task.Factory.StartNew(Tick);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -131,7 +119,6 @@ namespace DevUiWinForms
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
-
             if (World.Army.GetUnit(worldY, worldX) == null)
                 if (radioButtonUnitSwords.Checked)
                     WorldGen.CreateSwordsman(team, worldY, worldX);

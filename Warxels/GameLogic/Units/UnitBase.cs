@@ -28,6 +28,10 @@
 
         public abstract int DamageValue { get; }
 
+        public abstract int MoveCost { get; }
+
+
+
         public bool ApplyStrategies()
         {
             Power++;

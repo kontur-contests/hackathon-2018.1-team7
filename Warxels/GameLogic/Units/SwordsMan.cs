@@ -12,5 +12,7 @@
         public override UnitType UnitType => UnitType.SwordsMan;
 
         public override int DamageValue => 25;
+
+        public override int MoveCost => 10;
     }
 }

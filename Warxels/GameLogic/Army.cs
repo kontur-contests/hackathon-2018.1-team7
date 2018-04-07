@@ -68,5 +68,24 @@
 
             _units.Remove(key);
         }
+
+        public IUnit GetFirstUnit(IUnit unit, int dx, int dy, int depth)
+        {
+            int posx = unit.X;
+            int posy = unit.Y;
+
+            for (int i = 0; i < depth; i++)
+            {
+                posx += dx;
+                posy += dy;
+
+                var foundUnit = GetUnit(posy, posx);
+
+                if (foundUnit != null)
+                    return foundUnit;
+
+            }
+            return null;
+        }
     }
 }
