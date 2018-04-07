@@ -11,23 +11,12 @@ using GameLogic;
 
 namespace DevUiWinForms
 {
-    internal class World : IWorld
-    {
-        public int Length { get; }
-
-        public int Width { get; }
-
-        public World(int width, int height)
-        {
-            Width = width;
-            Length = height;
-        }
-
-        public IArmy Army => throw new NotImplementedException();
-    }
+    
     public partial class MainForm : Form
     {
-        private static readonly Pen Pen = new Pen(Color.Black,1);
+        private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
+        private static readonly Pen TeamAPen = new Pen(Brushes.Red);
+        private static readonly Pen TeamBPen = new Pen(Brushes.Green);
         private static IWorld World;
 
         public class Actor
@@ -46,7 +35,7 @@ namespace DevUiWinForms
         public MainForm()
         {
             InitializeComponent();
-            SetWorld(new World(32,64) );
+            SetWorld(Game.GenerateWorld(128, 128));
         }
 
         public void SetWorld(IWorld world)
@@ -65,6 +54,7 @@ namespace DevUiWinForms
                         z.Clear(Color.White);
                         
                         DrawGrid(z, World);
+                        DrawUnits(z, World);
                     }
                     
                     pictureBox1.Image = image;
@@ -73,6 +63,17 @@ namespace DevUiWinForms
                 }));
 
                 Task.Delay(50).Wait();
+            }
+        }
+
+        private void DrawUnits(Graphics gfx, IWorld world)
+        {
+            int dX = ImageSizeX / world.Width;
+            int dY = ImageSizeY / world.Length;
+
+            foreach (var unit in world.Army.GetUnits())
+            {
+                gfx.DrawEllipse(TeamAPen, unit.X * dX, unit.Y * dY, dX, dY);
             }
         }
 
