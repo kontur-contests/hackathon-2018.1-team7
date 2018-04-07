@@ -1,7 +1,7 @@
 ﻿namespace GameLogic
 {
     using GameLogic.Strategies;
-    
+
     public class WorldsGenerator
     {
         private readonly World _world;
@@ -28,8 +28,8 @@
             _up = new DefaultMoveStrategy(1, 0, world);
             _down = new DefaultMoveStrategy(-1, 0, world);
 
-            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, _up);
-            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, _down);
+            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _up);
+            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _down);
 
             _horseUp = new HorseMoveStrategy(1, 0, world);
             _horseDown = new HorseMoveStrategy(-1, 0, world);

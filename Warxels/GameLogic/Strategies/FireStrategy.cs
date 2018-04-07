@@ -16,8 +16,8 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            var enemy = _world.Army.GetNearbyUnits(unit, 3, 20).FirstOrDefault(o => o.Team != unit.Team) ??
-                        _world.Army.GetNearbyUnits(unit, 20).FirstOrDefault(o => o.Team != unit.Team);
+            var enemy = _world.Army.GetNearbyUnits(unit, 20).Where(o => o.Team != unit.Team)
+                .OrderBy(o => DistanceHelper.GetDistanceSquared(unit, o)).FirstOrDefault();
 
             if (enemy != null)
             {

@@ -42,11 +42,11 @@
             }
         }
 
-        public IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int dx, int radius)
+        public IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int dx, int dy)
         {
             for (var i = unit.X - dx; i <= unit.X + dx; i++)
             {
-                for (var j = unit.Y - radius; j <= unit.Y + radius; j++)
+                for (var j = unit.Y - dy; j <= unit.Y + dy; j++)
                 {
                     var testUnit = GetUnit(j, i);
                     if (testUnit != null)
