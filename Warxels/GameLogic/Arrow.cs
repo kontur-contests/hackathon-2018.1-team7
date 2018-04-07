@@ -8,6 +8,6 @@
 
         }
 
-        public override int DamageValue => 15;
+        public override int DamageValue => 10;
     }
 }
