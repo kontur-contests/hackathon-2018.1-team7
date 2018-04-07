@@ -29,10 +29,10 @@
                     var x = unit.X + _dx[j];
 
                     var testUnit = _world.Army.GetUnit(y, x);
-                    if (testUnit == null || testUnit.Team == unit.Team)
+                    if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
                         continue;
 
-                    if ( minUnit == null || minUnit.Health > testUnit.Health)
+                    if (minUnit == null || minUnit.Health > testUnit.Health)
                     {
                         minUnit = testUnit;
                     }
