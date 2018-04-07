@@ -2,6 +2,6 @@
 {
     internal interface IStrategy
     {
-        bool Apply(UnitBase unit);
+        StrategyResult Apply(UnitBase unit);
     }
 }

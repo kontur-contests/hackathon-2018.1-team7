@@ -17,27 +17,27 @@
             _world = world;
         }
 
-        public bool Apply(UnitBase unit)
+        public StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Counter < _cost)
-                return false;
+            if (unit.Power < _cost)
+                return StrategyResult.NotEnoughPower;
 
             var x = unit.X + _dx;
             var y = unit.Y + _dy;
 
             if (x >= _world.Width || x < 0 || y >= _world.Length || y < 0)
             {
-                return false;
+                return StrategyResult.NotApplicable;
             }
 
             if (_world.Army.GetUnit(y, x) != null)
             {
-                return false;
+                return StrategyResult.NotApplicable;
             }
 
             _world.MoveUnit(unit, y, x);
 
-            return true;
+            return StrategyResult.Applied;
         }
     }
 }

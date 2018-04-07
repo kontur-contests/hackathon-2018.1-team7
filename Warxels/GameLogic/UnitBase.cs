@@ -30,21 +30,30 @@
 
         public bool ApplyStrategies()
         {
-            Counter++;
+            Power++;
 
             foreach (var strategy in _strategies)
             {
-                if (strategy.Apply(this))
+                var result = strategy.Apply(this);
+
+                switch (result)
                 {
-                    Counter = 0;
-                    return true;
+                    case StrategyResult.NotEnoughPower:
+                        return false;
+                    case StrategyResult.Applied:
+                    {
+                        Power = 0;
+                        return true;
+                    }
+                    case StrategyResult.NotApplicable:
+                        continue;
                 }
             }
 
             return false;
         }
 
-        public int Counter { get; set; }
+        public int Power { get; set; }
 
         public void Move(int y, int x)
         {

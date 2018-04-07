@@ -14,10 +14,10 @@
             _world = world;
         }
 
-        public bool Apply(UnitBase unit)
+        public StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Counter < _cost)
-                return false;
+            if (unit.Power < _cost)
+                return StrategyResult.NotEnoughPower;
 
             IUnit minUnit = null;
 
@@ -42,10 +42,10 @@
             if (minUnit != null)
             {
                 _world.ApplyDamage(minUnit as UnitBase, unit.DamageValue);
-                return true;
+                return StrategyResult.Applied;
             }
 
-            return false;
+            return StrategyResult.NotApplicable;
         }
     }
 }
