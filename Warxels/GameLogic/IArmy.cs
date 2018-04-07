@@ -10,6 +10,8 @@
 
         IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int radius);
 
+        IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int dx, int radius);
+
         IUnit GetFirstUnit(IUnit unit, int dx, int dy, int depth);
 
         void Remove(IUnit unit);

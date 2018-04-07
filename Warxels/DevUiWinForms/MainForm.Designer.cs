@@ -32,6 +32,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtonUnitHorse = new System.Windows.Forms.RadioButton();
             this.radioButtonUnitSwords = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -47,7 +48,7 @@
             this.textBoxWorldY = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxWorldX = new System.Windows.Forms.TextBox();
-            this.radioButtonUnitHorse = new System.Windows.Forms.RadioButton();
+            this.radioButtonUnitArcher = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -100,6 +101,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButtonUnitArcher);
             this.groupBox1.Controls.Add(this.radioButtonUnitHorse);
             this.groupBox1.Controls.Add(this.radioButtonUnitSwords);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -108,6 +110,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "UnitType";
+            // 
+            // radioButtonUnitHorse
+            // 
+            this.radioButtonUnitHorse.AutoSize = true;
+            this.radioButtonUnitHorse.Location = new System.Drawing.Point(7, 53);
+            this.radioButtonUnitHorse.Name = "radioButtonUnitHorse";
+            this.radioButtonUnitHorse.Size = new System.Drawing.Size(71, 17);
+            this.radioButtonUnitHorse.TabIndex = 1;
+            this.radioButtonUnitHorse.TabStop = true;
+            this.radioButtonUnitHorse.Text = "horseman";
+            this.radioButtonUnitHorse.UseVisualStyleBackColor = true;
             // 
             // radioButtonUnitSwords
             // 
@@ -267,16 +280,16 @@
             this.textBoxWorldX.Size = new System.Drawing.Size(66, 20);
             this.textBoxWorldX.TabIndex = 0;
             // 
-            // radioButtonUnitHorse
+            // radioButtonUnitArcher
             // 
-            this.radioButtonUnitHorse.AutoSize = true;
-            this.radioButtonUnitHorse.Location = new System.Drawing.Point(7, 53);
-            this.radioButtonUnitHorse.Name = "radioButtonUnitHorse";
-            this.radioButtonUnitHorse.Size = new System.Drawing.Size(71, 17);
-            this.radioButtonUnitHorse.TabIndex = 1;
-            this.radioButtonUnitHorse.TabStop = true;
-            this.radioButtonUnitHorse.Text = "horseman";
-            this.radioButtonUnitHorse.UseVisualStyleBackColor = true;
+            this.radioButtonUnitArcher.AutoSize = true;
+            this.radioButtonUnitArcher.Location = new System.Drawing.Point(7, 76);
+            this.radioButtonUnitArcher.Name = "radioButtonUnitArcher";
+            this.radioButtonUnitArcher.Size = new System.Drawing.Size(55, 17);
+            this.radioButtonUnitArcher.TabIndex = 2;
+            this.radioButtonUnitArcher.TabStop = true;
+            this.radioButtonUnitArcher.Text = "archer";
+            this.radioButtonUnitArcher.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -324,6 +337,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxWorldX;
         private System.Windows.Forms.RadioButton radioButtonUnitHorse;
+        private System.Windows.Forms.RadioButton radioButtonUnitArcher;
     }
 }
 

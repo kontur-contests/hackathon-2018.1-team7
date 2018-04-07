@@ -15,6 +15,11 @@ namespace DevUiWinForms
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
+        private static readonly Pen ProjectilePen = new Pen(Brushes.Brown);
+
+        private static readonly SolidBrush TeamASolidPen = new SolidBrush(Color.Red);
+        private static readonly SolidBrush TeamBSolidPen = new SolidBrush(Color.Blue);
+
         private static IWorld World;
         private WorldsGenerator WorldGen;
         private readonly Graphics _gfx;
@@ -41,7 +46,7 @@ namespace DevUiWinForms
         {
             World = world;
         }
-        
+
 
         private void Render()
         {
@@ -58,14 +63,26 @@ namespace DevUiWinForms
 
                     DrawGrid(_gfx, world);
                     DrawUnits(_gfx, world);
+                    DrawProjectiles(_gfx, world);
                 }
 
                 pictureBox1.BeginInvoke(new Action(() =>
                 {
                     pictureBox1.Image = image;
                 }));
-                
+
                 Task.Delay(Delay).Wait();
+            }
+        }
+
+        private void DrawProjectiles(Graphics gfx, IWorld world)
+        {
+            int dX = ImageSizeX / world.Width;
+            int dY = ImageSizeY / world.Length;
+
+            foreach (var projectile in world.GetProjectiles())
+            {
+                gfx.DrawEllipse(ProjectilePen, projectile.X * dX, projectile.Y * dY, dX , dY);
             }
         }
 
@@ -82,6 +99,8 @@ namespace DevUiWinForms
                         gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
                     case UnitType.HorseMan:
                         gfx.DrawRectangle(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                    case UnitType.Archer:
+                        gfx.FillEllipse(unit.Team == Team.Red ? TeamASolidPen : TeamBSolidPen, unit.X * dX, unit.Y * dY, dX, dY); break;
                 }
 
             }
@@ -94,7 +113,7 @@ namespace DevUiWinForms
 
             for (int x = 0; x < ImageSizeX; x += stepX)
             {
-                gfx.DrawLine(Pen, x,0, x, ImageSizeY);
+                gfx.DrawLine(Pen, x, 0, x, ImageSizeY);
             }
 
             for (int y = 0; y < ImageSizeY; y += stepY)
@@ -120,10 +139,14 @@ namespace DevUiWinForms
         private void AddUnit(Team team, int worldX, int worldY)
         {
             if (World.Army.GetUnit(worldY, worldX) == null)
+            {
                 if (radioButtonUnitSwords.Checked)
                     WorldGen.CreateSwordsman(team, worldY, worldX);
-                else
+                else if (radioButtonUnitHorse.Checked)
                     WorldGen.CreateHorseman(team, worldY, worldX);
+                else if (radioButtonUnitArcher.Checked)
+                    WorldGen.CreateArcher(team, worldY, worldX);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
