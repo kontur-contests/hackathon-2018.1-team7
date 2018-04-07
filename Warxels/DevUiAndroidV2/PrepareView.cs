@@ -82,16 +82,21 @@ namespace DevUiAndroidV2
 
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
-            _totalUnitsEditText.Text = _view.Army.Size.ToString();
+            var army = _view.Army.MaxSizeArmy - _view.Army.Size;
             if (sender == _rowsSeekBar)
             {
+                _rowsSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army 
+                    ? army/_rankSeekBar.Progress : _rowsSeekBar.Max;
                 _rowText.Text = "Число рядов: " + _rowsSeekBar.Progress;
             }
             else
             {
+                _rankSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army
+                    ? army/_rankSeekBar.Progress : _rankSeekBar.Max;
                 _rankText.Text = "Число шеренг: " + _rankSeekBar.Progress;
             }
+            _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
+            _totalUnitsEditText.Text = _view.Army.Size.ToString();
         }
     }
 }

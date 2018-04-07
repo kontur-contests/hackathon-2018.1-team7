@@ -20,6 +20,7 @@ namespace DevUiAndroidV2
             return _squads;
         }
 
+        public int MaxSizeArmy => 1000;
         public int Size => _squads.Sum(s => s.Size);
 
         public bool AddSquad(ISquad squad)
@@ -34,8 +35,11 @@ namespace DevUiAndroidV2
 
         public bool CheckSquad(ISquad squad)
         {
-            return _squads.Count == 0 || _squads.All(val => squad==val || val.MaxX < squad.MinX || val.MinX > squad.MaxX
-                                     || val.MinY > squad.MaxY || val.MaxY < squad.MinY);
+            var inWorldSpace = squad.MinX >= 0 && squad.MaxX < MyView.SIZE 
+                               && squad.MinY >= 0 && squad.MaxY < MyView.SIZE/2;
+            return inWorldSpace && (_squads.Count == 0 || _squads.All(val => squad==val 
+                                    || val.MaxX < squad.MinX || val.MinX > squad.MaxX
+                                     || val.MinY > squad.MaxY || val.MaxY < squad.MinY));
         }
     }
 }
