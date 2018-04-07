@@ -78,9 +78,27 @@ namespace GameLogic
             return unit;
         }
 
-        public void CreatePreset()
+        public static WorldsGenerator CreatePreset(int sizeY,int sizeX)
         {
-            
+            var world = Game.GenerateWorld(sizeY, sizeX);
+
+            float dx = sizeX / 512.0f;
+            float dy = sizeY / 512.0f;
+            var gen =  new WorldsGenerator(world);
+            gen.AddUnitSquare(Team.Blue, 2, 50*dx, 60*dx, 40*dy, UnitType.HorseMan, 150);
+            gen.AddUnitSquare(Team.Blue, 2, 380 *dx, 60*dx, 40*dy, UnitType.HorseMan, 150);
+
+            gen.AddUnitSquare(Team.Blue, 5, 130 *dx, 100*dx, 40*dy, UnitType.Archer, 200);
+            gen.AddUnitSquare(Team.Blue, 5, 270 *dx, 100*dx, 40*dy, UnitType.Archer, 200);
+
+            gen.AddUnitSquare(Team.Blue, 90 *dy, 100*dx, 100*dx, 50*dy, UnitType.SwordsMan, 400);
+            gen.AddUnitSquare(Team.Blue, 90 *dy, 300*dx, 100*dx, 50*dy, UnitType.SwordsMan, 400);
+
+            gen.AddUnitSquare(Team.Blue, 50 *dy, 220*dx, 60*dx, 150*dy, UnitType.SwordsMan, 200);
+
+
+            return gen;
+
         }
 
         public void AddUnitSquare(Team team, int y, int x, int width, int height, UnitType type, int amount)
@@ -99,6 +117,12 @@ namespace GameLogic
                     if (k == amount)
                         return;
                 }
+        }
+
+        public void AddUnitSquare(Team team, float y, float x, float width, float height, UnitType type, int amount)
+        {
+            AddUnitSquare(team, (int)y, (int)x, (int)width, (int)height, type, amount);
+            
         }
 
         public IUnit CreateUnit(UnitType type, Team team, int y, int x)

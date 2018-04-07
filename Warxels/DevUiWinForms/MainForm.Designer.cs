@@ -32,8 +32,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButtonUnitArcher = new System.Windows.Forms.RadioButton();
             this.radioButtonUnitHorse = new System.Windows.Forms.RadioButton();
+            this.radioButtonUnitArcher = new System.Windows.Forms.RadioButton();
             this.radioButtonUnitSwords = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -53,6 +53,7 @@
             this.textBoxSquareAmount = new System.Windows.Forms.TextBox();
             this.radioButtonSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonOneUnit = new System.Windows.Forms.RadioButton();
+            this.comboBoxPreset = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -118,17 +119,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "UnitType";
             // 
-            // radioButtonUnitArcher
-            // 
-            this.radioButtonUnitArcher.AutoSize = true;
-            this.radioButtonUnitArcher.Location = new System.Drawing.Point(6, 65);
-            this.radioButtonUnitArcher.Name = "radioButtonUnitArcher";
-            this.radioButtonUnitArcher.Size = new System.Drawing.Size(55, 17);
-            this.radioButtonUnitArcher.TabIndex = 2;
-            this.radioButtonUnitArcher.TabStop = true;
-            this.radioButtonUnitArcher.Text = "archer";
-            this.radioButtonUnitArcher.UseVisualStyleBackColor = true;
-            // 
             // radioButtonUnitHorse
             // 
             this.radioButtonUnitHorse.AutoSize = true;
@@ -139,6 +129,17 @@
             this.radioButtonUnitHorse.TabStop = true;
             this.radioButtonUnitHorse.Text = "horseman";
             this.radioButtonUnitHorse.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonUnitArcher
+            // 
+            this.radioButtonUnitArcher.AutoSize = true;
+            this.radioButtonUnitArcher.Location = new System.Drawing.Point(6, 65);
+            this.radioButtonUnitArcher.Name = "radioButtonUnitArcher";
+            this.radioButtonUnitArcher.Size = new System.Drawing.Size(55, 17);
+            this.radioButtonUnitArcher.TabIndex = 2;
+            this.radioButtonUnitArcher.TabStop = true;
+            this.radioButtonUnitArcher.Text = "archer";
+            this.radioButtonUnitArcher.UseVisualStyleBackColor = true;
             // 
             // radioButtonUnitSwords
             // 
@@ -244,6 +245,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.comboBoxPreset);
             this.groupBox4.Controls.Add(this.buttonGenerateWorld);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.textBoxWorldY);
@@ -258,7 +260,7 @@
             // 
             // buttonGenerateWorld
             // 
-            this.buttonGenerateWorld.Location = new System.Drawing.Point(29, 86);
+            this.buttonGenerateWorld.Location = new System.Drawing.Point(29, 101);
             this.buttonGenerateWorld.Name = "buttonGenerateWorld";
             this.buttonGenerateWorld.Size = new System.Drawing.Size(75, 23);
             this.buttonGenerateWorld.TabIndex = 4;
@@ -341,6 +343,16 @@
             this.radioButtonOneUnit.Text = "one unit";
             this.radioButtonOneUnit.UseVisualStyleBackColor = true;
             // 
+            // comboBoxPreset
+            // 
+            this.comboBoxPreset.FormattingEnabled = true;
+            this.comboBoxPreset.Items.AddRange(new object[] {
+            "1"});
+            this.comboBoxPreset.Location = new System.Drawing.Point(7, 75);
+            this.comboBoxPreset.Name = "comboBoxPreset";
+            this.comboBoxPreset.Size = new System.Drawing.Size(97, 21);
+            this.comboBoxPreset.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +406,7 @@
         private System.Windows.Forms.RadioButton radioButtonOneUnit;
         private System.Windows.Forms.TextBox textBoxSquareAmount;
         private System.Windows.Forms.RadioButton radioButtonUnitArcher;
+        private System.Windows.Forms.ComboBox comboBoxPreset;
     }
 }
 

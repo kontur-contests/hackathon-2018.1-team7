@@ -94,7 +94,7 @@ namespace DevUiWinForms
 
             foreach (var projectile in world.GetProjectiles())
             {
-                gfx.DrawEllipse(ProjectilePen, projectile.X * dX, projectile.Y * dY, dX , dY);
+                gfx.DrawEllipse(ProjectilePen, projectile.X * dX, projectile.Y * dY, dX/2 , dY/2);
             }
         }
 
@@ -159,7 +159,7 @@ namespace DevUiWinForms
                 if (e.Button == MouseButtons.Left)
                 {
                     var coords = ControlCoordsToWorldCoords(e.X, e.Y);
-                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.Y, coords.X);
+                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.X, coords.Y);
                 }
             }
             else
@@ -243,8 +243,11 @@ namespace DevUiWinForms
             int x = Int32.Parse(textBoxWorldX.Text);
             int y = Int32.Parse(textBoxWorldY.Text);
 
+            if (comboBoxPreset.SelectedIndex == -1)
+                WorldGen = WorldsGenerator.GetDefault(y, x);
+            else
+                WorldGen = WorldsGenerator.CreatePreset(y, x);
 
-            WorldGen = WorldsGenerator.GetDefault(y, x);
             var world = WorldGen.GetWorld();
             SetWorld(world);
 
