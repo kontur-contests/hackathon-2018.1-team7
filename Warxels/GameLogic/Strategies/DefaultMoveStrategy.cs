@@ -14,10 +14,10 @@
             _dy = dy;
             World = world;
         }
-
+    
         public virtual StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Power < unit.MoveCost)
+            if (unit.Power < unit.MoveCost*unit.GetTerrainPenalty(World.Terrain[unit.X,unit.Y]))
                 return StrategyResult.NotEnoughPower;
 
             var x = unit.X + _dx;

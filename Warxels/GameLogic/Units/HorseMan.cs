@@ -13,5 +13,13 @@
         public override int DamageValue => 50;
 
         public override int MoveCost => 5;
+
+        public override float GetTerrainPenalty(byte terrainId)
+        {
+            if (terrainId == 1)
+                return 2.5f;
+
+            return base.GetTerrainPenalty(terrainId);
+        }
     }
 }
