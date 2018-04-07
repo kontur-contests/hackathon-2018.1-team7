@@ -16,9 +16,6 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Power < _cost)
-                return StrategyResult.NotEnoughPower;
-
             IUnit minUnit = null;
 
             for (var i = 0; i < 3; i++)
@@ -41,6 +38,9 @@
 
             if (minUnit != null)
             {
+                if (unit.Power < _cost)
+                    return StrategyResult.NotEnoughPower;
+
                 _world.ApplyDamage(minUnit as UnitBase, unit.DamageValue);
                 return StrategyResult.Applied;
             }
