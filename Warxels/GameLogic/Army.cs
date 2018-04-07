@@ -103,5 +103,10 @@
             }
             return null;
         }
+
+        public void Clear()
+        {
+            _units.Clear();
+        }
     }
 }

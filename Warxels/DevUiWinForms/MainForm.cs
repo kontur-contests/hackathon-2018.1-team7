@@ -2,7 +2,10 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text;
+using System.IO;
 using GameLogic;
+using GameLogic.Helper;
 
 namespace DevUiWinForms
 {
@@ -417,6 +420,52 @@ namespace DevUiWinForms
         private void radioButtonSquare_CheckedChanged(object sender, EventArgs e)
         {
             CheckRenderSquare();
+        }
+
+        private void buttonUnitsSave_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "*.units|*.units|*.*|*.*";
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                World.SaveUnits(dialog.FileName);
+            }
+        }
+
+        
+
+        private void buttonTerrainLoad_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "*.terr|*.terr|*.*|*.*";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                WorldGen = SaveLoadHelper.LoadTerrainFromFile(dialog.FileName);
+                SetWorld(WorldGen.GetWorld());
+            }
+        }
+        
+        
+        private void buttonTerrainSave_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "*.terr|*.terr|*.*|*.*";
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                World.SaveTerrain(dialog.FileName);
+            }
+        }
+
+        private void buttonUnitsLoad_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "*.units|*.units|*.*|*.*";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+                WorldGen.LoadUnitsFromFile(dialog.FileName);
         }
     }
 }
