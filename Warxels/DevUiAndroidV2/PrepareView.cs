@@ -1,9 +1,8 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using GameLogic;
-using Xamarin.Forms;
 using Button = Android.Widget.Button;
 
 namespace DevUiAndroidV2
@@ -21,6 +20,7 @@ namespace DevUiAndroidV2
         private LinearLayout _cocosLayout;
         private WorldsGenerator WorldGen;
         private Button _somethingButton;
+        private View _view;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,15 +36,16 @@ namespace DevUiAndroidV2
             _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
+            _view = FindViewById<View>(Resource.Id.cocosLayout);
             _rowsSeekBar.Max = 15;
             _rankSeekBar.Max = 15;
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
-
         }
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
+
         }
 
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
