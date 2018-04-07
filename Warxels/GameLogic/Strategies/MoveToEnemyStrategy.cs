@@ -14,7 +14,7 @@
         public StrategyResult Apply(UnitBase unit)
         {
             IUnit nearestEnemyUnit = null;
-            double minDistance = double.PositiveInfinity;
+            var minDistance = int.MaxValue;
 
             foreach (var testUnit in _world.Army.GetNearbyUnits(unit, _lookupRadius))
             {

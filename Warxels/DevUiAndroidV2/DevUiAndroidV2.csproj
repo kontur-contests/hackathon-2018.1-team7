@@ -65,6 +65,7 @@
     <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CocosSharp.1.7.1.0\lib\MonoAndroid10\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK-1.0" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -83,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDelegate.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PrepareView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

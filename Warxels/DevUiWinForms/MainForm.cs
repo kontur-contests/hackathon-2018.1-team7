@@ -243,7 +243,12 @@ namespace DevUiWinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Paused = !Paused;
+            SetPaused(!Paused);
+        }
+
+        private void SetPaused(bool paused)
+        {
+            Paused = paused;
 
             button1.Text = Paused ? "Start" : "Pause";
         }
@@ -278,7 +283,7 @@ namespace DevUiWinForms
 
             var world = WorldGen.GetWorld();
             SetWorld(world);
-
+            SetPaused(true);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)

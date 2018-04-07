@@ -6,6 +6,7 @@
     internal sealed class World : IWorld
     {
         private readonly Army _army;
+        public byte[,] Terrain { get; }
 
         public World(int length, int width, Army army)
         {
@@ -13,6 +14,7 @@
             Length = length;
             Width = width;
             _projectiles = new HashSet<ProjectileBase>();
+            Terrain = new byte[width, length];
         }
 
         public int Length { get; }
