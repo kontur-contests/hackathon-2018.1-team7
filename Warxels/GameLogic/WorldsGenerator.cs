@@ -11,15 +11,26 @@
         private readonly StrategySet _strategiesUp;
         private readonly StrategySet _strategiesDown;
 
+        private readonly IStrategy _horseUp;
+        private readonly IStrategy _horseDown;
+        private readonly StrategySet _strategiesHorseUp;
+        private readonly StrategySet _strategiesHorseDown;
+
         internal WorldsGenerator(World world)
         {
-            _up = new DefaultMoveStrategy(1, 0, world);
-            _down = new DefaultMoveStrategy(-1, 0, world);
-
             var meleeFightStrategy = new MeleeFightStrategy(world);
 
+            _up = new DefaultMoveStrategy(1, 0, world);
+            _down = new DefaultMoveStrategy(-1, 0, world);
+            
             _strategiesUp = new StrategySet(meleeFightStrategy, _up);
             _strategiesDown = new StrategySet(meleeFightStrategy, _down);
+
+            _horseUp = new HorseMoveStrategy(1, 0, world);
+            _horseDown = new HorseMoveStrategy(-1, 0, world);
+
+            _strategiesHorseUp = new StrategySet(meleeFightStrategy, _horseUp);
+            _strategiesHorseDown = new StrategySet(meleeFightStrategy, _horseDown);
 
             _world = world;
         }
@@ -36,18 +47,22 @@
             return new WorldsGenerator(world);
         }
 
+        
         public IUnit CreateSwordsman(Team team, int y, int x)
         {
-            UnitBase unit;
+            var strats = team == Team.Blue ? _strategiesUp : _strategiesDown;
+            
+            var unit = new SwordsMan(team, strats, y, x);
+            
+            _world.AddUnit(unit);
+            return unit;
+        }
 
-            if (team == Team.Blue)
-            {
-                unit = new SwordsMan(team, _strategiesUp, y, x);
-            }
-            else
-            {
-                unit = new SwordsMan(team, _strategiesDown, y, x);
-            }
+        public IUnit CreateHorseman(Team team, int y, int x)
+        {
+            var strats = team == Team.Blue ? _strategiesHorseUp : _strategiesHorseDown;
+
+            var unit = new HorseMan(team, strats, y, x);
 
             _world.AddUnit(unit);
             return unit;
