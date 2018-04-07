@@ -145,17 +145,20 @@ namespace DevUiWinForms
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 500;
+            if (radioButtonGameSpeedNormal.Checked)
+                Delay = 500;
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 250;
+            if (radioButtonGameSpeedX2.Checked)
+                Delay = 250;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 125;
+            if (radioButtonGameSpeedX4.Checked)
+                Delay = 125;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -163,6 +166,12 @@ namespace DevUiWinForms
             Paused = !Paused;
 
             button1.Text = Paused ? "Start" : "Pause";
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
         }
     }
 }
