@@ -13,9 +13,12 @@
             _strategies = strategies;
             Y = y;
             X = x;
+            Health = MaxHealth;
         }
 
-        public int Health { get; private set; } = 100;
+        public virtual int MaxHealth => 100;
+        
+        public int Health { get; private set; }
 
         public int Y { get; private set; }
 
@@ -30,6 +33,11 @@
         public abstract int DamageValue { get; }
 
         public abstract int MoveCost { get; }
+
+        public double GetHealthPercentage()
+        {
+            return Math.Max(0, 100 * Health / MaxHealth);
+        }
 
         public bool ApplyStrategies()
         {
