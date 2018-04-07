@@ -44,7 +44,7 @@ namespace DevUiAndroidV2
             }
         }
 
-        public void TapTap(float x, float y, int rows, int ranks)
+        public void TapTap(float x, float y, int rows, int ranks, UnitType type)
         {
             step = Width / SIZE;
             var location = new Point((int)x, (int)y);
@@ -55,7 +55,7 @@ namespace DevUiAndroidV2
                 if (focus == null && rows != 0 && ranks!=0)
                 {
 
-                    var rectsquad = new RectSquad(rows, ranks, UnitType.SwordsMan, Team.Blue, location.X/step, location.Y/step);
+                    var rectsquad = new RectSquad(rows, ranks, type, Team.Blue, location.X/step, location.Y/step);
                     var isAdded = Army.AddSquad(rectsquad);
                     if (isAdded)
                     {

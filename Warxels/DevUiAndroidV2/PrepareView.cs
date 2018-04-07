@@ -22,6 +22,7 @@ namespace DevUiAndroidV2
         private WorldsGenerator WorldGen;
         private Button _somethingButton;
         private MyView _view;
+        private Spinner _spinner;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,6 +38,7 @@ namespace DevUiAndroidV2
             _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
+            _spinner = FindViewById<Spinner>(Resource.Id.squadTypeSpinner);
             _view = new MyView(_cocosLayout.Context);
             _cocosLayout.AddView(_view);
             _rowsSeekBar.Max = 15;
@@ -53,10 +55,24 @@ namespace DevUiAndroidV2
         {
             if(e.Event.Action== MotionEventActions.Up)
             {
-                _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress);
+                _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress, GetUnitType());
                 _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
                 _totalUnitsEditText.Text = _view.Army.Size.ToString();
             }
+        }
+
+        private UnitType GetUnitType()
+        {
+            switch(_spinner.SelectedItem.ToString())
+            {
+                case "Мечник":
+                    return UnitType.SwordsMan;
+                case "Лучник":
+                    return UnitType.Archer;
+                case "Конь текучий":
+                    return UnitType.HorseMan;
+            }
+            return UnitType.SwordsMan;
         }
 
         private void _somethingButton_Click(object sender, System.EventArgs e)

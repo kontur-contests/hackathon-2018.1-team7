@@ -24,16 +24,15 @@
         p1:minHeight="25px"
         p1:layout_width="match_parent"
         p1:id="@+id/cocosLayout"
-        p1:layout_weight="7"
+        p1:layout_weight="6"
         p1:layout_marginBottom="0.0dp"
-        p1:layout_height="600px" />
+        p1:layout_height="400px" />
     <LinearLayout
         p1:orientation="horizontal"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:id="@+id/BottomLayout"
-        p1:layout_weight="1"
-        p1:layout_marginBottom="4.5dp">
+        p1:layout_weight="1">
         <LinearLayout
             p1:orientation="vertical"
             p1:layout_width="wrap_content"
@@ -46,23 +45,33 @@
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/rowText" />
+                p1:id="@+id/rowText"
+                p1:layout_weight="1" />
             <SeekBar
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/rowsSeekBar"
-                p1:scrollIndicators="right" />
+                p1:scrollIndicators="right"
+                p1:layout_weight="1" />
             <TextView
                 p1:text="Число шеренг"
                 p1:textAppearance="?android:attr/textAppearanceMedium"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
-                p1:id="@+id/rankText" />
+                p1:id="@+id/rankText"
+                p1:layout_weight="1" />
             <SeekBar
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/rankSeekBar"
-                p1:scrollIndicators="right" />
+                p1:scrollIndicators="right"
+                p1:layout_weight="1" />
+            <Spinner
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/squadTypeSpinner"
+                p1:entries="@array/squadType"
+                p1:layout_weight="1" />
         </LinearLayout>
         <LinearLayout
             p1:orientation="vertical"
