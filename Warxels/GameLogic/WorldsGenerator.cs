@@ -79,6 +79,9 @@ namespace GameLogic
         public void AddUnitSquare(Team team, int y, int x, int width, int height, UnitType type, int amount)
         {
             var density = (float)Math.Sqrt(width * height / amount);
+
+            if (density == 0)
+                density = 1;
             int k = 0;
             for (float i = 0; i < height; i += density)
                 for (float j = 0; j < width; j += density)

@@ -152,7 +152,7 @@ namespace DevUiWinForms
                 int amount = int.Parse(textBoxSquareAmount.Text);
                 WorldGen.AddUnitSquare(_radioTeamA.Checked ? Team.Red : Team.Blue,
                     coords1.Y, coords1.X, coords2.X - coords1.X, coords2.Y - coords1.Y,
-                    radioButtonUnitSwords.Checked ? UnitType.SwordsMan : UnitType.HorseMan, 32);
+                    radioButtonUnitSwords.Checked ? UnitType.SwordsMan : UnitType.HorseMan, amount);
             }
         }
 
