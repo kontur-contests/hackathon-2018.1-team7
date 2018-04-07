@@ -18,6 +18,7 @@ namespace DevUiWinForms
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
         private static IWorld World;
+        private WorldsGenerator WorldGen;
 
         public class Actor
         {
@@ -36,11 +37,11 @@ namespace DevUiWinForms
         {
             InitializeComponent();
 
-            var worldGen = WorldsGenerator.GetDefault(128, 128);
-            worldGen.CreateSwordsman(Team.Blue, 5, 5);
-            worldGen.CreateSwordsman(Team.Red, 10, 10);
+            WorldGen = WorldsGenerator.GetDefault(64, 64);
+            WorldGen.CreateSwordsman(Team.Blue, 5, 5);
+            WorldGen.CreateSwordsman(Team.Red, 7, 7);
 
-            SetWorld(worldGen.GetWorld());
+            SetWorld(WorldGen.GetWorld());
         }
 
         public void SetWorld(IWorld world)
@@ -78,8 +79,8 @@ namespace DevUiWinForms
 
             foreach (var unit in world.Army.GetUnits())
             {
-                gfx.DrawEllipse(TeamAPen, unit.X * dX, unit.Y * dY, dX, dY);
-            }
+                gfx.DrawEllipse(unit.Team==Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
+            } 
         }
 
         private void DrawGrid(Graphics gfx, IWorld world)
@@ -109,6 +110,19 @@ namespace DevUiWinForms
             }
 
             Task.Factory.StartNew(Render);
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+            
+
+            int WorldX = e.X * World.Width / pictureBox1.Width;
+            int WorldY = e.Y * World.Length / pictureBox1.Height;
+
+            if (World.Army.GetUnit(WorldY, WorldX) == null)
+                WorldGen.CreateSwordsman(_radioTeamA.Checked ? Team.Red : Team.Blue, WorldY, WorldX);
         }
     }
 }
