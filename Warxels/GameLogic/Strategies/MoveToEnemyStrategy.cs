@@ -53,9 +53,35 @@
                     return StrategyResult.NotApplicable;
                 }
 
+                bool okToMove = false;
                 if (_world.Army.GetUnit(y, x) != null)
                 {
                     // Так, прямо по курсу какой-то хер, попробуем обойти.
+
+                    foreach(var possibleWay in DistanceHelper.GetAdjancedDirectionVectors(moveVector))
+                    {
+                        cost = unit.GetMovementCost(possibleWay);
+
+                        if (unit.Power < cost)
+                            return StrategyResult.NotEnoughPower;
+
+                        x = unit.X + possibleWay.X;
+                        y = unit.Y + possibleWay.Y;
+
+                        if (_world.IsPointWithin(x, y) && _world.Army.GetUnit(y, x) == null)
+                        {
+                            okToMove = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    okToMove = true;
+                }
+                
+                if(!okToMove)
+                {
                     return StrategyResult.NotApplicable;
                 }
 

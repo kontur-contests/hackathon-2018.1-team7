@@ -1,9 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameLogic.Strategies
 {
     public static class DistanceHelper
     {
+        private static Vector[] RotateVector = new Vector[] {
+            new Vector(1, 0),
+            new Vector(1, 1),
+            new Vector(0, 1),
+            new Vector(-1, 1),
+            new Vector(-1, 0),
+            new Vector(-1, -1),
+            new Vector(0, -1),
+            new Vector(1, -1)
+        };
+
         public const double Pi_quarter = Math.PI / 4;
         public const double Pi_quarter_minus = - 1 * Math.PI / 4;
         public const double Pi_quarter_third = Math.PI * 3 / 4;
@@ -45,6 +57,32 @@ namespace GameLogic.Strategies
 
 
             return new Vector(x_diff, y_diff);
+        }
+
+        public static IEnumerable<Vector> GetAdjancedDirectionVectors(Vector binaryMovementVector)
+        {
+            var vectorIndex = Array.FindIndex(RotateVector, v => v.X == binaryMovementVector.X && v.Y == binaryMovementVector.Y);
+
+            var counterClockWiseIndex = (vectorIndex + 1) % RotateVector.Length;
+            yield return RotateVector[counterClockWiseIndex];
+
+            var clockWiseIndex = vectorIndex - 1;
+            if (clockWiseIndex < 0)
+            {
+                clockWiseIndex = clockWiseIndex + RotateVector.Length;
+            }
+
+            yield return RotateVector[clockWiseIndex];
+
+            yield return RotateVector[(vectorIndex + 2) % RotateVector.Length];
+
+            clockWiseIndex = vectorIndex - 2;
+            if (clockWiseIndex < 0)
+            {
+                clockWiseIndex = clockWiseIndex + RotateVector.Length;
+            }
+
+            yield return RotateVector[clockWiseIndex];
         }
     }
 }
