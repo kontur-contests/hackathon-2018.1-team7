@@ -4,6 +4,10 @@
     {
         int Health { get; }
 
+        int MaxHealth { get; }
+
+        double GetHealthPercentage();
+
         int Y { get; }
 
         int X { get; }
