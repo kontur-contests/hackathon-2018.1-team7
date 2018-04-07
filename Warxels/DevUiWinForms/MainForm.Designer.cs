@@ -59,10 +59,10 @@
             this.radioButtonUnitSwords = new System.Windows.Forms.RadioButton();
             this.tabPageTerrain = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBoxTerrainBrushSize = new System.Windows.Forms.TextBox();
             this.radioButtonTerrainSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonTerrainBrush = new System.Windows.Forms.RadioButton();
             this.comboBoxTerrain = new System.Windows.Forms.ComboBox();
-            this.textBoxTerrainBrushSize = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -342,6 +342,7 @@
             this.radioButtonSquare.TabStop = true;
             this.radioButtonSquare.Text = "square";
             this.radioButtonSquare.UseVisualStyleBackColor = true;
+            this.radioButtonSquare.CheckedChanged += new System.EventHandler(this.radioButtonSquare_CheckedChanged);
             // 
             // radioButtonOneUnit
             // 
@@ -423,6 +424,14 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "groupBox6";
             // 
+            // textBoxTerrainBrushSize
+            // 
+            this.textBoxTerrainBrushSize.Location = new System.Drawing.Point(78, 17);
+            this.textBoxTerrainBrushSize.Name = "textBoxTerrainBrushSize";
+            this.textBoxTerrainBrushSize.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTerrainBrushSize.TabIndex = 2;
+            this.textBoxTerrainBrushSize.Text = "3";
+            // 
             // radioButtonTerrainSquare
             // 
             this.radioButtonTerrainSquare.AutoSize = true;
@@ -457,14 +466,6 @@
             this.comboBoxTerrain.Name = "comboBoxTerrain";
             this.comboBoxTerrain.Size = new System.Drawing.Size(136, 21);
             this.comboBoxTerrain.TabIndex = 0;
-            // 
-            // textBoxTerrainBrushSize
-            // 
-            this.textBoxTerrainBrushSize.Location = new System.Drawing.Point(78, 17);
-            this.textBoxTerrainBrushSize.Name = "textBoxTerrainBrushSize";
-            this.textBoxTerrainBrushSize.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTerrainBrushSize.TabIndex = 2;
-            this.textBoxTerrainBrushSize.Text = "3";
             // 
             // MainForm
             // 
