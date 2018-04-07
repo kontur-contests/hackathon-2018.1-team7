@@ -172,6 +172,9 @@ namespace DevUiWinForms
         {
             if (e.Button == MouseButtons.Left)
                 AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            else
+                if (e.Button == MouseButtons.Right)
+                AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
         }
     }
 }
