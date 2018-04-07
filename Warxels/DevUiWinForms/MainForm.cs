@@ -42,6 +42,8 @@ namespace DevUiWinForms
             InitializeComponent();
 
             WorldGen = WorldsGenerator.GetDefault(64, 64);
+            textBoxWorldX.Text = "64";
+            textBoxWorldY.Text = "64";
             WorldGen.CreateSwordsman(Team.Blue, 5, 5);
             WorldGen.CreateSwordsman(Team.Red, 7, 7);
 
@@ -69,19 +71,18 @@ namespace DevUiWinForms
         {
             while (true)
             {
+                var world = World;
                 pictureBox1.Invoke(new Action(() =>
                 {
                     using (var z = Graphics.FromImage(image))
                     {
                         z.Clear(Color.White);
                         
-                        DrawGrid(z, World);
-                        DrawUnits(z, World);
+                        DrawGrid(z, world);
+                        DrawUnits(z, world);
                     }
                     
                     pictureBox1.Image = image;
-                    
-                    //pictureBox1.Invalidate();
                 }));
 
                 Task.Delay(50).Wait();
@@ -132,9 +133,7 @@ namespace DevUiWinForms
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
-
-                        
+                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);                        
         }
 
         private void AddUnit(Team team, int worldX, int worldY)
@@ -145,17 +144,20 @@ namespace DevUiWinForms
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 500;
+            if (radioButtonGameSpeedNormal.Checked)
+                Delay = 500;
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 250;
+            if (radioButtonGameSpeedX2.Checked)
+                Delay = 250;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            Delay = 125;
+            if (radioButtonGameSpeedX4.Checked)
+                Delay = 125;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -163,6 +165,27 @@ namespace DevUiWinForms
             Paused = !Paused;
 
             button1.Text = Paused ? "Start" : "Pause";
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            else
+                if (e.Button == MouseButtons.Right)
+                AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+        }
+
+        private void buttonGenerateWorld_Click(object sender, EventArgs e)
+        {
+            int x = Int32.Parse(textBoxWorldX.Text);
+            int y = Int32.Parse(textBoxWorldY.Text);
+
+           
+                WorldGen = WorldsGenerator.GetDefault(y, x);
+                var world = WorldGen.GetWorld();
+                SetWorld(world);
+            
         }
     }
 }
