@@ -19,12 +19,13 @@
         internal WorldsGenerator(World world)
         {
             var meleeFightStrategy = new MeleeFightStrategy(world);
+            var moveToEnemyStrategy = new MoveToEnemyStrategy(world);
 
             _up = new DefaultMoveStrategy(1, 0, world);
             _down = new DefaultMoveStrategy(-1, 0, world);
             
-            _strategiesUp = new StrategySet(meleeFightStrategy, _up);
-            _strategiesDown = new StrategySet(meleeFightStrategy, _down);
+            _strategiesUp = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _up);
+            _strategiesDown = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _down);
 
             _horseUp = new HorseMoveStrategy(1, 0, world);
             _horseDown = new HorseMoveStrategy(-1, 0, world);

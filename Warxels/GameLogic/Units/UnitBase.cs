@@ -1,6 +1,7 @@
 ﻿namespace GameLogic
 {
     using GameLogic.Strategies;
+    using System;
 
     internal abstract class UnitBase : IUnit
     {
@@ -78,6 +79,27 @@
         public static int GetPositionKey(int y, int x)
         {
             return y * 3733 ^ x;
+        }
+
+        public int GetMovementCost(Vector moveVector)
+        {
+            var length = moveVector.GetLengthSquared();
+            if (length == 0)
+            {
+                return 0;
+            }
+
+            if (length == 1)
+            {
+                return MoveCost;
+            }
+
+            if (length == 2)
+            {
+                return (int)Math.Ceiling(1.4 * MoveCost);
+            }
+
+            return (int)Math.Ceiling(length * (double)MoveCost);
         }
     }
 }
