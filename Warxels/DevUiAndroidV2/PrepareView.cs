@@ -70,13 +70,13 @@ namespace DevUiAndroidV2
             if (sender == _rowsSeekBar)
             {
                 _rowsSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army 
-                    ? army/_rankSeekBar.Progress : _rowsSeekBar.Max;
+                    ? army/(_rankSeekBar.Progress != 0 ? _rankSeekBar.Progress : 1) : _rowsSeekBar.Max;
                 _rowText.Text = "Число рядов: " + _rowsSeekBar.Progress;
             }
             else
             {
                 _rankSeekBar.Max = _rankSeekBar.Progress * _rowsSeekBar.Progress < army
-                    ? army/_rankSeekBar.Progress : _rankSeekBar.Max;
+                    ? army/(_rowsSeekBar.Progress != 0 ? _rowsSeekBar.Progress : 1): _rankSeekBar.Max;
                 _rankText.Text = "Число шеренг: " + _rankSeekBar.Progress;
             }
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
