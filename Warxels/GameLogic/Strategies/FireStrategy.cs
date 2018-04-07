@@ -9,6 +9,8 @@
 
         private readonly World _world;
 
+        private int _minDist = 3;
+
         public FireStrategy(World world)
         {
             _world = world;
@@ -16,9 +18,14 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            var enemy = _world.Army.GetNearbyUnits(unit, 20).Where(o => o.Team != unit.Team)
+            if (_world.Army.GetNearbyUnits(unit, 1).FirstOrDefault(o => o.Team != unit.Team) != null)
+            {
+                return StrategyResult.NotApplicable;
+            }
+
+            var enemy = _world.Army.GetNearbyUnits(unit, 10, 20).Where(o => o.Team != unit.Team)
                 .Select(o => new { Unit = o, Dist = DistanceHelper.GetDistanceSquared(unit, o) })
-                .Where(o => o.Dist >= 2 * 2)
+                .Where(o => o.Dist >= _minDist * _minDist)
                 .OrderBy(o => o.Dist)
                 .Select(o => o.Unit)
                 .FirstOrDefault();
