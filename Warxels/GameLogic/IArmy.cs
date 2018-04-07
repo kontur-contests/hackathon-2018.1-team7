@@ -8,6 +8,8 @@
 
         IUnit GetUnit(int y, int x);
 
+        IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int radius);
+
         void Remove(IUnit unit);
     }
 }

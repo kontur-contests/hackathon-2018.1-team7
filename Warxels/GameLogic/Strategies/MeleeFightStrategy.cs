@@ -21,21 +21,14 @@
 
             IUnit minUnit = null;
 
-            for (var i = 0; i < 3; i++)
+            foreach(var testUnit in _world.Army.GetNearbyUnits(unit, 1))
             {
-                for (var j = 0; j < 3; j++)
+                if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
+                    continue;
+
+                if (minUnit == null || minUnit.Health > testUnit.Health)
                 {
-                    var y = unit.Y + _dy[i];
-                    var x = unit.X + _dx[j];
-
-                    var testUnit = _world.Army.GetUnit(y, x);
-                    if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
-                        continue;
-
-                    if (minUnit == null || minUnit.Health > testUnit.Health)
-                    {
-                        minUnit = testUnit;
-                    }
+                    minUnit = testUnit;
                 }
             }
 

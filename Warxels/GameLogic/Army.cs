@@ -29,6 +29,19 @@
             return null;
         }
 
+        public IEnumerable<IUnit> GetNearbyUnits(IUnit unit, int radius)
+        {
+            for (var i = unit.X - radius; i <= unit.X + radius; i++)
+            {
+                for (var j = unit.Y - radius; j <= unit.Y + radius; j++)
+                {
+                    var testUnit = GetUnit(j, i);
+                    if (testUnit != null)
+                        yield return testUnit;
+                }
+            }
+        }
+
         public void Move(UnitBase unit, int y, int x)
         {
             var key = unit.GetPositionKey();
