@@ -2,6 +2,7 @@
 {
     public enum UnitType
     {
-        SwordsMan
+        SwordsMan,
+        HorseMan
     }
 }

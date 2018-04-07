@@ -1,9 +1,9 @@
 ﻿namespace GameLogic.Strategies
 {
-    internal sealed class DefaultMoveStrategy : IStrategy
+    internal class DefaultMoveStrategy : IStrategy
     {
-        private readonly int _cost = 10;
-
+        protected int Cost = 10;
+        
         private readonly int _dy;
 
         private readonly int _dx;
@@ -19,7 +19,7 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Power < _cost)
+            if (unit.Power < Cost)
                 return StrategyResult.NotEnoughPower;
 
             var x = unit.X + _dx;

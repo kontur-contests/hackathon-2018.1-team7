@@ -84,11 +84,18 @@ namespace DevUiWinForms
         {
             int dX = ImageSizeX / world.Width;
             int dY = ImageSizeY / world.Length;
-            
-                foreach (var unit in world.Army.GetUnits())
+
+            foreach (var unit in world.Army.GetUnits())
+            {
+                switch (unit.UnitType)
                 {
-                    gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
+                    case UnitType.SwordsMan:
+                        gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                    case UnitType.HorseMan:
+                        gfx.DrawRectangle(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
                 }
+
+            }
         }
 
         private void DrawGrid(Graphics gfx, IWorld world)
@@ -124,9 +131,12 @@ namespace DevUiWinForms
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
-            
+
             if (World.Army.GetUnit(worldY, worldX) == null)
-                WorldGen.CreateSwordsman(team, worldY, worldX);
+                if (radioButtonUnitSwords.Checked)
+                    WorldGen.CreateSwordsman(team, worldY, worldX);
+                else
+                    WorldGen.CreateHorseman(team, worldY, worldX);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)

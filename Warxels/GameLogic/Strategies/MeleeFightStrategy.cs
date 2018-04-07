@@ -16,9 +16,6 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Power < _cost)
-                return StrategyResult.NotEnoughPower;
-
             IUnit minUnit = null;
 
             foreach(var testUnit in _world.Army.GetNearbyUnits(unit, 1))
@@ -34,6 +31,9 @@
 
             if (minUnit != null)
             {
+                if (unit.Power < _cost)
+                    return StrategyResult.NotEnoughPower;
+
                 _world.ApplyDamage(minUnit as UnitBase, unit.DamageValue);
                 return StrategyResult.Applied;
             }
