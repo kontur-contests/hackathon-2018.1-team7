@@ -48,14 +48,14 @@ namespace DevUiAndroidV2
 			// aapt resource value: 0x7f040006
 			public const int BottomLayout = 2130968582;
 			
+			// aapt resource value: 0x7f040005
+			public const int cCGameView = 2130968581;
+			
 			// aapt resource value: 0x7f040004
 			public const int cocosLayout = 2130968580;
 			
 			// aapt resource value: 0x7f040003
 			public const int doSomethingButton = 2130968579;
-			
-			// aapt resource value: 0x7f040005
-			public const int gridView1 = 2130968581;
 			
 			// aapt resource value: 0x7f040001
 			public const int linearLayout1 = 2130968577;
