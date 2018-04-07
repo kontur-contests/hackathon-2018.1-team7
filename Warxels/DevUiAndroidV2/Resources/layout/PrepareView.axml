@@ -26,12 +26,7 @@
         p1:id="@+id/cocosLayout"
         p1:layout_weight="7"
         p1:layout_marginBottom="0.0dp"
-        p1:layout_height="600px">
-        <View
-            p1:layout_width="wrap_content"
-            p1:layout_height="match_parent"
-            p1:id="@+id/view1" />
-    </LinearLayout>
+        p1:layout_height="600px" />
     <LinearLayout
         p1:orientation="horizontal"
         p1:layout_width="match_parent"

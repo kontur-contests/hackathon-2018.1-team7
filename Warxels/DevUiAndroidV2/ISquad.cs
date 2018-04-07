@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using GameLogic;
 
-namespace DevUIAndroid
+namespace DevUiAndroidV2
 {
     interface ISquad
     {

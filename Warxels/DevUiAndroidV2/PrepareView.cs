@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -36,7 +37,8 @@ namespace DevUiAndroidV2
             _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
-            _view = FindViewById<View>(Resource.Id.cocosLayout);
+            _view = new MyView(ApplicationContext);
+            _cocosLayout.AddView(_view);
             _rowsSeekBar.Max = 15;
             _rankSeekBar.Max = 15;
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
@@ -45,7 +47,14 @@ namespace DevUiAndroidV2
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
-
+            
+            Paint paint = new Paint();
+            paint.Color = Color.Blue;
+            paint.StrokeWidth = 10;
+            paint.SetStyle(Paint.Style.Fill);
+            Canvas canvas = new Canvas();
+            canvas.DrawRect(new Rect(10, 10, 1000, 6000), paint);
+            _view.Draw(canvas);
         }
 
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
