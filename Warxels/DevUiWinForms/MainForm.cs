@@ -14,11 +14,14 @@ namespace DevUiWinForms
     
     public partial class MainForm : Form
     {
+        private static bool Paused = true;
+        private static int Delay = 500;
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
         private static IWorld World;
         private WorldsGenerator WorldGen;
+        private readonly object SyncRoot = new object();
 
         public class Actor
         {
@@ -31,6 +34,7 @@ namespace DevUiWinForms
 
         private static readonly Image image = new Bitmap(ImageSizeX, ImageSizeY);
 
+        
         private readonly Actor[] _actors = new Actor[500];
 
         public MainForm()
@@ -47,6 +51,18 @@ namespace DevUiWinForms
         public void SetWorld(IWorld world)
         {
             World = world;
+        }
+
+        private void Tick()
+        {
+            while (true)
+            {
+                if (!Paused)
+                    lock(SyncRoot)
+                        World.DoTick();
+
+                Task.Delay(Delay).Wait();
+            }
         }
 
         private void Render()
@@ -76,7 +92,7 @@ namespace DevUiWinForms
         {
             int dX = ImageSizeX / world.Width;
             int dY = ImageSizeY / world.Length;
-
+            lock(SyncRoot)
             foreach (var unit in world.Army.GetUnits())
             {
                 gfx.DrawEllipse(unit.Team==Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY);
@@ -110,19 +126,43 @@ namespace DevUiWinForms
             }
 
             Task.Factory.StartNew(Render);
+            Task.Factory.StartNew(Tick);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            int x = e.X;
-            int y = e.Y;
-            
+            if (e.Button == MouseButtons.Left)
+                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
 
-            int WorldX = e.X * World.Width / pictureBox1.Width;
-            int WorldY = e.Y * World.Length / pictureBox1.Height;
+                        
+        }
 
-            if (World.Army.GetUnit(WorldY, WorldX) == null)
-                WorldGen.CreateSwordsman(_radioTeamA.Checked ? Team.Red : Team.Blue, WorldY, WorldX);
+        private void AddUnit(Team team, int worldX, int worldY)
+        {
+            if (World.Army.GetUnit(worldY, worldX) == null)
+                WorldGen.CreateSwordsman(team, worldY, worldX);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Delay = 500;
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            Delay = 250;
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            Delay = 125;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Paused = !Paused;
+
+            button1.Text = Paused ? "Start" : "Pause";
         }
     }
 }

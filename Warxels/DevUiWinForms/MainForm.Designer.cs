@@ -36,11 +36,17 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this._radioTeamA = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonGameSpeedNormal = new System.Windows.Forms.RadioButton();
+            this.radioButtonGameSpeedX2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonGameSpeedX4 = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -73,6 +79,8 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.groupBox2);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(938, 3);
@@ -96,7 +104,7 @@
             this.groupBox2.Controls.Add(this._radioTeamA);
             this.groupBox2.Location = new System.Drawing.Point(3, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(104, 100);
+            this.groupBox2.Size = new System.Drawing.Size(104, 75);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Team";
@@ -132,9 +140,65 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(59, 17);
             this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "TeamB";
             this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButtonGameSpeedX4);
+            this.groupBox3.Controls.Add(this.radioButtonGameSpeedX2);
+            this.groupBox3.Controls.Add(this.radioButtonGameSpeedNormal);
+            this.groupBox3.Location = new System.Drawing.Point(3, 190);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(104, 124);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "GameSpeed";
+            // 
+            // radioButtonGameSpeedNormal
+            // 
+            this.radioButtonGameSpeedNormal.AutoSize = true;
+            this.radioButtonGameSpeedNormal.Checked = true;
+            this.radioButtonGameSpeedNormal.Location = new System.Drawing.Point(7, 20);
+            this.radioButtonGameSpeedNormal.Name = "radioButtonGameSpeedNormal";
+            this.radioButtonGameSpeedNormal.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonGameSpeedNormal.TabIndex = 0;
+            this.radioButtonGameSpeedNormal.TabStop = true;
+            this.radioButtonGameSpeedNormal.Text = "Normal";
+            this.radioButtonGameSpeedNormal.UseVisualStyleBackColor = true;
+            this.radioButtonGameSpeedNormal.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButtonGameSpeedX2
+            // 
+            this.radioButtonGameSpeedX2.AutoSize = true;
+            this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(7, 44);
+            this.radioButtonGameSpeedX2.Name = "radioButtonGameSpeedX2";
+            this.radioButtonGameSpeedX2.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonGameSpeedX2.TabIndex = 1;
+            this.radioButtonGameSpeedX2.Text = "x2";
+            this.radioButtonGameSpeedX2.UseVisualStyleBackColor = true;
+            this.radioButtonGameSpeedX2.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // radioButtonGameSpeedX4
+            // 
+            this.radioButtonGameSpeedX4.AutoSize = true;
+            this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(7, 67);
+            this.radioButtonGameSpeedX4.Name = "radioButtonGameSpeedX4";
+            this.radioButtonGameSpeedX4.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonGameSpeedX4.TabIndex = 2;
+            this.radioButtonGameSpeedX4.Text = "x4";
+            this.radioButtonGameSpeedX4.UseVisualStyleBackColor = true;
+            this.radioButtonGameSpeedX4.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 320);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Start";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -152,6 +216,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -166,6 +232,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton _radioTeamA;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButtonGameSpeedX4;
+        private System.Windows.Forms.RadioButton radioButtonGameSpeedX2;
+        private System.Windows.Forms.RadioButton radioButtonGameSpeedNormal;
+        private System.Windows.Forms.Button button1;
     }
 }
 

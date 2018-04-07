@@ -14,7 +14,7 @@
 
         public IEnumerable<IUnit> GetUnits()
         {
-            return _units.Values;
+            return _units.Values.ToArray();
         }
 
         public IUnit GetUnit(int y, int x)
