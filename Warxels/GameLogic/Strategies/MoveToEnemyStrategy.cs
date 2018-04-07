@@ -3,11 +3,12 @@
     internal sealed class MoveToEnemyStrategy : IStrategy
     {
         private readonly World _world;
-        private const int LookupRadius = 5;
+        private int _lookupRadius;
 
-        public MoveToEnemyStrategy(World world)
+        public MoveToEnemyStrategy(World world, int lookupRadius)
         {
             _world = world;
+            _lookupRadius = lookupRadius;
         }
 
         public StrategyResult Apply(UnitBase unit)
@@ -15,7 +16,7 @@
             IUnit nearestEnemyUnit = null;
             double minDistance = double.PositiveInfinity;
 
-            foreach (var testUnit in _world.Army.GetNearbyUnits(unit, LookupRadius))
+            foreach (var testUnit in _world.Army.GetNearbyUnits(unit, _lookupRadius))
             {
                 if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
                     continue;

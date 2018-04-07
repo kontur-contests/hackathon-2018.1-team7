@@ -24,23 +24,22 @@ namespace GameLogic
         private WorldsGenerator(World world)
         {
             var meleeFightStrategy = new MeleeFightStrategy(world);
-            var moveToEnemyStrategy = new MoveToEnemyStrategy(world);
             var fireStrategy = new FireStrategy(world);
 
             _up = new DefaultMoveStrategy(1, 0, world);
             _down = new DefaultMoveStrategy(-1, 0, world);
 
-            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _up);
-            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, moveToEnemyStrategy, _down);
+            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 9), _up);
+            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 9), _down);
 
             _horseUp = new HorseMoveStrategy(1, 0, world);
             _horseDown = new HorseMoveStrategy(-1, 0, world);
 
-            _strategiesHorseUp = new StrategySet(meleeFightStrategy, _horseUp);
-            _strategiesHorseDown = new StrategySet(meleeFightStrategy, _horseDown);
+            _strategiesHorseUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 15), _horseUp);
+            _strategiesHorseDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 15), _horseDown);
 
-            _archerStrategiesUp = new StrategySet(fireStrategy, meleeFightStrategy, _up);
-            _archerStrategiesDown = new StrategySet(fireStrategy, meleeFightStrategy, _down);
+            _archerStrategiesUp = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, 30), _up);
+            _archerStrategiesDown = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, 30), _down);
 
             _world = world;
         }
