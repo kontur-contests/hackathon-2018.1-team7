@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleView.cs" />
     <Compile Include="GenerateArmy.cs" />
     <Compile Include="ISquad.cs" />
     <Compile Include="MainActivity.cs" />
@@ -90,6 +91,9 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\PrepareView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BattleView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
