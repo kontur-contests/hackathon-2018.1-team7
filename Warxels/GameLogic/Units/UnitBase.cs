@@ -22,25 +22,52 @@
 
         public Team Team { get; }
 
-        public bool IsDead => Health == 0;
+        public bool IsDead => Health <= 0;
 
         public abstract UnitType UnitType { get; }
 
+        public abstract int DamageValue { get; }
+
+        public abstract int MoveCost { get; }
+
+
+
         public bool ApplyStrategies()
         {
+            Power++;
+
             foreach (var strategy in _strategies)
             {
-                if (strategy.Apply(this))
-                    return true;
+                var result = strategy.Apply(this);
+
+                switch (result)
+                {
+                    case StrategyResult.NotEnoughPower:
+                        return false;
+                    case StrategyResult.Applied:
+                    {
+                        Power = 0;
+                        return true;
+                    }
+                    case StrategyResult.NotApplicable:
+                        continue;
+                }
             }
 
             return false;
         }
 
+        public int Power { get; set; }
+
         public void Move(int y, int x)
         {
             X = x;
             Y = y;
+        }
+
+        public void ApplyDamage(int damageValue)
+        {
+            Health -= damageValue;
         }
 
         public int GetPositionKey()

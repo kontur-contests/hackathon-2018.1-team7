@@ -15,5 +15,7 @@
         bool IsDead { get; }
 
         UnitType UnitType { get; }
+
+        int DamageValue { get; }
     }
 }
