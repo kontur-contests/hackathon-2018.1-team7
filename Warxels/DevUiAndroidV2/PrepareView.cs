@@ -21,7 +21,7 @@ namespace DevUiAndroidV2
         private LinearLayout _cocosLayout;
         private WorldsGenerator WorldGen;
         private Button _somethingButton;
-        private View _view;
+        private MyView _view;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,24 +37,28 @@ namespace DevUiAndroidV2
             _rankText = FindViewById<TextView>(Resource.Id.rankText);
             _topLayout = FindViewById<LinearLayout>(Resource.Id.topLayout);
             _cocosLayout = FindViewById<LinearLayout>(Resource.Id.cocosLayout);
-            _view = new MyView(ApplicationContext);
+            _view = new MyView(_cocosLayout.Context);
             _cocosLayout.AddView(_view);
             _rowsSeekBar.Max = 15;
             _rankSeekBar.Max = 15;
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
+            _somethingButton.Click += _somethingButton_Click;
+            _view.Touch += _view_Touch; ;
+        }
+
+        private void _view_Touch(object sender, View.TouchEventArgs e)
+        {
+            if(e.Event.Action== MotionEventActions.Up)
+            {
+                _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress);
+                Toast.MakeText(this, $"{e.Event.GetX()} {e.Event.GetY()}", ToastLength.Short).Show();
+            }
         }
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
-            
-            Paint paint = new Paint();
-            paint.Color = Color.Blue;
-            paint.StrokeWidth = 10;
-            paint.SetStyle(Paint.Style.Fill);
-            Canvas canvas = new Canvas();
-            canvas.DrawRect(new Rect(10, 10, 1000, 6000), paint);
-            _view.Draw(canvas);
+            _view.Invalidate();
         }
 
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)

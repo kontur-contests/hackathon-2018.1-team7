@@ -22,8 +22,7 @@ namespace DevUiAndroidV2
 
         public bool AddSquad(ISquad squad)
         {
-            if (!_squads.Any(val => val.MaxX < squad.MinX || val.MinX > squad.MaxX
-                                   || val.MinY > squad.MaxY || val.MaxY < squad.MinY))
+            if (CheckSquad(squad))
             {
                 _squads.Add(squad);
                 return true; 
@@ -33,8 +32,8 @@ namespace DevUiAndroidV2
 
         public bool CheckSquad(ISquad squad)
         {
-            return !_squads.Any(val => val.MaxX < squad.MinX || val.MinX > squad.MaxX
-                                    || val.MinY > squad.MaxY || val.MaxY < squad.MinY);
+            return _squads.Count == 0 || _squads.All(val => squad==val || val.MaxX < squad.MinX || val.MinX > squad.MaxX
+                                     || val.MinY > squad.MaxY || val.MaxY < squad.MinY);
         }
     }
 }

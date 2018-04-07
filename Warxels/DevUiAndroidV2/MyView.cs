@@ -17,37 +17,66 @@ namespace DevUiAndroidV2
 {
     class MyView : View
     {
-        const int SIZE = 100;
+        const int SIZE = 50;
         int step;
         GenerateArmy army;
+        Paint paint;
+        Paint focusPaint;
+        private Tuple<Rect, ISquad> focus = null;
         private List<Tuple<Rect, ISquad>> lists = new List<Tuple<Rect, ISquad>>();
         public MyView(Context context) : base(context)
         {
-
+            paint = new Paint
+            {
+                Color = Color.Green
+            };
+            paint.SetStyle(Paint.Style.Fill);
+            focusPaint = new Paint(paint);
+            focusPaint.Color = Color.Gray;
             army = new GenerateArmy();
         }
         
         public override void Draw(Canvas canvas)
         {
-            for (int i = 0; i < 5; i++)
+            foreach(var t in lists)
             {
-                step = Width / SIZE;
-                var rectsquad = new RectSquad(5, 2, UnitType.SwordsMan, Team.Blue, 15 * i + 10, 15 * i + 10);
-                var isAdded = army.AddSquad(rectsquad);
-                if (isAdded)
-                {
-                    var a = new Rect(rectsquad.MinX * step, rectsquad.MinY * step,
-                        rectsquad.MaxX * step, rectsquad.MaxY * step);
+                canvas.DrawRect(t.Item1, t == focus ? focusPaint : paint);
+            }
+        }
 
-                    Paint paint = new Paint
+        public void TapTap(float x, float y, int rows, int ranks)
+        {
+            step = Width / SIZE;
+            var location = new Point((int)x, (int)y);
+            if (focus == null)
+            {
+                focus = lists.FirstOrDefault(val => location.X < val.Item2.MaxX * step && location.X > val.Item2.MinX * step
+                                               && location.Y < val.Item2.MaxY * step && location.Y > val.Item2.MinY * step);
+                if (focus == null && rows != 0 && ranks!=0)
+                {
+
+                    var rectsquad = new RectSquad(rows, ranks, UnitType.SwordsMan, Team.Blue, location.X/step, location.Y/step);
+                    var isAdded = army.AddSquad(rectsquad);
+                    if (isAdded)
                     {
-                        Color=Color.Green
-                    };
-                    paint.SetStyle(Paint.Style.Fill);
-                    canvas.DrawRect(a, paint);
-                    lists.Add(new Tuple<Rect, ISquad>(a, rectsquad));
+                        var a = new Rect(rectsquad.MinX * step, rectsquad.MinY * step,
+                            rectsquad.MaxX * step, rectsquad.MaxY * step);
+
+                        lists.Add(new Tuple<Rect, ISquad>(a, rectsquad));
+                    }
                 }
             }
+            else
+            {
+                if(focus.Item2.CheckAndSetPos(army, (int)(location.X / step), (int)(location.Y / step)))
+                {
+                    var rectsquad = focus.Item2;
+                    focus.Item1.Set(new Rect(rectsquad.MinX * step, rectsquad.MinY * step,
+                        rectsquad.MaxX * step, rectsquad.MaxY * step));
+                }
+                focus = null;
+            }
+            Invalidate();
         }
     }
 }
