@@ -22,9 +22,11 @@
 
         public Team Team { get; }
 
-        public bool IsDead => Health == 0;
+        public bool IsDead => Health <= 0;
 
         public abstract UnitType UnitType { get; }
+
+        public abstract int DamageValue { get; }
 
         public bool ApplyStrategies()
         {
@@ -41,6 +43,11 @@
         {
             X = x;
             Y = y;
+        }
+
+        public void ApplyDamage(int damageValue)
+        {
+            Health -= damageValue;
         }
 
         public int GetPositionKey()

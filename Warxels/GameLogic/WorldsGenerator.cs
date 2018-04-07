@@ -16,8 +16,10 @@
             _up = new DefaultMoveStrategy(1, 0, world);
             _down = new DefaultMoveStrategy(-1, 0, world);
 
-            _strategiesUp = new StrategySet(_up);
-            _strategiesDown = new StrategySet(_down);
+            var meleeFightStrategy = new MeleeFightStrategy(world);
+
+            _strategiesUp = new StrategySet(meleeFightStrategy, _up);
+            _strategiesDown = new StrategySet(meleeFightStrategy, _down);
 
             _world = world;
         }
