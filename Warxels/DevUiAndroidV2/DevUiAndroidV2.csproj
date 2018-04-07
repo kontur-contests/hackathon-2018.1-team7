@@ -77,6 +77,7 @@
     <Compile Include="GenerateArmy.cs" />
     <Compile Include="ISquad.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyView.cs" />
     <Compile Include="PrepareView.cs" />
     <Compile Include="RectSquad.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameLogic;
 
-namespace DevUIAndroid
+namespace DevUiAndroidV2
 {
     class RectSquad : ISquad
     {
