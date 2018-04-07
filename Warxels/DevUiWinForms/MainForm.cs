@@ -23,12 +23,7 @@ namespace DevUiWinForms
         private static int Delay = DefaultDelay;
         private static readonly Brush MarshBrush = new SolidBrush(Color.FromArgb(64,0,0,255));
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
-        private static readonly Pen TeamAPen = new Pen(Brushes.Red);
-        private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
         private static readonly Pen ProjectilePen = new Pen(Brushes.Brown);
-
-        private static readonly SolidBrush TeamASolidPen = new SolidBrush(Color.Red);
-        private static readonly SolidBrush TeamBSolidPen = new SolidBrush(Color.Blue);
 
         private static readonly Pen SquarePen = new Pen(Color.Black);
         private static IWorld World;
@@ -120,6 +115,39 @@ namespace DevUiWinForms
             }
         }
 
+
+        private Pen[] TeamAPens = new Pen[] {
+            new Pen(Color.FromArgb(50, Color.Red)),
+            new Pen(Color.FromArgb(100, Color.Red)),
+            new Pen(Color.FromArgb(150, Color.Red)),
+            new Pen(Color.FromArgb(200, Color.Red)),
+            new Pen(Color.FromArgb(255, Color.Red))
+        };
+
+        private Pen[] TeamBPens = new Pen[] {
+            new Pen(Color.FromArgb(50, Color.Blue)),
+            new Pen(Color.FromArgb(100, Color.Blue)),
+            new Pen(Color.FromArgb(150, Color.Blue)),
+            new Pen(Color.FromArgb(200, Color.Blue)),
+            new Pen(Color.FromArgb(255, Color.Blue))
+        };
+
+        private SolidBrush[] TeamASolidPens = new SolidBrush[] {
+            new SolidBrush(Color.FromArgb(50, Color.Red)),
+            new SolidBrush(Color.FromArgb(100, Color.Red)),
+            new SolidBrush(Color.FromArgb(150, Color.Red)),
+            new SolidBrush(Color.FromArgb(200, Color.Red)),
+            new SolidBrush(Color.FromArgb(255, Color.Red))
+        };
+
+        private SolidBrush[] TeamBSolidPens = new SolidBrush[] {
+            new SolidBrush(Color.FromArgb(50, Color.Blue)),
+            new SolidBrush(Color.FromArgb(100, Color.Blue)),
+            new SolidBrush(Color.FromArgb(150, Color.Blue)),
+            new SolidBrush(Color.FromArgb(200, Color.Blue)),
+            new SolidBrush(Color.FromArgb(255, Color.Blue))
+        };
+
         private void DrawUnits(Graphics gfx, IWorld world)
         {
             int dX = ImageSizeX / world.Width;
@@ -127,14 +155,15 @@ namespace DevUiWinForms
 
             foreach (var unit in world.Army.GetUnits())
             {
+                var healthPercentageIndex = (int)Math.Floor(unit.GetHealthPercentage() / 25);
                 switch (unit.UnitType)
                 {
                     case UnitType.SwordsMan:
-                        gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                        gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPens[healthPercentageIndex]: TeamBPens[healthPercentageIndex], unit.X * dX, unit.Y * dY, dX, dY); break;
                     case UnitType.HorseMan:
-                        gfx.DrawRectangle(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                        gfx.DrawRectangle(unit.Team == Team.Red ? TeamAPens[healthPercentageIndex]: TeamBPens[healthPercentageIndex], unit.X * dX, unit.Y * dY, dX, dY); break;
                     case UnitType.Archer:
-                        gfx.FillEllipse(unit.Team == Team.Red ? TeamASolidPen : TeamBSolidPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                        gfx.FillEllipse(unit.Team == Team.Red ? TeamASolidPens[healthPercentageIndex] : TeamBSolidPens[healthPercentageIndex], unit.X * dX, unit.Y * dY, dX, dY); break;
                 }
 
             }
