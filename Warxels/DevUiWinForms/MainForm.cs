@@ -23,19 +23,10 @@ namespace DevUiWinForms
         private WorldsGenerator WorldGen;
         private readonly object SyncRoot = new object();
 
-        public class Actor
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
-        }
-
         private const int ImageSizeX = 512;
         private const int ImageSizeY = 512;
 
         private static readonly Image image = new Bitmap(ImageSizeX, ImageSizeY);
-
-        
-        private readonly Actor[] _actors = new Actor[500];
 
         public MainForm()
         {
@@ -44,8 +35,6 @@ namespace DevUiWinForms
             WorldGen = WorldsGenerator.GetDefault(64, 64);
             textBoxWorldX.Text = "64";
             textBoxWorldY.Text = "64";
-            WorldGen.CreateSwordsman(Team.Blue, 5, 5);
-            WorldGen.CreateSwordsman(Team.Red, 7, 7);
 
             SetWorld(WorldGen.GetWorld());
         }
@@ -72,20 +61,21 @@ namespace DevUiWinForms
             while (true)
             {
                 var world = World;
+                
+
                 pictureBox1.Invoke(new Action(() =>
                 {
                     using (var z = Graphics.FromImage(image))
                     {
                         z.Clear(Color.White);
-                        
+
                         DrawGrid(z, world);
                         DrawUnits(z, world);
                     }
-                    
                     pictureBox1.Image = image;
                 }));
 
-                Task.Delay(50).Wait();
+                Task.Delay(25).Wait();
             }
         }
 
@@ -120,11 +110,6 @@ namespace DevUiWinForms
         private void MainForm_Load(object sender, EventArgs e)
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            var rnd = new Random(DateTime.Now.GetHashCode());
-            for (int i = 0; i < _actors.Length; i++)
-            {
-                _actors[i] = new Actor { X = 50 + rnd.Next(400), Y = 50 + rnd.Next(400) };
-            }
 
             Task.Factory.StartNew(Render);
             Task.Factory.StartNew(Tick);
@@ -138,6 +123,7 @@ namespace DevUiWinForms
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
+            lock(SyncRoot)
             if (World.Army.GetUnit(worldY, worldX) == null)
                 WorldGen.CreateSwordsman(team, worldY, worldX);
         }
