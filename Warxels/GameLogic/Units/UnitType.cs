@@ -3,6 +3,7 @@
     public enum UnitType
     {
         SwordsMan,
-        HorseMan
+        HorseMan,
+        Archer
     }
 }

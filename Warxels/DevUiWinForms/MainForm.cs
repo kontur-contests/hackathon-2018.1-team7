@@ -9,12 +9,22 @@ namespace DevUiWinForms
 
     public partial class MainForm : Form
     {
+        private Point squareBegin;
+        private Point squareEnd;
+        private bool renderSquare = false;
+
         private static bool Paused = true;
         private const int DefaultDelay = 100;
         private static int Delay = DefaultDelay;
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
+        private static readonly Pen ProjectilePen = new Pen(Brushes.Brown);
+
+        private static readonly SolidBrush TeamASolidPen = new SolidBrush(Color.Red);
+        private static readonly SolidBrush TeamBSolidPen = new SolidBrush(Color.Blue);
+
+        private static readonly Pen SquarePen = new Pen(Color.Black);
         private static IWorld World;
         private WorldsGenerator WorldGen;
         private readonly Graphics _gfx;
@@ -41,7 +51,7 @@ namespace DevUiWinForms
         {
             World = world;
         }
-        
+
 
         private void Render()
         {
@@ -49,8 +59,7 @@ namespace DevUiWinForms
             {
                 if (!Paused)
                     World.DoTick();
-
-                Task.Delay(Delay).Wait();
+                
                 var world = World;
 
                 {
@@ -58,14 +67,33 @@ namespace DevUiWinForms
 
                     DrawGrid(_gfx, world);
                     DrawUnits(_gfx, world);
+                    DrawProjectiles(_gfx, world);
+
+                    if (renderSquare)
+                    {
+                        var coord1 = ControlCoordsToImageCoords(squareBegin.X, squareBegin.Y);
+                        var coord2 = ControlCoordsToImageCoords(squareEnd.X, squareEnd.Y);
+                        _gfx.DrawRectangle(SquarePen, coord1.X, coord1.Y, coord2.X-coord1.X, coord2.Y-coord1.Y);
+                    }
                 }
 
                 pictureBox1.BeginInvoke(new Action(() =>
                 {
                     pictureBox1.Image = image;
                 }));
-                
+
                 Task.Delay(Delay).Wait();
+            }
+        }
+
+        private void DrawProjectiles(Graphics gfx, IWorld world)
+        {
+            int dX = ImageSizeX / world.Width;
+            int dY = ImageSizeY / world.Length;
+
+            foreach (var projectile in world.GetProjectiles())
+            {
+                gfx.DrawEllipse(ProjectilePen, projectile.X * dX, projectile.Y * dY, dX/2 , dY/2);
             }
         }
 
@@ -82,6 +110,8 @@ namespace DevUiWinForms
                         gfx.DrawEllipse(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
                     case UnitType.HorseMan:
                         gfx.DrawRectangle(unit.Team == Team.Red ? TeamAPen : TeamBPen, unit.X * dX, unit.Y * dY, dX, dY); break;
+                    case UnitType.Archer:
+                        gfx.FillEllipse(unit.Team == Team.Red ? TeamASolidPen : TeamBSolidPen, unit.X * dX, unit.Y * dY, dX, dY); break;
                 }
 
             }
@@ -94,7 +124,7 @@ namespace DevUiWinForms
 
             for (int x = 0; x < ImageSizeX; x += stepX)
             {
-                gfx.DrawLine(Pen, x,0, x, ImageSizeY);
+                gfx.DrawLine(Pen, x, 0, x, ImageSizeY);
             }
 
             for (int y = 0; y < ImageSizeY; y += stepY)
@@ -111,19 +141,57 @@ namespace DevUiWinForms
             Task.Factory.StartNew(Render);
         }
 
+        private Point ControlCoordsToWorldCoords(int x, int y)
+        {
+            return new Point(x * World.Width / pictureBox1.Width, y * World.Length / pictureBox1.Height);
+        }
+
+        private Point ControlCoordsToImageCoords(int x, int y)
+        {
+            return new Point(x * ImageSizeX / pictureBox1.Width, y * ImageSizeY / pictureBox1.Height);
+        }
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            if (radioButtonOneUnit.Checked)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    var coords = ControlCoordsToWorldCoords(e.X, e.Y);
+                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.X, coords.Y);
+                }
+            }
+            else
+            {
+                UnitType t = UnitType.SwordsMan;
+                if (radioButtonUnitSwords.Checked)
+                    t = UnitType.SwordsMan;
+                else if (radioButtonUnitHorse.Checked)
+                    t = UnitType.HorseMan;
+                if (radioButtonUnitArcher.Checked)
+                    t = UnitType.Archer;
+
+
+                renderSquare = false;
+                var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
+                var coords2 = ControlCoordsToWorldCoords(squareEnd.X, squareEnd.Y);
+                int amount = int.Parse(textBoxSquareAmount.Text);
+                WorldGen.AddUnitSquare(_radioTeamA.Checked ? Team.Red : Team.Blue,coords1.Y, coords1.X, coords2.X - coords1.X, coords2.Y - coords1.Y,
+                    t, amount);
+            }
         }
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
             if (World.Army.GetUnit(worldY, worldX) == null)
+            {
                 if (radioButtonUnitSwords.Checked)
-                    WorldGen.CreateSwordsman(team, worldY, worldX);
-                else
-                    WorldGen.CreateHorseman(team, worldY, worldX);
+                    WorldGen.CreateUnit(UnitType.SwordsMan, team, worldY, worldX);
+                if (radioButtonUnitHorse.Checked)
+                    WorldGen.CreateUnit(UnitType.HorseMan, team, worldY, worldX);
+                if (radioButtonUnitArcher.Checked)
+                    WorldGen.CreateUnit(UnitType.Archer, team, worldY, worldX);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -153,11 +221,20 @@ namespace DevUiWinForms
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            if (radioButtonOneUnit.Checked)
+            {
+                var coords = ControlCoordsToWorldCoords(e.X, e.Y);
+                if (e.Button == MouseButtons.Left)
+                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.X, coords.Y);
+                else
+                    if (e.Button == MouseButtons.Right)
+                    AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, coords.X, coords.Y);
+            }
             else
-                if (e.Button == MouseButtons.Right)
-                AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            {
+                if (e.Button == MouseButtons.Left)
+                    squareEnd = new Point(e.X, e.Y);
+            }
         }
 
         private void buttonGenerateWorld_Click(object sender, EventArgs e)
@@ -165,11 +242,30 @@ namespace DevUiWinForms
             int x = Int32.Parse(textBoxWorldX.Text);
             int y = Int32.Parse(textBoxWorldY.Text);
 
+            if (comboBoxPreset.SelectedIndex == -1)
+                WorldGen = WorldsGenerator.GetDefault(y, x);
+            else
+                WorldGen = WorldsGenerator.CreatePreset(y, x);
 
-            WorldGen = WorldsGenerator.GetDefault(y, x);
             var world = WorldGen.GetWorld();
             SetWorld(world);
 
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (radioButtonSquare.Checked)
+            {
+                squareBegin = squareEnd = new Point(e.X, e.Y);
+                
+                renderSquare = true;
+            }
+        }
+
+        private void radioButtonX8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonX8.Checked)
+                Delay = DefaultDelay / 8;
         }
     }
 }
