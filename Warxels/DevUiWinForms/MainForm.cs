@@ -9,12 +9,17 @@ namespace DevUiWinForms
 
     public partial class MainForm : Form
     {
+        private Point squareBegin;
+        private Point squareEnd;
+        private bool renderSquare = false;
+
         private static bool Paused = true;
         private const int DefaultDelay = 100;
         private static int Delay = DefaultDelay;
         private static readonly Pen Pen = new Pen(Brushes.AliceBlue);
         private static readonly Pen TeamAPen = new Pen(Brushes.Red);
         private static readonly Pen TeamBPen = new Pen(Brushes.Blue);
+        private static readonly Pen SquarePen = new Pen(Color.Black);
         private static IWorld World;
         private WorldsGenerator WorldGen;
         private readonly Graphics _gfx;
@@ -42,6 +47,7 @@ namespace DevUiWinForms
             World = world;
         }
         
+        
 
         private void Render()
         {
@@ -58,6 +64,13 @@ namespace DevUiWinForms
 
                     DrawGrid(_gfx, world);
                     DrawUnits(_gfx, world);
+
+                    if (renderSquare)
+                    {
+                        var coord1 = ControlCoordsToImageCoords(squareBegin.X, squareBegin.Y);
+                        var coord2 = ControlCoordsToImageCoords(squareEnd.X, squareEnd.Y);
+                        _gfx.DrawRectangle(SquarePen, coord1.X, coord1.Y, coord2.X-coord1.X, coord2.Y-coord1.Y);
+                    }
                 }
 
                 pictureBox1.BeginInvoke(new Action(() =>
@@ -111,19 +124,45 @@ namespace DevUiWinForms
             Task.Factory.StartNew(Render);
         }
 
+        private Point ControlCoordsToWorldCoords(int x, int y)
+        {
+            return new Point(x * World.Width / pictureBox1.Width, y * World.Length / pictureBox1.Height);
+        }
+
+        private Point ControlCoordsToImageCoords(int x, int y)
+        {
+            return new Point(x * ImageSizeX / pictureBox1.Width, y * ImageSizeY / pictureBox1.Height);
+        }
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            if (radioButtonOneUnit.Checked)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    var coords = ControlCoordsToWorldCoords(e.X, e.Y);
+                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.Y, coords.X);
+                }
+            }
+            else
+            {
+                renderSquare = false;
+                var coords1 = ControlCoordsToWorldCoords(squareBegin.X, squareBegin.Y);
+                var coords2 = ControlCoordsToWorldCoords(squareEnd.X, squareEnd.Y);
+                int amount = int.Parse(textBoxSquareAmount.Text);
+                WorldGen.AddUnitSquare(_radioTeamA.Checked ? Team.Red : Team.Blue,
+                    coords1.Y, coords1.X, coords2.X - coords1.X, coords2.Y - coords1.Y,
+                    radioButtonUnitSwords.Checked ? UnitType.SwordsMan : UnitType.HorseMan, 32);
+            }
         }
 
         private void AddUnit(Team team, int worldX, int worldY)
         {
             if (World.Army.GetUnit(worldY, worldX) == null)
                 if (radioButtonUnitSwords.Checked)
-                    WorldGen.CreateSwordsman(team, worldY, worldX);
+                    WorldGen.CreateUnit(UnitType.SwordsMan, team, worldY, worldX);
                 else
-                    WorldGen.CreateHorseman(team, worldY, worldX);
+                    WorldGen.CreateUnit(UnitType.HorseMan, team, worldY, worldX);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -153,11 +192,20 @@ namespace DevUiWinForms
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            if (radioButtonOneUnit.Checked)
+            {
+                var coords = ControlCoordsToWorldCoords(e.X, e.Y);
+                if (e.Button == MouseButtons.Left)
+                    AddUnit(_radioTeamA.Checked ? Team.Red : Team.Blue, coords.X, coords.Y);
+                else
+                    if (e.Button == MouseButtons.Right)
+                    AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, coords.X, coords.Y);
+            }
             else
-                if (e.Button == MouseButtons.Right)
-                AddUnit(_radioTeamA.Checked ? Team.Blue : Team.Red, e.X * World.Width / pictureBox1.Width, e.Y * World.Length / pictureBox1.Height);
+            {
+                if (e.Button == MouseButtons.Left)
+                    squareEnd = new Point(e.X, e.Y);
+            }
         }
 
         private void buttonGenerateWorld_Click(object sender, EventArgs e)
@@ -170,6 +218,16 @@ namespace DevUiWinForms
             var world = WorldGen.GetWorld();
             SetWorld(world);
 
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (radioButtonSquare.Checked)
+            {
+                squareBegin = squareEnd = new Point(e.X, e.Y);
+                
+                renderSquare = true;
+            }
         }
     }
 }
