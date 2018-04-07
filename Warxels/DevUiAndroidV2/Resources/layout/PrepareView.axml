@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1">
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/topLayout"
+        p1:layout_weight="1" />
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/cocosLayout"
+        p1:layout_weight="6" />
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:layout_width="match_parent"
+        p1:layout_height="53.0dp"
+        p1:id="@+id/BottomLayout"
+        p1:layout_weight="1">
+        <LinearLayout
+            p1:orientation="vertical"
+            p1:layout_width="wrap_content"
+            p1:layout_height="99.5dp"
+            p1:id="@+id/linearLayout2"
+            p1:layout_weight="4"
+            p1:layout_marginBottom="0.0dp">
+            <TextView
+                p1:text="Число рядов"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView1" />
+            <SeekBar
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/rowsSeekBar"
+                p1:scrollIndicators="right" />
+            <TextView
+                p1:text="Число шеренг"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView2" />
+            <SeekBar
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/rankSeekBar"
+                p1:scrollIndicators="right" />
+        </LinearLayout>
+        <LinearLayout
+            p1:orientation="vertical"
+            p1:layout_width="wrap_content"
+            p1:layout_height="101.0dp"
+            p1:id="@+id/linearLayout3"
+            p1:layout_weight="1"
+            p1:layout_marginBottom="0.0dp">
+            <TextView
+                p1:text="Отряд"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView3" />
+            <TextView
+                p1:text="Text"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/totalInSquad" />
+            <TextView
+                p1:text="Армия"
+                p1:textAppearance="?android:attr/textAppearanceMedium"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/textView4" />
+            <TextView
+                p1:text="Text"
+                p1:layout_width="match_parent"
+                p1:layout_height="wrap_content"
+                p1:id="@+id/totalUnits" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
