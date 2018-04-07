@@ -13,5 +13,7 @@
         StepResult DoTick();
 
         IEnumerable<IProjectile> GetProjectiles();
+
+        byte[,] Terrain { get; }
     }
 }
