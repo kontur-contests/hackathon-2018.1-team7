@@ -21,5 +21,10 @@
         {
             _army.Move(unit, y, x);
         }
+
+        public void AddUnit(UnitBase unit)
+        {
+            _army.Add(unit);
+        }
     }
 }

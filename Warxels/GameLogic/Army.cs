@@ -41,5 +41,12 @@
 
             _units[key] = unit;
         }
+
+        public void Add(UnitBase unit)
+        {
+            var key = unit.GetPositionKey();
+
+            _units.Add(key, unit);
+        }
     }
 }

@@ -6,7 +6,7 @@
     {
         private readonly StrategySet _strategies;
 
-        protected UnitBase(Team team, int health, StrategySet strategies)
+        protected UnitBase(Team team, int health, StrategySet strategies, int y, int x)
         {
             Team = team;
             Health = health;
