@@ -72,6 +72,9 @@ namespace DevUiAndroidV2
 			// aapt resource value: 0x7f050005
 			public const int doSomethingButton = 2131034117;
 			
+			// aapt resource value: 0x7f050015
+			public const int enemyDamageText = 2131034133;
+			
 			// aapt resource value: 0x7f050003
 			public const int linearLayout1 = 2131034115;
 			
@@ -102,6 +105,9 @@ namespace DevUiAndroidV2
 			// aapt resource value: 0x7f050001
 			public const int startGameButton = 2131034113;
 			
+			// aapt resource value: 0x7f050013
+			public const int textView1 = 2131034131;
+			
 			// aapt resource value: 0x7f05000f
 			public const int textView3 = 2131034127;
 			
@@ -116,6 +122,12 @@ namespace DevUiAndroidV2
 			
 			// aapt resource value: 0x7f050012
 			public const int totalUnits = 2131034130;
+			
+			// aapt resource value: 0x7f050016
+			public const int winnerText = 2131034134;
+			
+			// aapt resource value: 0x7f050014
+			public const int yourDamageText = 2131034132;
 			
 			static Id()
 			{
@@ -138,6 +150,9 @@ namespace DevUiAndroidV2
 			
 			// aapt resource value: 0x7f020002
 			public const int PrepareView = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int ResultView = 2130837507;
 			
 			static Layout()
 			{
