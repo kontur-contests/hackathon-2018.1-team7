@@ -67,6 +67,8 @@
             this.radioButtonTerrainSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonTerrainBrush = new System.Windows.Forms.RadioButton();
             this.comboBoxTerrain = new System.Windows.Forms.ComboBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -79,6 +81,7 @@
             this.groupBox1.SuspendLayout();
             this.tabPageTerrain.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -90,12 +93,12 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tabControlUnits, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.73431F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.26568F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1114, 724);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1114, 700);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -103,7 +106,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(979, 585);
+            this.pictureBox1.Size = new System.Drawing.Size(979, 566);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -119,7 +122,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(988, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(123, 585);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(123, 566);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // groupBox3
@@ -139,7 +142,6 @@
             // 
             // radioButtonX8
             // 
-            this.radioButtonX8.AutoEllipsis = true;
             this.radioButtonX8.AutoSize = true;
             this.radioButtonX8.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioButtonX8.Location = new System.Drawing.Point(3, 67);
@@ -152,7 +154,6 @@
             // 
             // radioButtonGameSpeedX4
             // 
-            this.radioButtonGameSpeedX4.AutoEllipsis = true;
             this.radioButtonGameSpeedX4.AutoSize = true;
             this.radioButtonGameSpeedX4.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(3, 50);
@@ -165,7 +166,6 @@
             // 
             // radioButtonGameSpeedX2
             // 
-            this.radioButtonGameSpeedX2.AutoEllipsis = true;
             this.radioButtonGameSpeedX2.AutoSize = true;
             this.radioButtonGameSpeedX2.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(3, 33);
@@ -271,7 +271,7 @@
             // 
             this.tabControlUnits.Controls.Add(this.tabPageUnits);
             this.tabControlUnits.Controls.Add(this.tabPageTerrain);
-            this.tabControlUnits.Location = new System.Drawing.Point(3, 594);
+            this.tabControlUnits.Location = new System.Drawing.Point(3, 575);
             this.tabControlUnits.Name = "tabControlUnits";
             this.tabControlUnits.SelectedIndex = 0;
             this.tabControlUnits.Size = new System.Drawing.Size(979, 100);
@@ -524,12 +524,30 @@
             this.comboBoxTerrain.Size = new System.Drawing.Size(136, 21);
             this.comboBoxTerrain.TabIndex = 0;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.plotToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1114, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // plotToolStripMenuItem
+            // 
+            this.plotToolStripMenuItem.Name = "plotToolStripMenuItem";
+            this.plotToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.plotToolStripMenuItem.Text = "Plot";
+            this.plotToolStripMenuItem.Click += new System.EventHandler(this.plotToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 724);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "MainForm";
             this.Text = "Warxels";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -552,7 +570,10 @@
             this.tabPageTerrain.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -597,6 +618,8 @@
         private System.Windows.Forms.Button buttonUnitsSave;
         private System.Windows.Forms.Button buttonTerrainLoad;
         private System.Windows.Forms.Button buttonTerrainSave;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem plotToolStripMenuItem;
     }
 }
 
