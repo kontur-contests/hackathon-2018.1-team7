@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using GameLogic;
 
 namespace DevUiAndroidV2
 {
@@ -40,6 +41,18 @@ namespace DevUiAndroidV2
             return inWorldSpace && (_squads.Count == 0 || _squads.All(val => squad==val 
                                     || val.MaxX < squad.MinX || val.MinX > squad.MaxX
                                      || val.MinY > squad.MaxY || val.MaxY < squad.MinY));
+        }
+
+        public IWorld GenerateWorld()
+        {
+            var generator = WorldsGenerator.GetDefault(MyView.SIZE * 3 / 2, MyView.SIZE);
+            foreach (var s in _squads)
+            {
+                for (var x = s.MinX; x < s.MaxX; x++)
+                for (var y = s.MinY; y < s.MaxY; y++)
+                    generator.CreateUnit(s.Type, s.Team, y, x);
+            }
+            return generator.GetWorld();
         }
     }
 }

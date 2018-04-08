@@ -20,9 +20,8 @@ namespace DevUiAndroidV2
         int MinY { get; }
         int MaxY { get; }
         int Size { get; }
-
+        UnitType Type { get; }
+        Team Team { get; }
         bool CheckAndSetPos(GenerateArmy army, int x, int y);
-        IEnumerable<IUnit> GetUnits();
-
     }
 }
