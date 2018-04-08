@@ -17,7 +17,7 @@ namespace DevUiAndroidV2
 {
     sealed class MyView : View
     {
-        public const int SIZE = 50;
+        public const int SIZE = 100;
         int step;
         public GenerateArmy Army { get; private set; }
         private Paint paint;
