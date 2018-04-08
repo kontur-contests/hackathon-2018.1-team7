@@ -81,5 +81,13 @@ namespace DevUiAndroidV2
             }
             Invalidate();
         }
+
+        public void SetLoadedWorld(IWorld world)
+        {
+            foreach (var unit in world.Army.GetUnits())
+            {
+                lists.Add(new Tuple<Rect, ISquad>(new Rect(unit.X,unit.Y,unit.X+1, unit.Y+1), null));
+            }
+        }
     }
 }

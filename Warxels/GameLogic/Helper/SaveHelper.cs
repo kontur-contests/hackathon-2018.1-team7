@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using Android.Content;
+using Android.Locations;
+using Java.IO;
 
 namespace GameLogic.Helper
 {
     public static class SaveLoadHelper
     {
-        public static void SaveTerrain(this IWorld world, string fname)
+        public static void SaveTerrain(this IWorld world, string fname, bool android = false)
         {
+            if (android)
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                fname = Path.Combine(path, fname);
+            }
             var builder = new StringBuilder();
             for (int i = 0; i < world.Width; i++)
             {
                 for (int j = 0; j <world.Length; j++)
                 {
-                    builder.Append(GetTerrainView((TerrainType)world.Terrain[j, i]));
+                    builder.Append(GetTerrainView((TerrainType)world.Terrain[i, j]));
                 }
 
                 builder.Append(Environment.NewLine);
@@ -21,7 +30,7 @@ namespace GameLogic.Helper
             System.IO.File.WriteAllText(fname, builder.ToString());
         }
 
-        public static void SaveUnits(this IWorld world, string fname)
+        public static void SaveUnits(this IWorld world, string fname, bool android = false)
         {
             var builder = new StringBuilder();
             for (int i = 0; i < world.Width; i++)
@@ -33,8 +42,13 @@ namespace GameLogic.Helper
 
                 builder.Append(Environment.NewLine);
             }
+            if (android) {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                fname = Path.Combine(path.ToString(), fname);               
+            }
             System.IO.File.WriteAllText(fname, builder.ToString());
         }
+
 
         private static char GetUnitView(IUnit unit)
         {
@@ -51,7 +65,6 @@ namespace GameLogic.Helper
 
         private static char GetTerrainView(TerrainType terrain)
         {
-
             switch (terrain)
             {
                 case TerrainType.Ground: return ' ';
@@ -60,8 +73,14 @@ namespace GameLogic.Helper
             }
         }
 
-        public static WorldsGenerator LoadTerrainFromFile(string fname)
+        public static WorldsGenerator LoadTerrainFromFile(string fname, bool android = false)
         {
+            if (android)
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                fname = Path.Combine(path, fname);
+            }
+
             var lines = System.IO.File.ReadAllLines(fname);
             
 
@@ -95,8 +114,14 @@ namespace GameLogic.Helper
         }
 
 
-        public static void LoadUnitsFromFile(this WorldsGenerator worldGen, string fname)
+        public static void LoadUnitsFromFile(this WorldsGenerator worldGen, string fname, bool android = false)
         {
+            if (android)
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                fname = Path.Combine(path, fname);
+            }
+
             var lines = System.IO.File.ReadAllLines(fname);
             if (lines.Length < 0)
                 return;
