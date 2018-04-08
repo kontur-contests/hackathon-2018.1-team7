@@ -2,7 +2,7 @@
 {
     internal sealed class HorseMoveStrategy : DefaultMoveStrategy
     {
-        public HorseMoveStrategy(int dy, int dx, World world):base(dy, dx, world)
+        public HorseMoveStrategy(int dy, int dx, World world) : base(dy, dx, world)
         {
         }
 
@@ -20,12 +20,12 @@
                 && blockingUnit.Team == unit.Team)
             {
                 if ((blockingUnit as UnitBase).MoveCost > unit.MoveCost)
-                    if ((x + y) % 2 == 0)
+                    if (((x + y) & 1) == 0)
                         x += 1;
                     else
                         x -= 1;
             }
-            
+
             if (!World.IsPointWithin(x, y))
             {
                 return StrategyResult.NotApplicable;

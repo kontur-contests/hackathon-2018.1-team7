@@ -12,7 +12,7 @@ namespace DevUiAndroidV2
             return _squads;
         }
 
-        public int MaxSizeArmy => 1000;
+        public int MaxSizeArmy => 640;
         public int Size => _squads.Sum(s => s.Size);
 
         public bool AddSquad(ISquad squad)
@@ -55,13 +55,13 @@ namespace DevUiAndroidV2
 
         public void GenerateEnemies(WorldsGenerator generator)
         {
-            generator.AddUnitSquare(Team.Blue, 10, 10, 10, 10, UnitType.HorseMan, 100);
-            generator.AddUnitSquare(Team.Blue, 10, 80, 10, 10, UnitType.HorseMan, 100);
+            generator.AddUnitSquare(Team.Blue, 8, 8, 8, 8, UnitType.HorseMan, 64);
+            generator.AddUnitSquare(Team.Blue, 8, 48, 8, 8, UnitType.HorseMan, 64);
 
-            generator.AddUnitSquare(Team.Blue, 10, 30, 40, 10, UnitType.Archer, 400);
+            generator.AddUnitSquare(Team.Blue, 8, 24, 16, 8, UnitType.Archer, 128);
 
-            generator.AddUnitSquare(Team.Blue, 30, 20, 20, 10, UnitType.SwordsMan, 200);
-            generator.AddUnitSquare(Team.Blue, 30, 60, 20, 10, UnitType.SwordsMan, 200);
+            generator.AddUnitSquare(Team.Blue, 24, 16, 16, 8, UnitType.SwordsMan, 128);
+            generator.AddUnitSquare(Team.Blue, 24, 32, 16, 8, UnitType.SwordsMan, 128);
         }
     }
 }

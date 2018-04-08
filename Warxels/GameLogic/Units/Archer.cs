@@ -14,5 +14,7 @@
         public override int DamageValue => 10;
 
         public override int MoveCost => 8;
+
+        public override int MaxHealth => 60;
     }
 }

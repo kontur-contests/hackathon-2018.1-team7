@@ -89,6 +89,17 @@ namespace DevUiAndroidV2
             }
         }
 
+        private void ShowResults(BattleView view)
+        {
+            SetContentView(Resource.Layout.ResultView);
+            var yourDamage = FindViewById<TextView>(Resource.Id.yourDamageText);
+            var enemyDamage = FindViewById<TextView>(Resource.Id.enemyDamageText);
+            var winner = FindViewById<TextView>(Resource.Id.winnerText);
+            yourDamage.Text += view.CountRedDead;
+            enemyDamage.Text += view.CountBlueDead;
+            winner.Text += view.CountRedDead < view.CountBlueDead ? "Красные" : "Синие";
+        }
+
         private UnitType GetUnitType()
         {
             switch(_spinner.SelectedItem.ToString())
@@ -112,12 +123,15 @@ namespace DevUiAndroidV2
             StartTimer(TimeSpan.FromMilliseconds(view.Delay), () =>
             {
                 view.Invalidate();
+                if (view.EndGame)
+                    ShowResults(view);
                 return !view.EndGame;
             });
 
             view.World.SaveUnits("units.units", true);
             view.World.SaveTerrain("terr.terr", true);
         }
+        
         public void StartTimer(TimeSpan interval, Func<bool> callback)
         {
             var handler = new Handler(Looper.MainLooper);

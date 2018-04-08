@@ -8,38 +8,38 @@ namespace GameLogic
     {
         private readonly World _world;
 
-        private readonly IStrategy _up;
-        private readonly IStrategy _down;
         private readonly StrategySet _meleeStrategiesUp;
         private readonly StrategySet _meleeStrategiesDown;
 
-        private readonly IStrategy _horseUp;
-        private readonly IStrategy _horseDown;
         private readonly StrategySet _strategiesHorseUp;
         private readonly StrategySet _strategiesHorseDown;
 
         private readonly StrategySet _archerStrategiesUp;
         private readonly StrategySet _archerStrategiesDown;
 
-        private WorldsGenerator(World world)
+        private WorldsGenerator(World world, int width)
         {
+            var meleeLookupRadius = width / 12;
+            var horsemanLookupRadius = width / 8;
+            var archerLookupRadius = width / 2;
+
             var meleeFightStrategy = new MeleeFightStrategy(world);
             var fireStrategy = new FireStrategy(world);
 
-            _up = new DefaultMoveStrategy(1, 0, world);
-            _down = new DefaultMoveStrategy(-1, 0, world);
+            IStrategy up = new DefaultMoveStrategy(1, 0, world);
+            IStrategy down = new DefaultMoveStrategy(-1, 0, world);
 
-            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 9), _up);
-            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 9), _down);
+            _meleeStrategiesUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, meleeLookupRadius), up);
+            _meleeStrategiesDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, meleeLookupRadius), down);
 
-            _horseUp = new HorseMoveStrategy(1, 0, world);
-            _horseDown = new HorseMoveStrategy(-1, 0, world);
+            IStrategy horseUp = new HorseMoveStrategy(1, 0, world);
+            IStrategy horseDown = new HorseMoveStrategy(-1, 0, world);
 
-            _strategiesHorseUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 15), _horseUp);
-            _strategiesHorseDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, 15), _horseDown);
+            _strategiesHorseUp = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, horsemanLookupRadius), horseUp);
+            _strategiesHorseDown = new StrategySet(meleeFightStrategy, new MoveToEnemyStrategy(world, horsemanLookupRadius), horseDown);
 
-            _archerStrategiesUp = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, 30), _up);
-            _archerStrategiesDown = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, 30), _down);
+            _archerStrategiesUp = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, archerLookupRadius), up);
+            _archerStrategiesDown = new StrategySet(fireStrategy, meleeFightStrategy, new MoveToEnemyStrategy(world, archerLookupRadius), down);
 
             _world = world;
         }
@@ -53,7 +53,7 @@ namespace GameLogic
         {
             var world = Game.GenerateWorld(length, width);
 
-            return new WorldsGenerator(world);
+            return new WorldsGenerator(world, width);
         }
 
 
@@ -83,7 +83,7 @@ namespace GameLogic
 
             float dx = sizeX / 512.0f;
             float dy = sizeY / 512.0f;
-            var gen = new WorldsGenerator(world);
+            var gen = new WorldsGenerator(world, sizeY);
             gen.AddUnitSquare(Team.Blue, 2, 50 * dx, 60 * dx, 40 * dy, UnitType.HorseMan, 150);
             gen.AddUnitSquare(Team.Blue, 2, 380 * dx, 60 * dx, 40 * dy, UnitType.HorseMan, 150);
 
