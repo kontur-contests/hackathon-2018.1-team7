@@ -96,7 +96,7 @@ namespace DevUiAndroidV2
         {
             foreach (var unit in World.Army.GetUnits())
             {
-                var healthPercentageIndex = (int)Math.Floor(unit.GetHealthPercentage() / 25);
+                var healthPercentageIndex = unit.GetHealthPercentage() / 25;
                 switch (unit.UnitType)
                 {
                     case UnitType.SwordsMan:

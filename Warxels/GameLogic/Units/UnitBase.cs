@@ -2,6 +2,7 @@
 {
     using GameLogic.Strategies;
     using System;
+    using System.Runtime.CompilerServices;
 
     internal abstract class UnitBase : IUnit
     {
@@ -17,7 +18,7 @@
         }
 
         public virtual int MaxHealth => 100;
-        
+
         public int Health { get; private set; }
 
         public int Y { get; private set; }
@@ -43,9 +44,10 @@
             }
         }
 
-        public double GetHealthPercentage()
+        public int GetHealthPercentage()
         {
-            return Math.Max(0, 100 * Health / MaxHealth);
+            var result = 100 * Health / MaxHealth;
+            return result > 0 ? result : 0;
         }
 
         public bool ApplyStrategies()
@@ -61,10 +63,10 @@
                     case StrategyResult.NotEnoughPower:
                         return false;
                     case StrategyResult.Applied:
-                    {
-                        Power = 0;
-                        return true;
-                    }
+                        {
+                            Power = 0;
+                            return true;
+                        }
                     case StrategyResult.NotApplicable:
                         continue;
                 }
@@ -90,7 +92,7 @@
         {
             return GetPositionKey(Y, X);
         }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetPositionKey(int y, int x)
         {
             return y * 3733 ^ x;

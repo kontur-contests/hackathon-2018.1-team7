@@ -46,6 +46,8 @@
             this.textBoxWorldX = new System.Windows.Forms.TextBox();
             this.tabControlUnits = new System.Windows.Forms.TabControl();
             this.tabPageUnits = new System.Windows.Forms.TabPage();
+            this.buttonUnitsLoad = new System.Windows.Forms.Button();
+            this.buttonUnitsSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this._radioTeamA = new System.Windows.Forms.RadioButton();
@@ -58,15 +60,13 @@
             this.radioButtonUnitArcher = new System.Windows.Forms.RadioButton();
             this.radioButtonUnitSwords = new System.Windows.Forms.RadioButton();
             this.tabPageTerrain = new System.Windows.Forms.TabPage();
+            this.buttonTerrainLoad = new System.Windows.Forms.Button();
+            this.buttonTerrainSave = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBoxTerrainBrushSize = new System.Windows.Forms.TextBox();
             this.radioButtonTerrainSquare = new System.Windows.Forms.RadioButton();
             this.radioButtonTerrainBrush = new System.Windows.Forms.RadioButton();
             this.comboBoxTerrain = new System.Windows.Forms.ComboBox();
-            this.buttonUnitsSave = new System.Windows.Forms.Button();
-            this.buttonUnitsLoad = new System.Windows.Forms.Button();
-            this.buttonTerrainLoad = new System.Windows.Forms.Button();
-            this.buttonTerrainSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -124,23 +124,27 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.radioButtonX8);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX4);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedX2);
             this.groupBox3.Controls.Add(this.radioButtonGameSpeedNormal);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(104, 102);
+            this.groupBox3.Size = new System.Drawing.Size(104, 87);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "GameSpeed";
             // 
             // radioButtonX8
             // 
+            this.radioButtonX8.AutoEllipsis = true;
             this.radioButtonX8.AutoSize = true;
-            this.radioButtonX8.Location = new System.Drawing.Point(6, 79);
+            this.radioButtonX8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonX8.Location = new System.Drawing.Point(3, 67);
             this.radioButtonX8.Name = "radioButtonX8";
-            this.radioButtonX8.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonX8.Size = new System.Drawing.Size(98, 17);
             this.radioButtonX8.TabIndex = 3;
             this.radioButtonX8.Text = "x8";
             this.radioButtonX8.UseVisualStyleBackColor = true;
@@ -148,10 +152,12 @@
             // 
             // radioButtonGameSpeedX4
             // 
+            this.radioButtonGameSpeedX4.AutoEllipsis = true;
             this.radioButtonGameSpeedX4.AutoSize = true;
-            this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(6, 56);
+            this.radioButtonGameSpeedX4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonGameSpeedX4.Location = new System.Drawing.Point(3, 50);
             this.radioButtonGameSpeedX4.Name = "radioButtonGameSpeedX4";
-            this.radioButtonGameSpeedX4.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonGameSpeedX4.Size = new System.Drawing.Size(98, 17);
             this.radioButtonGameSpeedX4.TabIndex = 2;
             this.radioButtonGameSpeedX4.Text = "x4";
             this.radioButtonGameSpeedX4.UseVisualStyleBackColor = true;
@@ -159,10 +165,12 @@
             // 
             // radioButtonGameSpeedX2
             // 
+            this.radioButtonGameSpeedX2.AutoEllipsis = true;
             this.radioButtonGameSpeedX2.AutoSize = true;
-            this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(6, 33);
+            this.radioButtonGameSpeedX2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonGameSpeedX2.Location = new System.Drawing.Point(3, 33);
             this.radioButtonGameSpeedX2.Name = "radioButtonGameSpeedX2";
-            this.radioButtonGameSpeedX2.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonGameSpeedX2.Size = new System.Drawing.Size(98, 17);
             this.radioButtonGameSpeedX2.TabIndex = 1;
             this.radioButtonGameSpeedX2.Text = "x2";
             this.radioButtonGameSpeedX2.UseVisualStyleBackColor = true;
@@ -172,9 +180,10 @@
             // 
             this.radioButtonGameSpeedNormal.AutoSize = true;
             this.radioButtonGameSpeedNormal.Checked = true;
-            this.radioButtonGameSpeedNormal.Location = new System.Drawing.Point(6, 10);
+            this.radioButtonGameSpeedNormal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonGameSpeedNormal.Location = new System.Drawing.Point(3, 16);
             this.radioButtonGameSpeedNormal.Name = "radioButtonGameSpeedNormal";
-            this.radioButtonGameSpeedNormal.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonGameSpeedNormal.Size = new System.Drawing.Size(98, 17);
             this.radioButtonGameSpeedNormal.TabIndex = 0;
             this.radioButtonGameSpeedNormal.TabStop = true;
             this.radioButtonGameSpeedNormal.Text = "Normal";
@@ -183,7 +192,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 111);
+            this.button1.Location = new System.Drawing.Point(3, 96);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -199,12 +208,12 @@
             this.groupBox4.Controls.Add(this.textBoxWorldY);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.textBoxWorldX);
-            this.groupBox4.Location = new System.Drawing.Point(3, 140);
+            this.groupBox4.Location = new System.Drawing.Point(3, 125);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(104, 130);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Создать мир";
+            this.groupBox4.Text = "Create world";
             // 
             // comboBoxPreset
             // 
@@ -281,8 +290,28 @@
             this.tabPageUnits.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageUnits.Size = new System.Drawing.Size(971, 74);
             this.tabPageUnits.TabIndex = 0;
-            this.tabPageUnits.Text = "Юниты";
+            this.tabPageUnits.Text = "Units";
             this.tabPageUnits.UseVisualStyleBackColor = true;
+            // 
+            // buttonUnitsLoad
+            // 
+            this.buttonUnitsLoad.Location = new System.Drawing.Point(890, 35);
+            this.buttonUnitsLoad.Name = "buttonUnitsLoad";
+            this.buttonUnitsLoad.Size = new System.Drawing.Size(75, 23);
+            this.buttonUnitsLoad.TabIndex = 7;
+            this.buttonUnitsLoad.Text = "Load";
+            this.buttonUnitsLoad.UseVisualStyleBackColor = true;
+            this.buttonUnitsLoad.Click += new System.EventHandler(this.buttonUnitsLoad_Click);
+            // 
+            // buttonUnitsSave
+            // 
+            this.buttonUnitsSave.Location = new System.Drawing.Point(890, 6);
+            this.buttonUnitsSave.Name = "buttonUnitsSave";
+            this.buttonUnitsSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonUnitsSave.TabIndex = 6;
+            this.buttonUnitsSave.Text = "Save";
+            this.buttonUnitsSave.UseVisualStyleBackColor = true;
+            this.buttonUnitsSave.Click += new System.EventHandler(this.buttonUnitsSave_Click);
             // 
             // groupBox2
             // 
@@ -300,9 +329,9 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(7, 43);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(59, 17);
+            this.radioButton3.Size = new System.Drawing.Size(76, 17);
             this.radioButton3.TabIndex = 1;
-            this.radioButton3.Text = "TeamB";
+            this.radioButton3.Text = "Team Blue";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // _radioTeamA
@@ -311,10 +340,10 @@
             this._radioTeamA.Checked = true;
             this._radioTeamA.Location = new System.Drawing.Point(7, 20);
             this._radioTeamA.Name = "_radioTeamA";
-            this._radioTeamA.Size = new System.Drawing.Size(59, 17);
+            this._radioTeamA.Size = new System.Drawing.Size(75, 17);
             this._radioTeamA.TabIndex = 0;
             this._radioTeamA.TabStop = true;
-            this._radioTeamA.Text = "TeamA";
+            this._radioTeamA.Text = "Team Red";
             this._radioTeamA.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -327,7 +356,7 @@
             this.groupBox5.Size = new System.Drawing.Size(178, 65);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Добавить юнитов";
+            this.groupBox5.Text = "Add units";
             // 
             // textBoxSquareAmount
             // 
@@ -417,8 +446,28 @@
             this.tabPageTerrain.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageTerrain.Size = new System.Drawing.Size(971, 74);
             this.tabPageTerrain.TabIndex = 1;
-            this.tabPageTerrain.Text = "Земля";
+            this.tabPageTerrain.Text = "Terrain";
             this.tabPageTerrain.UseVisualStyleBackColor = true;
+            // 
+            // buttonTerrainLoad
+            // 
+            this.buttonTerrainLoad.Location = new System.Drawing.Point(880, 35);
+            this.buttonTerrainLoad.Name = "buttonTerrainLoad";
+            this.buttonTerrainLoad.Size = new System.Drawing.Size(75, 23);
+            this.buttonTerrainLoad.TabIndex = 9;
+            this.buttonTerrainLoad.Text = "Load";
+            this.buttonTerrainLoad.UseVisualStyleBackColor = true;
+            this.buttonTerrainLoad.Click += new System.EventHandler(this.buttonTerrainLoad_Click);
+            // 
+            // buttonTerrainSave
+            // 
+            this.buttonTerrainSave.Location = new System.Drawing.Point(880, 6);
+            this.buttonTerrainSave.Name = "buttonTerrainSave";
+            this.buttonTerrainSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonTerrainSave.TabIndex = 8;
+            this.buttonTerrainSave.Text = "Save";
+            this.buttonTerrainSave.UseVisualStyleBackColor = true;
+            this.buttonTerrainSave.Click += new System.EventHandler(this.buttonTerrainSave_Click);
             // 
             // groupBox6
             // 
@@ -430,7 +479,7 @@
             this.groupBox6.Size = new System.Drawing.Size(234, 71);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "groupBox6";
+            this.groupBox6.Text = "Type";
             // 
             // textBoxTerrainBrushSize
             // 
@@ -475,46 +524,6 @@
             this.comboBoxTerrain.Size = new System.Drawing.Size(136, 21);
             this.comboBoxTerrain.TabIndex = 0;
             // 
-            // buttonUnitsSave
-            // 
-            this.buttonUnitsSave.Location = new System.Drawing.Point(890, 6);
-            this.buttonUnitsSave.Name = "buttonUnitsSave";
-            this.buttonUnitsSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonUnitsSave.TabIndex = 6;
-            this.buttonUnitsSave.Text = "Save";
-            this.buttonUnitsSave.UseVisualStyleBackColor = true;
-            this.buttonUnitsSave.Click += new System.EventHandler(this.buttonUnitsSave_Click);
-            // 
-            // buttonUnitsLoad
-            // 
-            this.buttonUnitsLoad.Location = new System.Drawing.Point(890, 35);
-            this.buttonUnitsLoad.Name = "buttonUnitsLoad";
-            this.buttonUnitsLoad.Size = new System.Drawing.Size(75, 23);
-            this.buttonUnitsLoad.TabIndex = 7;
-            this.buttonUnitsLoad.Text = "Load";
-            this.buttonUnitsLoad.UseVisualStyleBackColor = true;
-            this.buttonUnitsLoad.Click += new System.EventHandler(this.buttonUnitsLoad_Click);
-            // 
-            // buttonTerrainLoad
-            // 
-            this.buttonTerrainLoad.Location = new System.Drawing.Point(880, 35);
-            this.buttonTerrainLoad.Name = "buttonTerrainLoad";
-            this.buttonTerrainLoad.Size = new System.Drawing.Size(75, 23);
-            this.buttonTerrainLoad.TabIndex = 9;
-            this.buttonTerrainLoad.Text = "Load";
-            this.buttonTerrainLoad.UseVisualStyleBackColor = true;
-            this.buttonTerrainLoad.Click += new System.EventHandler(this.buttonTerrainLoad_Click);
-            // 
-            // buttonTerrainSave
-            // 
-            this.buttonTerrainSave.Location = new System.Drawing.Point(880, 6);
-            this.buttonTerrainSave.Name = "buttonTerrainSave";
-            this.buttonTerrainSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonTerrainSave.TabIndex = 8;
-            this.buttonTerrainSave.Text = "Save";
-            this.buttonTerrainSave.UseVisualStyleBackColor = true;
-            this.buttonTerrainSave.Click += new System.EventHandler(this.buttonTerrainSave_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,11 +531,12 @@
             this.ClientSize = new System.Drawing.Size(1114, 724);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Warxels";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
