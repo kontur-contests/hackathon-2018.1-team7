@@ -5,7 +5,7 @@
 
     internal sealed class FireStrategy : IStrategy
     {
-        private readonly int _cost = 25;
+        private readonly int _cost = 30;
 
         private readonly World _world;
 
