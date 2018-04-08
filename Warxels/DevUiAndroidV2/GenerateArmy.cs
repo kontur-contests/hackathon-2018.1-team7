@@ -43,12 +43,12 @@ namespace DevUiAndroidV2
                 {
                     for (var y = s.MinY; y < s.MaxY; y++)
                     {
-                        generator.CreateUnit(s.Type, s.Team, y + MyView.SIZE / 3, x);
+                        generator.CreateUnit(s.Type, s.Team, y + MyView.SIZE / 2, x);
                     }
                 }
             }
 
-            GenerateEnemies(generator);
+            //GenerateEnemies(generator);
 
             return generator.GetWorld();
         }
