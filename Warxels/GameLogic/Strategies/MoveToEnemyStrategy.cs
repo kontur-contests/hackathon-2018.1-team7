@@ -13,33 +13,41 @@
 
         public StrategyResult Apply(UnitBase unit)
         {
-            IUnit nearestEnemyUnit = null;
+            if (unit.Power < 5)
+                return StrategyResult.NotEnoughPower;
+
+            IUnit nearestEnemyUnit = unit.Enemy != null && !unit.Enemy.IsDead ? unit.Enemy : null;
             var minDistance = int.MaxValue;
 
-            foreach (var testUnit in _world.Army.GetNearbyUnits(unit, _lookupRadius))
+            if (nearestEnemyUnit == null)
             {
-                if (testUnit == null || testUnit.Team == unit.Team || testUnit.IsDead)
-                    continue;
-
-                var distanceSquared = DistanceHelper.GetDistanceSquared(unit, testUnit);
-
-                if (distanceSquared > minDistance)
+                foreach (var testUnit in _world.Army.GetNearbyUnits(unit, _lookupRadius))
                 {
-                    continue;
-                }
+                    if (testUnit == null || testUnit.Team == unit.Team || testUnit.IsDead)
+                        continue;
 
-                // если два врага находятся на одинаковом расстоянии, бежать к тому, у кого ХП меньше.
-                if (distanceSquared == minDistance && nearestEnemyUnit != null && nearestEnemyUnit.Health > testUnit.Health)
-                {
-                    continue;
-                }
+                    var distanceSquared = DistanceHelper.GetDistanceSquared(unit, testUnit);
 
-                minDistance = distanceSquared;
-                nearestEnemyUnit = testUnit;
+                    if (distanceSquared > minDistance)
+                    {
+                        continue;
+                    }
+
+                    // если два врага находятся на одинаковом расстоянии, бежать к тому, у кого ХП меньше.
+                    if (distanceSquared == minDistance && nearestEnemyUnit != null && nearestEnemyUnit.Health > testUnit.Health)
+                    {
+                        continue;
+                    }
+
+                    minDistance = distanceSquared;
+                    nearestEnemyUnit = testUnit;
+                }
             }
 
             if (nearestEnemyUnit != null)
             {
+                unit.Enemy = nearestEnemyUnit;
+
                 var moveVector = DistanceHelper.GetMoveTowardsPoint(unit, nearestEnemyUnit.X, nearestEnemyUnit.Y);
                 var cost = unit.GetMovementCost(moveVector, _world.Terrain[unit.X, unit.Y]);
 
@@ -59,7 +67,7 @@
                 {
                     // Так, прямо по курсу какой-то хер, попробуем обойти.
 
-                    foreach(var possibleWay in DistanceHelper.GetAdjancedDirectionVectors(moveVector))
+                    foreach (var possibleWay in DistanceHelper.GetAdjancedDirectionVectors(moveVector))
                     {
                         cost = unit.GetMovementCost(possibleWay, _world.Terrain[unit.X, unit.Y]);
 
@@ -80,8 +88,8 @@
                 {
                     okToMove = true;
                 }
-                
-                if(!okToMove)
+
+                if (!okToMove)
                 {
                     return StrategyResult.NotApplicable;
                 }

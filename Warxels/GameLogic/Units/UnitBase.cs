@@ -119,5 +119,7 @@
 
             return (int)Math.Ceiling(length * (double)tempMoveCost);
         }
+
+        public IUnit Enemy { get; set; }
     }
 }
