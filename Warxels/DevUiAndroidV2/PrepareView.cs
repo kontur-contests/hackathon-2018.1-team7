@@ -22,7 +22,6 @@ namespace DevUiAndroidV2
         private TextView _rankText;
         private LinearLayout _topLayout;
         private LinearLayout _cocosLayout;
-        private WorldsGenerator WorldGen;
         private Button _somethingButton;
         private MyView _view;
         private Spinner _spinner;
@@ -30,7 +29,6 @@ namespace DevUiAndroidV2
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            WorldGen = WorldsGenerator.GetDefault(150, 100);
             SetContentView(Resource.Layout.PrepareView);
             _somethingButton = FindViewById<Button>(Resource.Id.doSomethingButton);
             _rowsSeekBar = FindViewById<SeekBar>(Resource.Id.rowsSeekBar);
@@ -83,6 +81,7 @@ namespace DevUiAndroidV2
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
             var view = new BattleView(this, _view.Army.GenerateWorld());
+
             SetContentView(view);
 
             StartTimer(TimeSpan.FromMilliseconds(view.Delay), () =>

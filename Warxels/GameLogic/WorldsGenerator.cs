@@ -56,7 +56,7 @@ namespace GameLogic
             return new WorldsGenerator(world);
         }
 
-        
+
         private IUnit CreateSwordsman(Team team, int y, int x)
         {
             var strats = team == Team.Blue ? _meleeStrategiesUp : _meleeStrategiesDown;
@@ -77,23 +77,23 @@ namespace GameLogic
             return unit;
         }
 
-        public static WorldsGenerator CreatePreset(int sizeY,int sizeX)
+        public static WorldsGenerator CreatePreset(int sizeY, int sizeX)
         {
             var world = Game.GenerateWorld(sizeY, sizeX);
 
             float dx = sizeX / 512.0f;
             float dy = sizeY / 512.0f;
-            var gen =  new WorldsGenerator(world);
-            gen.AddUnitSquare(Team.Blue, 2, 50*dx, 60*dx, 40*dy, UnitType.HorseMan, 150);
-            gen.AddUnitSquare(Team.Blue, 2, 380 *dx, 60*dx, 40*dy, UnitType.HorseMan, 150);
+            var gen = new WorldsGenerator(world);
+            gen.AddUnitSquare(Team.Blue, 2, 50 * dx, 60 * dx, 40 * dy, UnitType.HorseMan, 150);
+            gen.AddUnitSquare(Team.Blue, 2, 380 * dx, 60 * dx, 40 * dy, UnitType.HorseMan, 150);
 
-            gen.AddUnitSquare(Team.Blue, 5, 130 *dx, 100*dx, 40*dy, UnitType.Archer, 200);
-            gen.AddUnitSquare(Team.Blue, 5, 270 *dx, 100*dx, 40*dy, UnitType.Archer, 200);
+            gen.AddUnitSquare(Team.Blue, 5, 130 * dx, 100 * dx, 40 * dy, UnitType.Archer, 200);
+            gen.AddUnitSquare(Team.Blue, 5, 270 * dx, 100 * dx, 40 * dy, UnitType.Archer, 200);
 
-            gen.AddUnitSquare(Team.Blue, 90 *dy, 100*dx, 100*dx, 50*dy, UnitType.SwordsMan, 400);
-            gen.AddUnitSquare(Team.Blue, 90 *dy, 300*dx, 100*dx, 50*dy, UnitType.SwordsMan, 400);
+            gen.AddUnitSquare(Team.Blue, 90 * dy, 100 * dx, 100 * dx, 50 * dy, UnitType.SwordsMan, 400);
+            gen.AddUnitSquare(Team.Blue, 90 * dy, 300 * dx, 100 * dx, 50 * dy, UnitType.SwordsMan, 400);
 
-            gen.AddUnitSquare(Team.Blue, 50 *dy, 220*dx, 60*dx, 150*dy, UnitType.SwordsMan, 200);
+            gen.AddUnitSquare(Team.Blue, 50 * dy, 220 * dx, 60 * dx, 150 * dy, UnitType.SwordsMan, 200);
 
 
             return gen;
@@ -110,7 +110,7 @@ namespace GameLogic
             for (float i = 0; i < height; i += density)
                 for (float j = 0; j < width; j += density)
                 {
-                    CreateUnit(type, team, (int)(y+i), (int)(x+j));
+                    CreateUnit(type, team, (int)(y + i), (int)(x + j));
                     k++;
 
                     if (k == amount)
@@ -121,7 +121,7 @@ namespace GameLogic
         public void AddUnitSquare(Team team, float y, float x, float width, float height, UnitType type, int amount)
         {
             AddUnitSquare(team, (int)y, (int)x, (int)width, (int)height, type, amount);
-            
+
         }
 
         public IUnit CreateUnit(UnitType type, Team team, int y, int x)
