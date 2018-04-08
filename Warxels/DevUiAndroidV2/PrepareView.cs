@@ -84,10 +84,25 @@ namespace DevUiAndroidV2
         {
             var view = new BattleView(this, _view.Army.GenerateWorld());
             SetContentView(view);
-            Timer timer = new Timer(true);
-            timer.Schedule(new ViewUpdater(view), view.Delay);
-        }
 
+            StartTimer(TimeSpan.FromMilliseconds(view.Delay), () =>
+            {
+                view.Invalidate();
+                return !view.EndGame;
+            });
+        }
+        public void StartTimer(TimeSpan interval, Func<bool> callback)
+        {
+            var handler = new Handler(Looper.MainLooper);
+            handler.PostDelayed(() =>
+            {
+                if (callback())
+                    StartTimer(interval, callback);
+
+                handler.Dispose();
+                handler = null;
+            }, (long)interval.TotalMilliseconds);
+        }
         private void UpdateSelectors()
         {
             UpdateSelectors(_rowsSeekBar);
@@ -115,21 +130,6 @@ namespace DevUiAndroidV2
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             UpdateSelectors(sender);
-        }
-    }
-    class ViewUpdater : TimerTask
-    {
-        private View _view;
-        public ViewUpdater(View view)
-        {
-            _view = view;
-        }
-        public override void Run()
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                _view.Invalidate();
-            });
         }
     }
 }

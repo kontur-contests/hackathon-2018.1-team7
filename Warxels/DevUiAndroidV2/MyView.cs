@@ -17,7 +17,7 @@ namespace DevUiAndroidV2
 {
     sealed class MyView : View
     {
-        public const int SIZE = 100;
+        public const int SIZE = 50;
         int step;
         public GenerateArmy Army { get; private set; }
         private Paint paint;
@@ -30,7 +30,7 @@ namespace DevUiAndroidV2
             SetPadding(0, 0, 0, 0);
             paint = new Paint
             {
-                Color = Color.Blue
+                Color = Color.Red
             };
             paint.SetStyle(Paint.Style.Fill);
             borderPaint = new Paint(paint) {Color = Color.Cyan};
@@ -58,7 +58,7 @@ namespace DevUiAndroidV2
                 if (focus == null && rows != 0 && ranks!=0)
                 {
 
-                    var rectsquad = new RectSquad(rows, ranks, type, Team.Blue, location.X/step, location.Y/step);
+                    var rectsquad = new RectSquad(rows, ranks, type, Team.Red, location.X/step, location.Y/step);
                     var isAdded = Army.AddSquad(rectsquad);
                     if (isAdded)
                     {

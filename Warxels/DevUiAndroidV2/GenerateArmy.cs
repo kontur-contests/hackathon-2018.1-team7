@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using GameLogic;
 
 namespace DevUiAndroidV2
@@ -50,7 +41,7 @@ namespace DevUiAndroidV2
             {
                 for (var x = s.MinX; x < s.MaxX; x++)
                 for (var y = s.MinY; y < s.MaxY; y++)
-                    generator.CreateUnit(s.Type, s.Team, y*3/2, x);
+                    generator.CreateUnit(s.Type, s.Team, y+MyView.SIZE/3, x);
             }
             return generator.GetWorld();
         }

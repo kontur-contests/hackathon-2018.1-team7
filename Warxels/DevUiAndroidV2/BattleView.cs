@@ -8,9 +8,9 @@ namespace DevUiAndroidV2
 {
     class BattleView : View
     {
-        public bool EndGame { get; set; }
+        public bool EndGame { get; set; } = false;
         public int Delay { get; } = 100;
-        public bool Paused { get; set; }
+        public bool Paused { get; set; } = false;
         public IWorld World { get; }
         private const int SIZE = MyView.SIZE;
         private int step;
