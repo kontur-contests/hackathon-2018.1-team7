@@ -11,7 +11,7 @@ using View = Android.Views.View;
 
 namespace DevUiAndroidV2
 {
-    [Activity(Label = "PrepareView")]
+    [Activity(Label = "Warxels")]
     public class PrepareView : Activity
     {
         private SeekBar _rowsSeekBar;

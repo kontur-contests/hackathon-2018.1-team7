@@ -13,7 +13,7 @@
         p1:id="@+id/topLayout"
         p1:layout_weight="1">
         <Button
-            p1:text="Старт"
+            p1:text="В бой"
             p1:layout_width="match_parent"
             p1:layout_height="match_parent"
             p1:id="@+id/doSomethingButton" />

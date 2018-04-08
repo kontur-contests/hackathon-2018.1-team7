@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace DevUiAndroidV2
 {
-    [Activity(Label = "DevUiAndroidV2", MainLauncher = true)]
+    [Activity(Label = "Warxels", MainLauncher = true)]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

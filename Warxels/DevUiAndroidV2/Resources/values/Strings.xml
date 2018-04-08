@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">DevUiAndroidV2</string>
+  <string name="app_name">Warxels</string>
   <string-array name="squadType">
       <item>Мечник</item>
       <item>Лучник</item>
