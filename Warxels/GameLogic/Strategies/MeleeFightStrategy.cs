@@ -17,7 +17,7 @@
 
             foreach(var testUnit in _world.Army.GetNearbyUnits(unit, 1))
             {
-                if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
+                if (testUnit == null || testUnit.Team == unit.Team || testUnit.IsDead)
                     continue;
 
                 if (minUnit == null || minUnit.Health > testUnit.Health)

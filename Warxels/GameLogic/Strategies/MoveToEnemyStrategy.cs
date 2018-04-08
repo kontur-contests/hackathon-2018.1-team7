@@ -18,7 +18,7 @@
 
             foreach (var testUnit in _world.Army.GetNearbyUnits(unit, _lookupRadius))
             {
-                if (testUnit == null || testUnit.Team == unit.Team || testUnit.Health <= 0)
+                if (testUnit == null || testUnit.Team == unit.Team || testUnit.IsDead)
                     continue;
 
                 var distanceSquared = DistanceHelper.GetDistanceSquared(unit, testUnit);

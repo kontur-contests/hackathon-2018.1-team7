@@ -1,7 +1,7 @@
 ﻿namespace GameLogic.Strategies
 {
     internal class DefaultMoveStrategy : IStrategy
-    {        
+    {
         protected readonly int _dy;
 
         protected readonly int _dx;
@@ -14,10 +14,10 @@
             _dy = dy;
             World = world;
         }
-    
+
         public virtual StrategyResult Apply(UnitBase unit)
         {
-            if (unit.Power < unit.MoveCost*unit.GetTerrainPenalty(World.Terrain[unit.X,unit.Y]))
+            if (unit.Power < unit.MoveCost * unit.GetTerrainPenalty(World.Terrain[unit.X, unit.Y]))
                 return StrategyResult.NotEnoughPower;
 
             var x = unit.X + _dx;
