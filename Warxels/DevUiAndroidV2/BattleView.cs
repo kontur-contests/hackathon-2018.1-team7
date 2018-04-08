@@ -14,8 +14,8 @@ namespace DevUiAndroidV2
         public IWorld World { get; }
         private const int SIZE = MyView.SIZE;
         private int step;
-        private Paint marshPaint = new Paint() {Color = new Color(0, 0, 255, 64) };
-        private Paint projectilePen = new Paint() {Color = Color.Brown};
+        private Paint marshPaint = new Paint { Color = new Color(0, 0, 255, 64) };
+        private Paint projectilePen = new Paint { Color = Color.Brown };
 
 
         private Paint[] TeamAPens = new Paint[] {
@@ -61,18 +61,32 @@ namespace DevUiAndroidV2
             {
                 p.SetStyle(Paint.Style.Fill);
             }
+
+            foreach (var p in TeamAPens)
+            {
+                p.SetStyle(Paint.Style.Stroke);
+            }
+            foreach (var p in TeamBPens)
+            {
+                p.SetStyle(Paint.Style.Stroke);
+            }
         }
 
         private void DrawTerrain(Canvas canvas)
         {
             for (int i = 0; i < World.Terrain.GetLength(0); i++)
-            for (int j = 0; j < World.Terrain.GetLength(1); j++)
-                switch (World.Terrain[i, j])
+            {
+                for (int j = 0; j < World.Terrain.GetLength(1); j++)
                 {
-                    case 1: canvas.DrawRect(i*step, j*step, (i+1)*step, (j+1)*step, marshPaint);
-                        break;
-                    default: break;
+                    switch (World.Terrain[i, j])
+                    {
+                        case 1:
+                            canvas.DrawRect(i * step, j * step, (i + 1) * step, (j + 1) * step, marshPaint);
+                            break;
+                        default: break;
+                    }
                 }
+            }
         }
         private void DrawUnits(Canvas canvas)
         {
@@ -82,13 +96,12 @@ namespace DevUiAndroidV2
                 switch (unit.UnitType)
                 {
                     case UnitType.SwordsMan:
-                        canvas.DrawOval(unit.X*step, unit.Y * step, (unit.X+1) * step, (unit.Y+1) * step, unit.Team == Team.Red ? TeamAPens[healthPercentageIndex] : TeamBPens[healthPercentageIndex]); break;
+                        canvas.DrawOval(unit.X * step, unit.Y * step, (unit.X + 1) * step, (unit.Y + 1) * step, unit.Team == Team.Red ? TeamAPens[healthPercentageIndex] : TeamBPens[healthPercentageIndex]); break;
                     case UnitType.HorseMan:
                         canvas.DrawRect(unit.X * step, unit.Y * step, (unit.X + 1) * step, (unit.Y + 1) * step, unit.Team == Team.Red ? TeamAPens[healthPercentageIndex] : TeamBPens[healthPercentageIndex]); break;
                     case UnitType.Archer:
                         canvas.DrawOval(unit.X * step, unit.Y * step, (unit.X + 1) * step, (unit.Y + 1) * step, unit.Team == Team.Red ? TeamASolidPens[healthPercentageIndex] : TeamBSolidPens[healthPercentageIndex]); break;
                 }
-
             }
         }
 
@@ -96,8 +109,8 @@ namespace DevUiAndroidV2
         {
             foreach (var projectile in World.GetProjectiles())
             {
-                canvas.DrawOval(projectile.X * step, projectile.Y * step, projectile.X * step + step / 2,
-                    projectile.Y * step + step / 2, projectilePen);
+                canvas.DrawOval(projectile.X * step, projectile.Y * step, projectile.X * step + step / 2.0f,
+                    projectile.Y * step + step / 2.0f, projectilePen);
             }
         }
 
@@ -106,7 +119,7 @@ namespace DevUiAndroidV2
             step = Right / SIZE;
 
             if (!Paused)
-                World.DoTick(); 
+                World.DoTick();
             canvas.DrawARGB(255, 255, 255, 255);
 
             DrawTerrain(canvas);

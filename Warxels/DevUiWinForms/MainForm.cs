@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text;
-using System.IO;
 using GameLogic;
 using GameLogic.Helper;
 

@@ -6,8 +6,13 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <Button
-        android:text="Начать игру"
+        android:text="Расставить войска"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startGameButton" />
+    <Button
+        android:text="Загрузить последнюю растановку"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadLastGame" />
 </LinearLayout>
