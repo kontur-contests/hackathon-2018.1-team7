@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Android.Accounts;
 using Android.App;
 using Android.Graphics;
@@ -80,7 +81,13 @@ namespace DevUiAndroidV2
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
-            _view.Invalidate();
+            SetContentView(Resource.Layout.BattleView);
+            var view = new BattleView(this, GenerateArmy.GenerateWorld());
+            while (!view.EndGame)
+            {
+                Task.Delay(view.Delay).Wait();
+                view.Invalidate();
+            }
         }
 
         private void UpdateSelectors()
