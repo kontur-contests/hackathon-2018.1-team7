@@ -102,7 +102,6 @@ namespace DevUiAndroidV2
                     case UnitType.Archer:
                         canvas.DrawOval(unit.X * step, unit.Y * step, (unit.X + 1) * step, (unit.Y + 1) * step, unit.Team == Team.Red ? TeamASolidPens[healthPercentageIndex] : TeamBSolidPens[healthPercentageIndex]); break;
                 }
-
             }
         }
 
