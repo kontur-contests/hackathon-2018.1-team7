@@ -6,7 +6,6 @@ namespace DevUiAndroidV2
     class RectSquad : ISquad
     {
         private UnitType _type;
-        private List<IUnit> _units;
         private int _x;
         private int _y;
         private int _xMin;
@@ -15,7 +14,6 @@ namespace DevUiAndroidV2
 
         public RectSquad(int x, int y, UnitType type, Team team, int xMin, int yMin)
         {
-            _units = new List<IUnit>(x * y);
             _x = x;
             _y = y;
             _xMin = xMin;
@@ -30,6 +28,8 @@ namespace DevUiAndroidV2
         public int MaxY => _yMin+_y;
 
         public int Size => _x * _y;
+        public UnitType Type => _type;
+        public Team Team => _team;
 
         public bool CheckAndSetPos(GenerateArmy army, int x, int y)
         {
