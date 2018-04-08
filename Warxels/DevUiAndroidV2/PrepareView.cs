@@ -1,12 +1,13 @@
 ﻿using System;
-using Android.Accounts;
 using Android.App;
-using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using GameLogic;
+using Java.Util;
+using Xamarin.Forms;
 using Button = Android.Widget.Button;
+using View = Android.Views.View;
 
 namespace DevUiAndroidV2
 {
@@ -51,6 +52,7 @@ namespace DevUiAndroidV2
             _view.Touch += _view_Touch;
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
             _totalUnitsEditText.Text = _view.Army.Size.ToString();
+            Forms.Init(this, savedInstanceState);
         }
 
         private void _view_Touch(object sender, View.TouchEventArgs e)
@@ -80,7 +82,10 @@ namespace DevUiAndroidV2
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
-            _view.Invalidate();
+            var view = new BattleView(this, _view.Army.GenerateWorld());
+            SetContentView(view);
+            Timer timer = new Timer(true);
+            timer.Schedule(new ViewUpdater(view), view.Delay);
         }
 
         private void UpdateSelectors()
@@ -110,6 +115,21 @@ namespace DevUiAndroidV2
         private void _rankSeekBar_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             UpdateSelectors(sender);
+        }
+    }
+    class ViewUpdater : TimerTask
+    {
+        private View _view;
+        public ViewUpdater(View view)
+        {
+            _view = view;
+        }
+        public override void Run()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _view.Invalidate();
+            });
         }
     }
 }

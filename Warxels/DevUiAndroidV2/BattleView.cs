@@ -8,6 +8,7 @@ namespace DevUiAndroidV2
 {
     class BattleView : View
     {
+        public bool EndGame { get; set; }
         public int Delay { get; } = 100;
         public bool Paused { get; set; }
         public IWorld World { get; }
@@ -49,9 +50,9 @@ namespace DevUiAndroidV2
             new Paint{Color = Color.Blue, Alpha = 255}
         };
 
-
-        public BattleView(Context context) : base(context)
+        public BattleView(Context context, IWorld world) : base(context)
         {
+            World = world;
             foreach (var p in TeamASolidPens)
             {
                 p.SetStyle(Paint.Style.Fill);

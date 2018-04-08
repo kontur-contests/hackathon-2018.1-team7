@@ -30,7 +30,7 @@ namespace DevUiAndroidV2
             SetPadding(0, 0, 0, 0);
             paint = new Paint
             {
-                Color = Color.Green
+                Color = Color.Blue
             };
             paint.SetStyle(Paint.Style.Fill);
             borderPaint = new Paint(paint) {Color = Color.Cyan};
