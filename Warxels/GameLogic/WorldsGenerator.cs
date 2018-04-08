@@ -19,8 +19,8 @@ namespace GameLogic
 
         private WorldsGenerator(World world, int width)
         {
-            var meleeLookupRadius = width / 12;
-            var horsemanLookupRadius = width / 8;
+            var meleeLookupRadius = width / 10;
+            var horsemanLookupRadius = width / 6;
             var archerLookupRadius = width / 2;
 
             var meleeFightStrategy = new MeleeFightStrategy(world);
