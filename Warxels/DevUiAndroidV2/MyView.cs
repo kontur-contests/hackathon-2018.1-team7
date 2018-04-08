@@ -77,10 +77,14 @@ namespace DevUiAndroidV2
 
         public void SetLoadedWorld(IWorld world)
         {
+            step = Width / SIZE;
             foreach (var unit in world.Army.GetUnits())
             {
-                lists.Add(new Tuple<Rect, ISquad>(new Rect(unit.X,unit.Y,unit.X+1, unit.Y+1), null));
+                lists.Add(new Tuple<Rect, ISquad>(
+                    new Rect(unit.X * step, (unit.Y - SIZE / 2) * step, (unit.X + 1) * step,
+                        (unit.Y + 1 - SIZE / 2) * step), null));
             }
+            Invalidate();
         }
     }
 }

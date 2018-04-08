@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Android.Content;
 using Android.Locations;
@@ -27,7 +28,7 @@ namespace GameLogic.Helper
 
                 builder.Append(Environment.NewLine);
             }
-            System.IO.File.WriteAllText(fname, builder.ToString());
+            System.IO.File.WriteAllText(fname, builder.ToString(), Encoding.Unicode);
         }
 
         public static void SaveUnits(this IWorld world, string fname, bool android = false)
@@ -37,7 +38,7 @@ namespace GameLogic.Helper
             {
                 for (int j = 0; j < world.Length; j++)
                 {
-                    builder.Append(GetUnitView(world.Army.GetUnit(i, j)));
+                    builder.Append(GetUnitView(world.Army.GetUnit(j, i)));
                 }
 
                 builder.Append(Environment.NewLine);
@@ -46,7 +47,9 @@ namespace GameLogic.Helper
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 fname = Path.Combine(path.ToString(), fname);               
             }
-            System.IO.File.WriteAllText(fname, builder.ToString());
+
+            var str = builder.ToString().Where(c => c != ' ' && c != '\n');
+            System.IO.File.WriteAllText(fname, builder.ToString(), Encoding.Unicode);
         }
 
 
@@ -81,9 +84,8 @@ namespace GameLogic.Helper
                 fname = Path.Combine(path, fname);
             }
 
-            var lines = System.IO.File.ReadAllLines(fname);
+            var lines = System.IO.File.ReadAllLines(fname, Encoding.Unicode);
             
-
             var width = lines[0].Length;
             var height = lines.Length;
 
@@ -104,7 +106,7 @@ namespace GameLogic.Helper
                         break;
 
                     if (c == 'm')
-                        World.Terrain[y, x] = 1;
+                        World.Terrain[x, y] = 1;
                     y++;
                 }
                 x++;
@@ -122,7 +124,7 @@ namespace GameLogic.Helper
                 fname = Path.Combine(path, fname);
             }
 
-            var lines = System.IO.File.ReadAllLines(fname);
+            var lines = System.IO.File.ReadAllLines(fname,Encoding.Unicode);
             if (lines.Length < 0)
                 return;
 
@@ -131,17 +133,17 @@ namespace GameLogic.Helper
             var world = worldGen.GetWorld();
             world.Army.Clear();
 
-            int y = 0;
+            int x = 0;
 
             foreach (var line in lines)
             {
-                int x = 0;
-                if (y >= world.Length)
+                int y = 0;
+                if (x >= world.Width)
                     break;
 
                 foreach (var c in line)
                 {
-                    if (x >= world.Width)
+                    if (y >= world.Length)
                         break;
                     
                     switch (c)
@@ -155,9 +157,9 @@ namespace GameLogic.Helper
                         case ' ': break;
                         default: throw new InvalidOperationException("Unknown unit type " + c);
                     }
-                    x++;
+                    y++;
                 }
-                y++;
+                x++;
             }
         }
     }

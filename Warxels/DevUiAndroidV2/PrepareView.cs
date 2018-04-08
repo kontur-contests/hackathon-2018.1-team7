@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using GameLogic;
+using GameLogic.Helper;
 using Java.Util;
 using Xamarin.Forms;
 using Button = Android.Widget.Button;
@@ -22,6 +23,7 @@ namespace DevUiAndroidV2
         private TextView _rankText;
         private LinearLayout _topLayout;
         private LinearLayout _cocosLayout;
+        private WorldsGenerator WorldGen;
         private Button _somethingButton;
         private MyView _view;
         private Spinner _spinner;
@@ -47,14 +49,37 @@ namespace DevUiAndroidV2
             _rowsSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _rankSeekBar.ProgressChanged += _rankSeekBar_ProgressChanged;
             _somethingButton.Click += _somethingButton_Click;
-            _view.Touch += _view_Touch;
             _totalInSquadEditText.Text = (_rankSeekBar.Progress * _rowsSeekBar.Progress).ToString();
             _totalUnitsEditText.Text = _view.Army.Size.ToString();
             Forms.Init(this, savedInstanceState);
+            if (Intent.GetBooleanExtra("ISLOAD", false))
+            {
+                WorldGen = WorldsGenerator.GetDefault(MyView.SIZE * 3 / 2, MyView.SIZE);
+                if (WorldGen.GetWorld().Width != MyView.SIZE)
+                    WorldGen = null;
+                else
+                {
+                    try
+                    {
+                        WorldGen.LoadUnitsFromFile("units.units", true);
+                    }
+                    catch 
+                    {
+                        WorldGen = null;
+                    }
+                }
+            }
+            _view.Touch += _view_Touch;
         }
 
         private void _view_Touch(object sender, View.TouchEventArgs e)
         {
+            if (WorldGen != null)
+            {
+                _view.SetLoadedWorld(WorldGen.GetWorld());
+                _view.Touch -= _view_Touch;
+                return;
+            }
             if(e.Event.Action== MotionEventActions.Up)
             {
                 _view.TapTap(e.Event.GetX(), e.Event.GetY(), _rowsSeekBar.Progress, _rankSeekBar.Progress, GetUnitType());
@@ -80,7 +105,7 @@ namespace DevUiAndroidV2
 
         private void _somethingButton_Click(object sender, System.EventArgs e)
         {
-            var view = new BattleView(this, _view.Army.GenerateWorld());
+            var view = new BattleView(this, WorldGen == null ? _view.Army.GenerateWorld() : WorldGen.GetWorld());
 
             SetContentView(view);
 
@@ -89,6 +114,9 @@ namespace DevUiAndroidV2
                 view.Invalidate();
                 return !view.EndGame;
             });
+
+            view.World.SaveUnits("units.units", true);
+            view.World.SaveTerrain("terr.terr", true);
         }
         public void StartTimer(TimeSpan interval, Func<bool> callback)
         {
