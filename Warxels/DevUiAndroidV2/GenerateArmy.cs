@@ -48,7 +48,7 @@ namespace DevUiAndroidV2
                 }
             }
 
-            //GenerateEnemies(generator);
+            GenerateEnemies(generator);
 
             return generator.GetWorld();
         }
