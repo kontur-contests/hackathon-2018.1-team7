@@ -50,7 +50,7 @@ namespace DevUiAndroidV2
             {
                 for (var x = s.MinX; x < s.MaxX; x++)
                 for (var y = s.MinY; y < s.MaxY; y++)
-                    generator.CreateUnit(s.Type, s.Team, y, x);
+                    generator.CreateUnit(s.Type, s.Team, y*3/2, x);
             }
             return generator.GetWorld();
         }
