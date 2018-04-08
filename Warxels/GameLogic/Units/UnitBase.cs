@@ -2,6 +2,7 @@
 {
     using GameLogic.Strategies;
     using System;
+    using System.Runtime.CompilerServices;
 
     internal abstract class UnitBase : IUnit
     {
@@ -91,7 +92,7 @@
         {
             return GetPositionKey(Y, X);
         }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetPositionKey(int y, int x)
         {
             return y * 3733 ^ x;
